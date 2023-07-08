@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('structure');
+});
+Route::get('/kafedra-prikladnoj-matematiki-i-informatiki', function () {
+    return view('department');
+});
+Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/basaeva-elena-kazbekovna', function () {
+    return view('persCard');
 });
