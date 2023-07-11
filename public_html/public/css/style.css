@@ -787,6 +787,161 @@ opacity: 0.8;
 .docent {
 margin-top: 20px;
 }
+.general-info {
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
+}
+.general-info-input__name {
+	color: #485370;
+font-size: 24px;
+font-weight: 400;
+line-height: 25px;
+}
+.general-info__input {
+	width: 100%;
+	margin-top: 8px;
+	color: #1C294D;
+	font-size: 24px;
+	border-radius: 5px;
+border: 1px solid #DFE0E1;
+background: #FFF;
+padding-left: 15px;
+height: 33px;
+box-sizing: border-box;
+}
+.image-editing__pic {
+	max-height: 442px;
+	border-radius: 20px 20px 0px 0px;
+}
+.image-editing-btn__pic {
+	width: 35px;
+	height: 35px;
+	margin-right: 10px;
+}
+.image-editing-btn__text {
+	color: rgba(28, 41, 77, 0.70);
+	font-size: 24px;
+	font-weight: 500;
+	text-align: center;
+}
+.image-editing-btn {
+	width: 100%;
+	height: 74px;
+	border-radius: 0px 0px 10px 10px;
+background: #D9D9D9;
+border: none;
+display: flex;
+justify-content: center;
+align-items: center;
+cursor: pointer;
+}
+.big-general-info-input__name {
+font-size: 32px;
+	line-height: 40px;
+}
+.big-general-info__input {
+	height: 50px;
+	font-size: 32px;
+}
+.general-info-input__name:not(:first-child) {
+	margin-top: 25px;
+}
+.general-info__input::placeholder {
+	color: #A7A9AC;
+}
+.general-info-body {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 34px;
+}
+.general-info-editing-block {
+	width: 60%;
+}
+.math-websites-editing {
+	margin-top: 85px;
+}
+.math-websites-editing-body {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+.math-websites-editing-icon-block {
+	height: 100px;
+}
+.math-websites-editing__text {
+	color: #1C294D;
+	font-size: 20px;
+}
+.math-websites-editing-el {
+	width: 50%;
+	margin-bottom: 42px;
+}
+.math-websites-editing-form{
+	width: 100%;
+}
+.math-websites-editing-form-input-block {
+	margin-top: 6px;
+	border: 1px solid #DFE0E1;
+	border-radius: 5px;
+	display: flex;
+	align-items: center;
+	max-width: 418px;
+	background-color: #fff;
+}
+.math-websites-editing__input {
+	width: 90%;
+	height: 38px;
+	border: none;
+	padding-left: 15px;
+	outline:none;
+	border-radius: 5px;
+}
+.clip__btn {
+	width: 24px;
+	height: 24px;
+	margin-right: 11px;
+	margin-left: 11px;
+	background-color: #fff;
+	background-image: url("/images/clip.png");
+	border: none;
+	cursor: pointer;
+}
+.math-websites-editing-input-block {
+	display: flex;
+}
+.editing-add__btn {
+	color: #1E54C1;
+	font-size: 24px;
+	width: 130px;
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+}
+.detail-info-editing {
+	margin-top: 62px;
+	padding-bottom: 36px;
+}
+.detail-info-editing__text {
+	color: #1C294D;
+	font-size: 36px;
+	line-height: 46px;
+	margin-bottom: 32px;
+}
+.detail-info-editing__text:not(:first-child) {
+	margin-top: 70px;
+}
+.detail-info-editing__input {
+	margin-bottom: 20px;
+	width: 90%;
+	height: 50px;
+	border-radius: 5px;
+border: 1px solid #DFE0E1;
+padding-left: 20px;
+font-size: 24px;
+color: #1C294D;
+
+}
 @media screen and (max-width: 1020px) {
 .section-title {
 text-align: center;
@@ -942,10 +1097,61 @@ margin-top: 52px;
 .math-websites-icon-container:not(:last-child) {
 margin-bottom: 20px;
 }
+.general-info-body {
+    width: 100%;
+    align-items: center;
 }
+.general-info {
+width: 100%;
+align-items: center;
+}
+.general-info-body {
+flex-direction: column;
+align-items: center;
+}
+.general-info-editing-block {
+margin-top: 30px;
+display: flex;
+flex-direction: column;
+}
+.math-websites-editing {
+width: 100%;
+margin: 0 auto;
+margin-top: 52px;
+}
+.math-websites-editing-body {
+flex-direction: column;
+align-items: center;
+}
+.math-websites-editing-el:not(:last-child) {
+margin-bottom: 20px;
+}
+.detail-info-editing {
+width: 60%;
+margin: 0 auto;
+margin-top: 70px;
+}
+.editing-add__btn:first-child {
+  width: 65%;
+}
+}
+
+
+
 @media screen and (max-width: 810px) {
+.math-websites-editing {
+width: 100%;
+margin-top: 70px;
+}
+.math-websites-editing-el:not(:last-child) {
+margin-bottom: 60px;
+}
 .directions-body {
 padding-left: 15px;
+}
+.detail-info-editing__text {
+	font-size: 26px;
+	margin-bottom: 7px
 }
 .mobile__link {
 display: block;
@@ -1002,6 +1208,7 @@ height: 35px;
 footer {
 min-height: 75px;
 }
+
 }
 @media screen and (max-width: 500px) {
 .section-title {
@@ -1078,6 +1285,22 @@ flex-wrap: wrap;
 .card {
 width: 315px;
 margin: 0 0 50px;
+}
+
+.general-info-input__name {
+font-size: 16px;
+}
+
+.detail-info-editing__text {
+	font-size: 20px;
+}
+
+.big-general-info__input {
+    height: 40px;
+    font-size: 16px;
+}
+.general-info__input {
+	font-size: 16px;
 }
 }
 @media screen and (max-width: 700px) {
