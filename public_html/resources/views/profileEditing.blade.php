@@ -11,22 +11,27 @@
 				</div>
 				<form action="#">
 					<button class="image-editing-btn" type="submit">
-					<img src="/images/camera.png" class="image-editing-btn__pic">
-					<p class="image-editing-btn__text">Добавить фото</p>
+						<img src="/images/camera.png" class="image-editing-btn__pic">
+						<p class="image-editing-btn__text">Добавить фото</p>
 					</button>
 				</form>
 			</div>
 			<div class="general-info-editing-block">
-				<p class="general-info-input__name big-general-info-input__name">ФИО</p>
-				<input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено">
-				<p class="general-info-input__name big-general-info-input__name">Должность</p>
-				<input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено">
-				<p class="general-info-input__name">Ученое звание</p>
-				<input type="text" class="general-info__input" placeholder="не заполнено">
-				<p class="general-info-input__name">Ученая степень</p>
-				<input type="text" class="general-info__input" placeholder="не заполнено">
-				<p class="general-info-input__name">Базовое образование</p>
-				<input type="text" class="general-info__input" placeholder="не заполнено">
+				<form method="post" action="/edit/save">
+				@csrf
+					<p class="general-info-input__name big-general-info-input__name">ФИО</p>
+					<input type="text" class="general-info__input big-general-info__input" name="FIO" placeholder="не заполнено">
+					<p class="general-info-input__name big-general-info-input__name">Должность</p>
+					<input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено">
+					<p class="general-info-input__name">Ученое звание</p>
+					<input type="text" class="general-info__input" placeholder="не заполнено">
+					<p class="general-info-input__name">Ученая степень</p>
+					<input type="text" class="general-info__input" placeholder="не заполнено">
+					<p class="general-info-input__name">Базовое образование</p>
+					<input type="text" class="general-info__input" placeholder="не заполнено">
+
+					<button type="submit">Сохранить</button>
+				</form>
 			</div>
 		</div>
 	</div>

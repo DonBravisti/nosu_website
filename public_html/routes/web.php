@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EditController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('structure');
 });
+
+Route::get('/edit', function () {
+    return view('profileEditing');
+});
+Route::post('/edit/save', [EditController::class, 'save']);
+
 Route::get('/kafedra-prikladnoj-matematiki-i-informatiki', function () {
     return view('department');
 });
+
 Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/basaeva-elena-kazbekovna', function () {
     return view('persCard');
 });
+
