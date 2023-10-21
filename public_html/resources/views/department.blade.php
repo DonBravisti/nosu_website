@@ -27,8 +27,8 @@
 				<p class="director-info__el">Общий стаж работы: 29</p>
 				<a href="/kafedra-prikladnoj-matematiki-i-informatiki/basaeva-elena-kazbekovna" class="director-info-link">
 					<button class="director-info-btn">
-					<p class="info-btn__text">Узнать больше</p>
-					<div class="info-btn__icon"></div>
+						<p class="info-btn__text">Узнать больше</p>
+						<div class="info-btn__icon"></div>
 					</button>
 				</a>
 			</div>
@@ -91,25 +91,29 @@
 		<div class="workers-body slider-container">
 			<div class="swiper">
 				<div class="swiper-wrapper workers-list">
+					@foreach($emplFIOs as $key => $employee)
 					<div class="worker-card swiper-slide">
 						<div class="worker-card-container">
 							<img src="/images/avatar.jpg">
-							<h3 class="worker__name">Басаева Елена Казбековна</h3>
-							<p class="worker__status">Кандидат физико-математических наук</p>
+							<h3 class="worker__name">
+								{{$employee['fio']}}
+							</h3>
+							<p class="worker__status">{{$employee['degree']}}</p>
 							<button class="learn-more__btn">
-							<a class="learn-more__text">Узнать больше</a>
-							<div class="learn-more__icon"></div>
+								<a class="learn-more__text">Узнать больше</a>
+								<div class="learn-more__icon"></div>
 							</button>
 						</div>
 					</div>
-					<div class="worker-card swiper-slide">
+					@endforeach
+					<!-- <div class="worker-card swiper-slide">
 						<div class="worker-card-container">
 							<img src="/images/avatar.jpg">
 							<h3 class="worker__name">Баззаев Александр Казбекович</h3>
 							<p class="worker__status">Кандидат физико-математических наук</p>
 							<button class="learn-more__btn">
-							<a class="learn-more__text">Узнать больше</a>
-							<div class="learn-more__icon"></div>
+								<a class="learn-more__text">Узнать больше</a>
+								<div class="learn-more__icon"></div>
 							</button>
 						</div>
 					</div>
@@ -119,8 +123,8 @@
 							<h3 class="worker__name">Биткина Виктория Васильевна</h3>
 							<p class="worker__status">Кандидат физико-математических наук</p>
 							<button class="learn-more__btn">
-							<a class="learn-more__text">Узнать больше</a>
-							<div class="learn-more__icon"></div>
+								<a class="learn-more__text">Узнать больше</a>
+								<div class="learn-more__icon"></div>
 							</button>
 						</div>
 					</div>
@@ -130,8 +134,8 @@
 							<h3 class="worker__name">Воронцова Ирина Александровна</h3>
 							<p class="worker__status">Кандидат физико-математических наук</p>
 							<button class="learn-more__btn">
-							<a class="learn-more__text">Узнать больше</a>
-							<div class="learn-more__icon"></div>
+								<a class="learn-more__text">Узнать больше</a>
+								<div class="learn-more__icon"></div>
 							</button>
 						</div>
 					</div>
@@ -141,8 +145,8 @@
 							<h3 class="worker__name">Гамаонов Владимир Георгиевич</h3>
 							<p class="worker__status">Кандидат физико-математических наук</p>
 							<button class="learn-more__btn">
-							<a class="learn-more__text">Узнать больше</a>
-							<div class="learn-more__icon"></div>
+								<a class="learn-more__text">Узнать больше</a>
+								<div class="learn-more__icon"></div>
 							</button>
 						</div>
 					</div>
@@ -152,11 +156,11 @@
 							<h3 class="worker__name">Гудиев Тимур Владимирович</h3>
 							<p class="worker__status">Кандидат физико-математических наук</p>
 							<button class="learn-more__btn">
-							<a class="learn-more__text">Узнать больше</a>
-							<div class="learn-more__icon"></div>
+								<a class="learn-more__text">Узнать больше</a>
+								<div class="learn-more__icon"></div>
 							</button>
 						</div>
-					</div>
+					</div> -->
 				</div>
 				<div class="swiper-scrollbar scrollbar"></div>
 			</div>
