@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,4 +17,30 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+//Запуск, удаление и создание миграций
+
+Route::prefix('migrate')->group(function () {
+    Route::get('run', function () {
+        $exitCode = Artisan::call('migrate:refresh', [
+            '--force' => 'foo'
+        ]);
+
+        return response()->json(['message' => $exitCode]);
+    });
+    Route::get('delete', function () {
+        $exitCode = Artisan::call('migrate:reset', [
+            '--force' => 'foo'
+        ]);
+
+        return response()->json(['message' => $exitCode]);
+    });
+    Route::get('create', function (Request $request) {
+        $exitCode = Artisan::call('make:migration', [
+            'name' => $request->get('migrationName')
+            //'--table'=>'table name'
+        ]);
+        return response()->json(['message' => $exitCode]);
+    });
 });

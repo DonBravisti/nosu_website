@@ -25,7 +25,7 @@
 				<p class="director-info__el">Базовое образование: Высшее. Математик.</p>
 				<p class="director-info__el">Преподаватель</p>
 				<p class="director-info__el">Общий стаж работы: 29</p>
-				<a href="/kafedra-prikladnoj-matematiki-i-informatiki/basaeva-elena-kazbekovna" class="director-info-link">
+				<a href="/kafedra-prikladnoj-matematiki-i-informatiki/2" class="director-info-link">
 					<button class="director-info-btn">
 						<p class="info-btn__text">Узнать больше</p>
 						<div class="info-btn__icon"></div>
