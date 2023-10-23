@@ -4,13 +4,13 @@
 <div class="content-container">
 	<div class="department-container">
 		<div class="department-block">
-			<h2 class="section-title perscard-section-title">Басаева Елена Казбековна</h2>
+			<h2 class="section-title perscard-section-title">{{$fio}}</h2>
 			<h3 class="director-info__title mobile-director-info__title">Заведующий кафедрой</h3>
 			<div class="department-body persCard-department-body">
 				<div class="director-info persCard-director-info">
 					<h3 class="director-info__title pc-director-info__title perscard-director-info__title">Заведующий кафедрой</h3>
 					<p class="director-info__el perscard-director-info__el docent">Доцент</p>
-					<p class="director-info__el perscard-director-info__el">Кандидат физико-математических наук</p>
+					<p class="director-info__el perscard-director-info__el">{{$degree}}</p>
 					<p class="director-info__el">Базовое образование</p>
 					<p class="director-info__el perscard-director-info__el">Высшее. Математик. Преподаватель</p>
 					<p class="director-info__el">Общий стаж работы: 29</p>

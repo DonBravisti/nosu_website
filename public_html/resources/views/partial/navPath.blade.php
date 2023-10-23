@@ -9,6 +9,6 @@
 		<a href="#" class="nav-path__link not-mobile__link">Кафедра прикладной математики и информатики</a>
 		<span class="nav-path__img not-mobile__link"></span>
 		<span class="nav-path__img mobile__link"></span>
-		<a href="#" class="nav-path__link">Басаева Елена Казбековна</a>
+		<a href="#" class="nav-path__link">{{$fio}}</a>
 	</div>
 </div>

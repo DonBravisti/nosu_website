@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +18,22 @@ use App\Http\Controllers\PageController;
 
 Route::get('/', [PageController::class, 'goToStructure']);
 
-Route::get('/edit', [PageController::class, 'goToProfileEditing']);
+Route::get('/logout', [AuthController::class, 'logout']);
 
+Route::get('/register', [AuthController::class, 'showRegForm']);
+Route::post('/register/reg', [AuthController::class, 'register']);
+
+Route::get('/profile', function () {
+    // Only authenticated users may access this route...
+    return view('profile');
+})->middleware('auth.basic');
+
+Route::get('/edit/{id}', [EditController::class, 'goToProfileEditing']);
 Route::post('/edit/save', [EditController::class, 'save']);
+Route::get('/create-user', [EditController::class, 'showCreationForm']);
+Route::post('/create', [EditController::class, 'create']);
 
 Route::get('/kafedra-prikladnoj-matematiki-i-informatiki', [PageController::class, 'goToDepartment']);
 
-Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/basaeva-elena-kazbekovna', [PageController::class, 'goToPersonalCard']);
+Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/{id}', [PageController::class, 'goToPersonalCard']);
 

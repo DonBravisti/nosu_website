@@ -3,7 +3,7 @@
 @include('partial.navPath')
 <div class="content-container">
 	<div class="general-info">
-		<h2 class="section-title">Редактировать профиль сотрудника</h2>
+		<h2 class="section-title">Добавить нового сотрудника</h2>
 		<div class="general-info-body">
 			<div class="image-editing-block">
 				<div class="director-photo-block">
@@ -17,13 +17,13 @@
 				</form>
 			</div>
 			<div class="general-info-editing-block">
-				<form method="post" action="/edit/save">
+				<form method="post" action="/create">
 					<p class="general-info-input__name big-general-info-input__name">ФИО</p>
-					<input type="text" class="general-info__input big-general-info__input" name="FIO" value="{{$fio}}" placeholder="не заполнено">
+					<input type="text" class="general-info__input big-general-info__input" name="FIO" value="" placeholder="не заполнено">
 					<p class="general-info-input__name big-general-info-input__name">Должность</p>
 					<input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено">
 					<p class="general-info-input__name">Ученое звание</p>
-					<input type="text" class="general-info__input" value="{{$degree}}" placeholder="не заполнено">
+					<input type="text" class="general-info__input" value="" placeholder="не заполнено">
 					<p class="general-info-input__name">Ученая степень</p>
 					<input type="text" class="general-info__input" placeholder="не заполнено">
 					<p class="general-info-input__name">Базовое образование</p>

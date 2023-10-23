@@ -100,9 +100,19 @@
 							</h3>
 							<p class="worker__status">{{$employee['degree']}}</p>
 							<button class="learn-more__btn">
-								<a class="learn-more__text">Узнать больше</a>
+								<a href="/kafedra-prikladnoj-matematiki-i-informatiki/{{$employee['id']}}" class="learn-more__text">
+									Узнать больше
+								</a>
 								<div class="learn-more__icon"></div>
 							</button>
+							@if(Auth::check())
+							<button class="learn-more__btn">
+								<a href="/edit/{{$employee['id']}}" class="learn-more__text">
+									Редактировать
+								</a>
+								<div class="learn-more__icon"></div>
+							</button>
+							@endif
 						</div>
 					</div>
 					@endforeach
