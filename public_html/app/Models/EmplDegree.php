@@ -10,6 +10,10 @@ class EmplDegree extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'spec_id'
+    ];
+
     public function employee() {
         return $this->belongsTo(Employee::class);
     }

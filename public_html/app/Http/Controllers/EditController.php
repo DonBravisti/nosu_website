@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\EmplDegree;
+use App\Models\EmplTitle;
 use Illuminate\Support\Facades\DB;
 
 class EditController extends Controller
@@ -18,7 +20,7 @@ class EditController extends Controller
         // print_r($validate['FIO']);
         $employee = Employee::find($id);
         $fioSplited = explode(" ", $validate['FIO']);
-        
+
         $employee->surname = $fioSplited[0];
         $employee->name = $fioSplited[1];
         $employee->patronimyc = $fioSplited[2];
@@ -31,7 +33,7 @@ class EditController extends Controller
         $emplTitle = $employee->emplTitle;
         $emplTitle->title_id = $validate['selectTitle'];
         $emplTitle->save();
-        
+
         return redirect('/kafedra-prikladnoj-matematiki-i-informatiki');
     }
 
@@ -55,12 +57,52 @@ class EditController extends Controller
 
     function showCreationForm()
     {
-        return view('profileCreation', ['fio' => 'Новый сотрудник']);
+        $degrees = DB::table('degrees')->get();
+        $titles = DB::table('titles')->get();
+        return view(
+            'profileCreation',
+            [
+                'fio' => 'Новый сотрудник',
+                'degrees' => $degrees,
+                'titles' => $titles
+            ]
+        );
     }
 
-    function create()
+    function create(Request $request)
     {
-        echo 'da';
+        $validate = $request->validate([
+            'FIO' => 'required|string|max:255',
+            'selectDegree' => 'required',
+            'selectTitle' => 'required'
+        ]);
+
+        $fioSplited = explode(" ", $validate['FIO']);
+        $credentials = [
+            'surname' => $fioSplited[0],
+            'name' => $fioSplited[1],
+            'patronimyc' => $fioSplited[2],
+            'address' => 'address',
+            'birthdate' => '1900-01-01',
+            'sex' => 0,
+            'phone' => '',
+            'email' => ''
+        ];
+
+        $employee = Employee::create($credentials);
+
+        $emplDegree = new EmplDegree();
+        $emplDegree->degree_id = $validate['selectDegree'];
+        $emplDegree->spec_id = 1;
+        $employee->emplDegree()->save($emplDegree);
+
+        $emplTitle = new EmplTitle();
+        $emplTitle->title_id = $validate['selectTitle'];
+        $emplTitle->date = '1900-01-01';
+        $employee->emplTitle()->save($emplTitle);
+
+        // echo 'da';
+        return redirect('/kafedra-prikladnoj-matematiki-i-informatiki');
     }
 
     private function getEmployeeDegree($emplID, $emplDegrees, $degrees)

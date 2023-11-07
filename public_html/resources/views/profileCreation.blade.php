@@ -23,13 +23,19 @@
 					<p class="general-info-input__name big-general-info-input__name">Должность</p>
 					<input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено">
 					<p class="general-info-input__name">Ученое звание</p>
-					<input type="text" class="general-info__input" value="" placeholder="не заполнено">
+					<select name="selectTitle" id="">
+						<option value="{{$titles[0]->id}}">{{$titles[0]->title}}</option>
+						<option value="{{$titles[1]->id}}">{{$titles[1]->title}}</option>
+					</select>
 					<p class="general-info-input__name">Ученая степень</p>
-					<input type="text" class="general-info__input" placeholder="не заполнено">
+					<select name="selectDegree" id="">
+						<option value="{{$degrees[0]->id}}">{{$degrees[0]->title}}</option>
+						<option value="{{$degrees[1]->id}}">{{$degrees[1]->title}}</option>
+					</select>
 					<p class="general-info-input__name">Базовое образование</p>
 					<input type="text" class="general-info__input" placeholder="не заполнено">
 
-					<button type="submit">Сохранить</button>
+					<button type="submit">Добавить</button>
 				</form>
 			</div>
 		</div>

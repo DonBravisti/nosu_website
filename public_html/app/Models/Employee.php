@@ -11,17 +11,25 @@ class Employee extends Model
 {
     use HasFactory;
 
+    protected $dates = ['birthdate'];
     protected $fillable = [
         'surname',
         'name',
         'patronimyc',
+        'address',
+        'birthdate',
+        'sex',
+        'phone',
+        'email'
     ];
 
-    public function emplDegree() {
+    public function emplDegree()
+    {
         return $this->hasOne(EmplDegree::class);
     }
 
-    public function emplTitle() {
+    public function emplTitle()
+    {
         return $this->hasOne(EmplTitle::class);
     }
 }
