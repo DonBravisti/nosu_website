@@ -17,15 +17,21 @@
 				</form>
 			</div>
 			<div class="general-info-editing-block">
-				<form method="post" action="/edit/save">
+				<form method="post" action="/edit/{{$id}}/update">
 					<p class="general-info-input__name big-general-info-input__name">ФИО</p>
 					<input type="text" class="general-info__input big-general-info__input" name="FIO" value="{{$fio}}" placeholder="не заполнено">
 					<p class="general-info-input__name big-general-info-input__name">Должность</p>
 					<input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено">
 					<p class="general-info-input__name">Ученое звание</p>
-					<input type="text" class="general-info__input" value="{{$degree}}" placeholder="не заполнено">
+					<select name="selectTitle" id="">
+						<option value="{{$emplTitle->id}}">{{$emplTitle->title}}</option>
+						<option value="{{$title->id}}">{{$title->title}}</option>
+					</select>
 					<p class="general-info-input__name">Ученая степень</p>
-					<input type="text" class="general-info__input" placeholder="не заполнено">
+					<select name="selectDegree" id="">
+						<option value="{{$emplDegree->id}}">{{$emplDegree->title}}</option>
+						<option value="{{$degree->id}}">{{$degree->title}}</option>
+					</select>
 					<p class="general-info-input__name">Базовое образование</p>
 					<input type="text" class="general-info__input" placeholder="не заполнено">
 

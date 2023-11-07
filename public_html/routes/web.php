@@ -29,7 +29,7 @@ Route::get('/profile', function () {
 })->middleware('auth.basic');
 
 Route::get('/edit/{id}', [EditController::class, 'goToProfileEditing']);
-Route::post('/edit/save', [EditController::class, 'save']);
+Route::post('/edit/{id}/update', [EditController::class, 'update']);
 Route::get('/create-user', [EditController::class, 'showCreationForm']);
 Route::post('/create', [EditController::class, 'create']);
 
