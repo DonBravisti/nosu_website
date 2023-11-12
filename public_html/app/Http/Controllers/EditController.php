@@ -15,15 +15,29 @@ class EditController extends Controller
         $validate = $request->validate([
             'FIO' => 'required|string|max:255',
             'selectDegree' => 'required',
-            'selectTitle' => 'required'
+            'selectTitle' => 'required',
+            'sex' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'birthdate' => 'required'
         ]);
         // print_r($validate['FIO']);
         $employee = Employee::find($id);
         $fioSplited = explode(" ", $validate['FIO']);
+        if (count($fioSplited) < 3) {
+            return redirect('/edit/' . $id)->withErrors(['ФИО указано неверно']);
+        }
+        // print_r($validate);
 
         $employee->surname = $fioSplited[0];
         $employee->name = $fioSplited[1];
         $employee->patronimyc = $fioSplited[2];
+        $employee->sex = $validate['sex'];
+        $employee->address = $validate['address'];
+        $employee->phone = $validate['phone'];
+        $employee->email = $validate['email'];
+        $employee->birthdate = $validate['birthdate'];
         $employee->save();
 
         $emplDegree = $employee->emplDegree;
@@ -34,7 +48,9 @@ class EditController extends Controller
         $emplTitle->title_id = $validate['selectTitle'];
         $emplTitle->save();
 
-        return redirect('/kafedra-prikladnoj-matematiki-i-informatiki');
+        session()->flash('success', 'Успешно сохранено!');
+
+        return redirect('/edit/' . $id);
     }
 
     public function save(Request $request)
@@ -55,38 +71,33 @@ class EditController extends Controller
         print_r($credentials);
     }
 
-    function showCreationForm()
-    {
-        $degrees = DB::table('degrees')->get();
-        $titles = DB::table('titles')->get();
-        return view(
-            'profileCreation',
-            [
-                'fio' => 'Новый сотрудник',
-                'degrees' => $degrees,
-                'titles' => $titles
-            ]
-        );
-    }
-
     function create(Request $request)
     {
+        $request->flash();
         $validate = $request->validate([
             'FIO' => 'required|string|max:255',
             'selectDegree' => 'required',
-            'selectTitle' => 'required'
+            'selectTitle' => 'required',
+            'sex' => 'required',
+            'address' => 'required',
+            'phone' => 'required',
+            'email' => 'required',
+            'birthdate' => 'required'
         ]);
 
         $fioSplited = explode(" ", $validate['FIO']);
+        if (count($fioSplited) < 3) {
+            return redirect('/create-user')->withErrors(['ФИО указано неверно']);
+        }
         $credentials = [
             'surname' => $fioSplited[0],
             'name' => $fioSplited[1],
             'patronimyc' => $fioSplited[2],
-            'address' => 'address',
-            'birthdate' => '1900-01-01',
-            'sex' => 0,
-            'phone' => '',
-            'email' => ''
+            'address' => $validate['address'],
+            'birthdate' => $validate['birthdate'],
+            'sex' => $validate['sex'],
+            'phone' => $validate['phone'],
+            'email' => $validate['email']
         ];
 
         $employee = Employee::create($credentials);
@@ -101,8 +112,8 @@ class EditController extends Controller
         $emplTitle->date = '1900-01-01';
         $employee->emplTitle()->save($emplTitle);
 
-        // echo 'da';
-        return redirect('/kafedra-prikladnoj-matematiki-i-informatiki');
+        session()->flash('success', 'Успешно сохранено!');
+        return redirect('/create-user');
     }
 
     private function getEmployeeDegree($emplID, $emplDegrees, $degrees)
@@ -115,6 +126,20 @@ class EditController extends Controller
     {
         $titleTableId = $emplTitles->where('employee_id', $emplID)->value('title_id') - 1;
         return $titles[$titleTableId];
+    }
+
+    function showCreationForm()
+    {
+        $degrees = DB::table('degrees')->get();
+        $titles = DB::table('titles')->get();
+        return view(
+            'profileCreation',
+            [
+                'fio' => 'Новый сотрудник',
+                'degrees' => $degrees,
+                'titles' => $titles
+            ]
+        );
     }
 
     function goToProfileEditing($id)
@@ -132,6 +157,12 @@ class EditController extends Controller
         $emplTitle = $this->getEmployeeTitle($id, $emplTitles, $titles);
         $title = $emplTitle->id == 1 ? $titles[1] : $titles[0];
 
+        $address = $employee->address;
+        $birthdate = $employee->birthdate;
+        $phone = $employee->phone;
+        $email = $employee->email;
+        $sex = $employee->sex;
+
         return view(
             'profileEditing',
             [
@@ -140,7 +171,12 @@ class EditController extends Controller
                 'emplDegree' => $emplDegree,
                 'degree' => $degree,
                 'emplTitle' => $emplTitle,
-                'title' => $title
+                'title' => $title,
+                'address' => $address,
+                'birthdate' => $birthdate,
+                'phone' => $phone,
+                'email' => $email,
+                'sex' => $sex
             ]
         );
     }
