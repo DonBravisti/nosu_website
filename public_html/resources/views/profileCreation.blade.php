@@ -54,7 +54,7 @@
 
 
 					<p class="general-info-input__name big-general-info-input__name">Должность</p>
-					<input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено">
+					<!-- <input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено"> -->
 					<p class="general-info-input__name">Ученое звание</p>
 					<select name="selectTitle" id="">
 						<option value="{{$titles[0]->id}}">{{$titles[0]->title}}</option>
@@ -66,7 +66,7 @@
 						<option value="{{$degrees[1]->id}}">{{$degrees[1]->title}}</option>
 					</select>
 					<p class="general-info-input__name">Базовое образование</p>
-					<input type="text" class="general-info__input" placeholder="не заполнено">
+					<!-- <input type="text" class="general-info__input" placeholder="не заполнено"> -->
 
 					<button type="submit">Добавить</button>
 				</form>

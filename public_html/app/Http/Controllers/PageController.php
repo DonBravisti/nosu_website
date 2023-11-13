@@ -35,12 +35,16 @@ class PageController extends Controller
     {
         $employee = Employee::all()->where('id', $id)->first();
         $degrees = DB::table('degrees')->get();
+        $titles = DB::table('titles')->get();
         $emplDegrees = DB::table('empl_degrees')->get();
-        $emplDegree = $this->getEmployeeDegree($id, $emplDegrees, $degrees);
+        // $emplDegree = $this->getEmployeeDegree($id, $emplDegrees, $degrees);
+        $emplDegree = $degrees[$employee->emplDegree->degree_id-1]->title;
+        $emplTitle = $titles[$employee->emplTitle->title_id-1]->title;
 
         return view('persCard', [
             'fio' => sprintf('%s %s %s', $employee->surname, $employee->name, $employee->patronimyc), 
-            'degree' => $emplDegree
+            'degree' => $emplDegree,
+            'title' => $emplTitle
         ]);
     }
 
