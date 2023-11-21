@@ -21,6 +21,7 @@ return new class extends Migration
             $table->TinyInteger('sex');
             $table->string('phone', 11);
             $table->string('email', 100);
+            $table->string('base_education', 256);
             $table->timestamps();
         });
     }

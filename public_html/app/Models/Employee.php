@@ -20,7 +20,8 @@ class Employee extends Model
         'birthdate',
         'sex',
         'phone',
-        'email'
+        'email',
+        'base_education'
     ];
 
     public function emplDegree()

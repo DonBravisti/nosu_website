@@ -20,7 +20,8 @@ class EditController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'email' => 'required',
-            'birthdate' => 'required'
+            'birthdate' => 'required',
+            'baseEdu' => 'required'
         ]);
         // print_r($validate['FIO']);
         $employee = Employee::find($id);
@@ -38,6 +39,7 @@ class EditController extends Controller
         $employee->phone = $validate['phone'];
         $employee->email = $validate['email'];
         $employee->birthdate = $validate['birthdate'];
+        $employee->base_education = $validate['baseEdu'];
         $employee->save();
 
         $emplDegree = $employee->emplDegree;
@@ -82,7 +84,8 @@ class EditController extends Controller
             'address' => 'required',
             'phone' => 'required',
             'email' => 'required',
-            'birthdate' => 'required'
+            'birthdate' => 'required',
+            'baseEdu' => 'required'
         ]);
 
         $fioSplited = explode(" ", $validate['FIO']);
@@ -97,7 +100,8 @@ class EditController extends Controller
             'birthdate' => $validate['birthdate'],
             'sex' => $validate['sex'],
             'phone' => $validate['phone'],
-            'email' => $validate['email']
+            'email' => $validate['email'],
+            'base_education' => $validate['baseEdu']
         ];
 
         $employee = Employee::create($credentials);
@@ -162,6 +166,7 @@ class EditController extends Controller
         $phone = $employee->phone;
         $email = $employee->email;
         $sex = $employee->sex;
+        $baseEdu = $employee->base_education;
 
         return view(
             'profileEditing',
@@ -176,7 +181,8 @@ class EditController extends Controller
                 'birthdate' => $birthdate,
                 'phone' => $phone,
                 'email' => $email,
-                'sex' => $sex
+                'sex' => $sex,
+                'baseEdu' => $baseEdu
             ]
         );
     }

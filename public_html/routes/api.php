@@ -43,4 +43,10 @@ Route::prefix('migrate')->group(function () {
         ]);
         return response()->json(['message' => $exitCode]);
     });
+    Route::get('status', function () {
+        $exitCode = Artisan::call('migrate:status');
+        $output = Artisan::output();
+        print_r($output);
+        // return response()->json(['message' => $exitCode]);
+    });
 });
