@@ -76,10 +76,7 @@
 	<div class="math-websites-editing">
 		<div class="math-websites-editing-body">
 			<div class="math-websites-editing-el">
-				<div class="math-websites-editing-icon-block">
-					<img src="/images/orcid.png" class="math-websites-editing__icon">
-				</div>
-				<p class="math-websites-editing__text">Укажите URL - адрес</p>
+				<p class="math-websites-editing__text">Укажите URL - адрес для Orcid</p>
 				<div class="math-websites-editing-input-block">
 					<form action="#" class="math-websites-editing-form">
 						<div class="math-websites-editing-form-input-block">
@@ -90,10 +87,7 @@
 				</div>
 			</div>
 			<div class="math-websites-editing-el">
-				<div class="math-websites-editing-icon-block">
-					<img src="/images/elsevier.png" class="math-websites-editing__icon">
-				</div>
-				<p class="math-websites-editing__text">Укажите URL - адрес</p>
+				<p class="math-websites-editing__text">Укажите URL - адрес для Elsevier Scopus</p>
 				<div class="math-websites-editing-input-block">
 					<form action="#" class="math-websites-editing-form">
 						<div class="math-websites-editing-form-input-block">
@@ -104,10 +98,7 @@
 				</div>
 			</div>
 			<div class="math-websites-editing-el">
-				<div class="math-websites-editing-icon-block">
-					<img src="/images/math-net.png" class="math-websites-editing__icon">
-				</div>
-				<p class="math-websites-editing__text">Укажите URL - адрес</p>
+				<p class="math-websites-editing__text">Укажите URL - адрес для Math-Net.ru</p>
 				<div class="math-websites-editing-input-block">
 					<form action="#" class="math-websites-editing-form">
 						<div class="math-websites-editing-form-input-block">
@@ -118,10 +109,7 @@
 				</div>
 			</div>
 			<div class="math-websites-editing-el">
-				<div class="math-websites-editing-icon-block">
-					<img src="/images/clarivate.png" class="math-websites-editing__icon">
-				</div>
-				<p class="math-websites-editing__text">Укажите URL - адрес</p>
+				<p class="math-websites-editing__text">Укажите URL - адрес для Clarivate</p>
 				<div class="math-websites-editing-input-block">
 					<form action="#" class="math-websites-editing-form">
 						<div class="math-websites-editing-form-input-block">
@@ -132,31 +120,24 @@
 				</div>
 			</div>
 		</div>
-		<form action="#">
-			<button class="editing-add__btn" type="submit">+ Добавить</button>
-		</form>
 	</div>
 	<div class="detail-info-editing">
-		<h2 class="detail-info-editing__text">Повышение квалификации</h2>
-		<form action="#">
-			<input type="text" class="detail-info-editing__input">
-			<button class="editing-add__btn" type="submit">+ Добавить</button>
-		</form>
-		<h2 class="detail-info-editing__text">Основные публикации</h2>
-		<form action="#">
-			<input type="text" class="detail-info-editing__input">
-			<button class="editing-add__btn" type="submit">+ Добавить</button>
-		</form>
-		<h2 class="detail-info-editing__text">Награды и почетные звания</h2>
-		<form action="#">
-			<input type="text" class="detail-info-editing__input">
-			<button class="editing-add__btn" type="submit">+ Добавить</button>
-		</form>
-		<h2 class="detail-info-editing__text">Трудовые договора</h2>
-		<form action="#">
-			<input type="text" class="detail-info-editing__input">
-			<button class="editing-add__btn" type="submit">+ Добавить</button>
-		</form>
+		<div>
+			<h2 class="detail-info-editing__text">Повышение квалификации</h2>
+			<a href="">Открыть форму</a>
+		</div>
+		<div>
+			<h2 class="detail-info-editing__text">Основные публикации</h2>
+			<a href="">Открыть форму</a>
+		</div>
+		<div>
+			<h2 class="detail-info-editing__text">Награды и почетные звания</h2>
+			<a href="">Открыть форму</a>
+		</div>
+		<div>
+			<h2 class="detail-info-editing__text">Трудовые договора</h2>
+			<a href="">Открыть форму</a>
+		</div>
 	</div>
 </div>
 @endsection

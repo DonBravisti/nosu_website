@@ -1091,19 +1091,22 @@ footer {
 }
 
 .detail-info-editing {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
 	margin-top: 62px;
 	padding-bottom: 36px;
 }
 
 .detail-info-editing__text {
 	color: #1C294D;
-	font-size: 36px;
+	font-size: 24px;
 	line-height: 46px;
-	margin-bottom: 32px;
+	margin-right: 100px;
 }
 
 .detail-info-editing__text:not(:first-child) {
-	margin-top: 70px;
+	margin-top: 35px;
 }
 
 .detail-info-editing__input {
