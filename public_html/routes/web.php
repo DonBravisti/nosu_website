@@ -18,6 +18,11 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', [PageController::class, 'goToStructure']);
 
+
+Route::post('/contracts/add/send', [PageController::class, 'addContract']);
+Route::get('/contracts/add', [PageController::class, 'goToContractsAdd']);
+Route::get('/contracts', [PageController::class, 'goToContracts']);
+
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/register', [AuthController::class, 'showRegForm']);

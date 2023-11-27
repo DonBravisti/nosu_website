@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\EmplContract;
+use App\Models\Position;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -38,11 +40,11 @@ class PageController extends Controller
         $titles = DB::table('titles')->get();
         $emplDegrees = DB::table('empl_degrees')->get();
         // $emplDegree = $this->getEmployeeDegree($id, $emplDegrees, $degrees);
-        $emplDegree = $degrees[$employee->emplDegree->degree_id-1]->title;
-        $emplTitle = $titles[$employee->emplTitle->title_id-1]->title;
+        $emplDegree = $degrees[$employee->emplDegree->degree_id - 1]->title;
+        $emplTitle = $titles[$employee->emplTitle->title_id - 1]->title;
 
         return view('persCard', [
-            'fio' => sprintf('%s %s %s', $employee->surname, $employee->name, $employee->patronimyc), 
+            'fio' => sprintf('%s %s %s', $employee->surname, $employee->name, $employee->patronimyc),
             'degree' => $emplDegree,
             'title' => $emplTitle
         ]);
@@ -51,5 +53,45 @@ class PageController extends Controller
     function goToStructure()
     {
         return view('structure');
+    }
+
+    function goToContracts()
+    {
+        $contracts = EmplContract::all();
+        $employees = Employee::all();
+        $positions = Position::all();
+
+        return view(
+            'contracts',
+            [
+                'contracts' => $contracts,
+                'employees' => $employees,
+                'positions' => $positions
+            ]
+        );
+    }
+
+    function goToContractsAdd()
+    {
+        $employees = Employee::all();
+        $positions = Position::all();
+
+        $emplFIOs = array();
+        foreach ($employees as $key => $empl) {
+            $fio = sprintf('%s %s %s', $empl->surname, $empl->name, $empl->patronimyc);
+            $emplFIOs[] = ['id' => $empl->id, 'fio' => $fio];
+        }
+
+        return view(
+            'addContract',
+            [
+                'employees' => $emplFIOs,
+                'positions' => $positions
+            ]
+        );
+    }
+
+    function addContract() {
+        echo 'da';
     }
 }
