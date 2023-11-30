@@ -68,59 +68,65 @@
 					<p class="general-info-input__name">Базовое образование</p>
 					<input type="text" class="general-info__input" name="baseEdu" placeholder="не заполнено" value="{{$baseEdu}}">
 
-					<button type="submit">Сохранить</button>
+
+
+					<div class="math-websites-editing">
+						<div class="math-websites-editing-body">
+							<div class="math-websites-editing-el">
+								<p class="math-websites-editing__text">Укажите URL - адрес для Orcid</p>
+								<div class="math-websites-editing-input-block">
+									<!-- <form action="#" class="math-websites-editing-form"> -->
+									<div class="math-websites-editing-form-input-block">
+										<input name="orcid" type="text" class="math-websites-editing__input" value="{{$orcid}}">
+										<button class="clip__btn" type="submit"></button>
+									</div>
+									<!-- </form> -->
+								</div>
+							</div>
+							<div class="math-websites-editing-el">
+								<p class="math-websites-editing__text">Укажите URL - адрес для Elsevier Scopus</p>
+								<div class="math-websites-editing-input-block">
+									<!-- <form action="#" class="math-websites-editing-form"> -->
+									<div class="math-websites-editing-form-input-block">
+										<input name="scopus" type="text" class="math-websites-editing__input" value="{{$scopus}}">
+										<button class="clip__btn" type="submit"></button>
+									</div>
+									<!-- </form> -->
+								</div>
+							</div>
+							<div class="math-websites-editing-el">
+								<p class="math-websites-editing__text">Укажите URL - адрес для Math-Net.ru</p>
+								<div class="math-websites-editing-input-block">
+									<!-- <form action="#" class="math-websites-editing-form"> -->
+									<div class="math-websites-editing-form-input-block">
+										<input name="math-net" type="text" class="math-websites-editing__input" value="{{$mathnet}}">
+										<button class="clip__btn" type="submit"></button>
+									</div>
+									<!-- </form> -->
+								</div>
+							</div>
+							<div class="math-websites-editing-el">
+								<p class="math-websites-editing__text">Укажите URL - адрес для Clarivate</p>
+								<div class="math-websites-editing-input-block">
+									<!-- <form action="#" class="math-websites-editing-form"> -->
+									<div class="math-websites-editing-form-input-block">
+										<input name="clarivate" type="text" class="math-websites-editing__input" value="{{$clarivate}}">
+										<button class="clip__btn" type="submit"></button>
+									</div>
+									<!-- </form> -->
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+					<button class="login-btn" type="submit">Сохранить</button>
 				</form>
 			</div>
 		</div>
 	</div>
-	<div class="math-websites-editing">
-		<div class="math-websites-editing-body">
-			<div class="math-websites-editing-el">
-				<p class="math-websites-editing__text">Укажите URL - адрес для Orcid</p>
-				<div class="math-websites-editing-input-block">
-					<form action="#" class="math-websites-editing-form">
-						<div class="math-websites-editing-form-input-block">
-							<input type="text" class="math-websites-editing__input">
-							<button class="clip__btn" type="submit"></button>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="math-websites-editing-el">
-				<p class="math-websites-editing__text">Укажите URL - адрес для Elsevier Scopus</p>
-				<div class="math-websites-editing-input-block">
-					<form action="#" class="math-websites-editing-form">
-						<div class="math-websites-editing-form-input-block">
-							<input type="text" class="math-websites-editing__input">
-							<button class="clip__btn" type="submit"></button>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="math-websites-editing-el">
-				<p class="math-websites-editing__text">Укажите URL - адрес для Math-Net.ru</p>
-				<div class="math-websites-editing-input-block">
-					<form action="#" class="math-websites-editing-form">
-						<div class="math-websites-editing-form-input-block">
-							<input type="text" class="math-websites-editing__input">
-							<button class="clip__btn" type="submit"></button>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="math-websites-editing-el">
-				<p class="math-websites-editing__text">Укажите URL - адрес для Clarivate</p>
-				<div class="math-websites-editing-input-block">
-					<form action="#" class="math-websites-editing-form">
-						<div class="math-websites-editing-form-input-block">
-							<input type="text" class="math-websites-editing__input">
-							<button class="clip__btn" type="submit"></button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+
 	<div class="detail-info-editing">
 		<div>
 			<h2 class="detail-info-editing__text">Повышение квалификации</h2>

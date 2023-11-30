@@ -21,7 +21,11 @@ class EditController extends Controller
             'phone' => 'required',
             'email' => 'required',
             'birthdate' => 'required',
-            'baseEdu' => 'required'
+            'baseEdu' => 'required',
+            'orcid' => 'required',
+            'scopus' => 'required',
+            'math-net' => 'required',
+            'clarivate' => 'required'
         ]);
         // print_r($validate['FIO']);
         $employee = Employee::find($id);
@@ -40,6 +44,10 @@ class EditController extends Controller
         $employee->email = $validate['email'];
         $employee->birthdate = $validate['birthdate'];
         $employee->base_education = $validate['baseEdu'];
+        $employee->orcid_url = $validate['orcid'];
+        $employee->scopus_url = $validate['scopus'];
+        $employee->mathnet_url = $validate['math-net'];
+        $employee->clarivate_url = $validate['clarivate'];
         $employee->save();
 
         $emplDegree = $employee->emplDegree;
@@ -85,7 +93,11 @@ class EditController extends Controller
             'phone' => 'required',
             'email' => 'required',
             'birthdate' => 'required',
-            'baseEdu' => 'required'
+            'baseEdu' => 'required',
+            'orcid' => 'required',
+            'scopus' => 'required',
+            'math-net' => 'required',
+            'clarivate' => 'required'
         ]);
 
         $fioSplited = explode(" ", $validate['FIO']);
@@ -101,7 +113,11 @@ class EditController extends Controller
             'sex' => $validate['sex'],
             'phone' => $validate['phone'],
             'email' => $validate['email'],
-            'base_education' => $validate['baseEdu']
+            'base_education' => $validate['baseEdu'],
+            'orcid_url' => $validate['orcid'],
+            'scopus_url' => $validate['scopus'],
+            'mathnet_url' => $validate['math-net'],
+            'clarivate_url' => $validate['clarivate']
         ];
 
         $employee = Employee::create($credentials);
@@ -167,6 +183,10 @@ class EditController extends Controller
         $email = $employee->email;
         $sex = $employee->sex;
         $baseEdu = $employee->base_education;
+        $orcid = $employee->orcid_url;
+        $scopus = $employee->scopus_url;
+        $mathnet = $employee->mathnet_url;
+        $clarivate = $employee->clarivate_url;
 
         return view(
             'profileEditing',
@@ -182,7 +202,11 @@ class EditController extends Controller
                 'phone' => $phone,
                 'email' => $email,
                 'sex' => $sex,
-                'baseEdu' => $baseEdu
+                'baseEdu' => $baseEdu,
+                'orcid' => $orcid,
+                'scopus' => $scopus,
+                'mathnet' => $mathnet,
+                'clarivate' => $clarivate
             ]
         );
     }

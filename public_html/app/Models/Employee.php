@@ -21,7 +21,11 @@ class Employee extends Model
         'sex',
         'phone',
         'email',
-        'base_education'
+        'base_education',
+        'orcid_url',
+        'scopus_url',
+        'mathnet_url',
+        'clarivate_url'
     ];
 
     public function emplDegree()
