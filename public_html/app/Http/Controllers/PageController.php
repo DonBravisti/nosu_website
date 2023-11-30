@@ -91,7 +91,28 @@ class PageController extends Controller
         );
     }
 
-    function addContract() {
-        echo 'da';
+    function addContract(Request $request) {
+        $request->flash();
+        $validate = $request->validate([
+            'emplId' => 'required',
+            'number' => 'required|int',
+            'position_id' => 'required',
+            'date_from' => 'required',
+            'date_to' => 'required',
+            'competition' => 'required'
+        ]);
+
+        $credentials = [
+            'employee_id' => $validate['emplId'],
+            'date_from' => $validate['date_from'],
+            'date_to' => $validate['date_to'],
+            'number' => $validate['number'],
+            'position_id' => $validate['position_id'],
+            'competition' => $validate['competition']
+        ];
+
+        EmplContract::create($credentials);
+        session()->flash('success', 'Успешно сохранено!');
+        return redirect('/contracts');
     }
 }

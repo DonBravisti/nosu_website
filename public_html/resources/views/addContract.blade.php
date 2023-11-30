@@ -18,18 +18,31 @@
 
 <section>
     <form class="contract__creating" action="/contracts/add/send" method="post">
+        @if (count($errors) > 0)
+        <div style="background-color:lightcoral">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li style="color: red;">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @elseif (session('success'))
+        <div style="background-color: lightgreen;">
+            <p style="color: green;">{{ session('success') }}</p>
+        </div>
+        @endif
         <label for="">ФИО</label>
-        <select name="FIO" id="FIO">
+        <select name="emplId" id="emplId">
             @foreach ($employees as $empl)
             <option value="{{$empl['id']}}">{{$empl['fio']}}</option>
             @endforeach
         </select>
 
         <label for="">Номер</label>
-        <input name="number" type="text">
+        <input name="number" type="text" value="123">
 
         <label for="">Должность</label>
-        <select name="FIO" id="FIO">
+        <select name="position_id" id="position_id">
             @foreach ($positions as $pos)
             <option value="{{$pos->id}}">{{$pos->title}}</option>
             @endforeach
