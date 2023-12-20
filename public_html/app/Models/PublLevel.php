@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PublLevel extends Model
 {
     use HasFactory;
+
+    public function publication() {
+        return $this->belongsTo(Publication::class);
+    }
 }

@@ -25,7 +25,7 @@
     <a class="action__link" style="text-align: center;" href="/contracts">
         <p>Трудовые договоры</p>
     </a>
-    <a class="action__link" style="text-align: center;" href="">
+    <a class="action__link" style="text-align: center;" href="/publs">
         <p>Публикации</p>
     </a>
     <a class="action__link" style="text-align: center;" href="/logout">

@@ -28,6 +28,12 @@ class Employee extends Model
         'clarivate_url'
     ];
 
+    public function FIO() {
+        $fio = $fio = sprintf('%s %s %s', $this->surname, $this->name, $this->patronimyc);
+
+        return $fio;
+    }
+
     public function emplDegree()
     {
         return $this->hasOne(EmplDegree::class);
@@ -36,5 +42,9 @@ class Employee extends Model
     public function emplTitle()
     {
         return $this->hasOne(EmplTitle::class);
+    }
+
+    public function emplPublication() {
+        return $this->hasOne(EmplPublication::class);
     }
 }

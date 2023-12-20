@@ -63,23 +63,23 @@ class EditController extends Controller
         return redirect('/edit/' . $id);
     }
 
-    public function save(Request $request)
-    {
-        $request->validate([
-            'FIO' => 'required|string|max:255'
-        ]);
-        $request_splited = explode(" ", $request->FIO);
+    // public function save(Request $request)
+    // {
+    //     $request->validate([
+    //         'FIO' => 'required|string|max:255'
+    //     ]);
+    //     $request_splited = explode(" ", $request->FIO);
 
-        $credentials = [
-            'surname' => $request_splited[0],
-            'name' => $request_splited[1],
-            'patronimyc' => $request_splited[2]
-        ];
+    //     $credentials = [
+    //         'surname' => $request_splited[0],
+    //         'name' => $request_splited[1],
+    //         'patronimyc' => $request_splited[2]
+    //     ];
 
-        // Employee::create($credentials);
+    //     // Employee::create($credentials);
 
-        print_r($credentials);
-    }
+    //     print_r($credentials);
+    // }
 
     function create(Request $request)
     {

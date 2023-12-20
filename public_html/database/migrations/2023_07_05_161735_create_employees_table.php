@@ -22,6 +22,10 @@ return new class extends Migration
             $table->string('phone', 11);
             $table->string('email', 100);
             $table->string('base_education', 256);
+            $table->text('orcid_url');
+            $table->text('scopus_url');
+            $table->text('mathnet_url');
+            $table->text('clarivate_url');
             $table->timestamps();
         });
     }

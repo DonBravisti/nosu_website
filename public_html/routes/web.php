@@ -18,10 +18,13 @@ use App\Http\Controllers\AuthController;
 
 Route::get('/', [PageController::class, 'goToStructure']);
 
-
 Route::post('/contracts/add/send', [PageController::class, 'addContract']);
 Route::get('/contracts/add', [PageController::class, 'goToContractsAdd']);
 Route::get('/contracts', [PageController::class, 'goToContracts']);
+
+Route::post('/publs/add/send', [PageController::class, 'addPubl']);
+Route::get('/publs/add', [PageController::class, 'goToPublsAdd']);
+Route::get('/publs', [PageController::class, 'goToPublications']);
 
 Route::get('/logout', [AuthController::class, 'logout']);
 

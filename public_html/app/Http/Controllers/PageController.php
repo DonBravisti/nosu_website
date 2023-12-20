@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Employee;
 use App\Models\EmplContract;
+use App\Models\EmplPublication;
 use App\Models\Position;
+use App\Models\Publication;
+use App\Models\PublLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -91,7 +94,8 @@ class PageController extends Controller
         );
     }
 
-    function addContract(Request $request) {
+    function addContract(Request $request)
+    {
         $request->flash();
         $validate = $request->validate([
             'emplId' => 'required',
@@ -114,5 +118,57 @@ class PageController extends Controller
         EmplContract::create($credentials);
         session()->flash('success', 'Успешно сохранено!');
         return redirect('/contracts');
+    }
+
+    function goToPublications()
+    {
+        $publications = Publication::all();
+
+        return view('publications', [
+            'publs' => $publications,
+
+        ]);
+    }
+
+    function goToPublsAdd()
+    {
+        $publLevels = PublLevel::all();
+        $employees = Employee::all();
+        return view('publsAdd', [
+            'publLevels' => $publLevels,
+            'employees' => $employees
+        ]);
+    }
+
+    function addPubl(Request $request)
+    {
+        $request->flash();
+        $validate = $request->validate([
+            'author' => 'required',
+            'title' => 'required',
+            'DOI' => 'required',
+            'imprint' => 'required',
+            'publ_level' => 'required',
+            'article_type' => 'required'
+        ]);
+
+        $credentials = [
+            'title' => $validate['title'],
+            'DOI' => $validate['DOI'],
+            'imprint' => $validate['imprint'],
+            'publ_level_id' => $validate['publ_level'],
+            'type' => $validate['article_type']
+        ];
+
+        $publication = Publication::create($credentials);
+        $employee = Employee::find($validate['author']);
+
+        $emplPubl = new EmplPublication();
+        $emplPubl->empl_id = $employee->id;
+        $emplPubl->publ_id = $publication->id;
+        $publication->emplPublication()->save($emplPubl);
+
+        session()->flash('success', 'Успешно сохранено!');
+        return redirect('/publs');
     }
 }
