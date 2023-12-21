@@ -42,6 +42,7 @@
             <option value="{{$empl->id}}">{{$empl->FIO()}}</option>
             @endforeach
         </select>
+        
         <label for="title">Название публикации</label>
         <input id="title" name="title" type="text">
         <label for="DOI">DOI адрес</label>
