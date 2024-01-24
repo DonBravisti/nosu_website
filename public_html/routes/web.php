@@ -44,4 +44,3 @@ Route::post('/create', [EditController::class, 'create']);
 Route::get('/kafedra-prikladnoj-matematiki-i-informatiki', [PageController::class, 'goToDepartment']);
 
 Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/{id}', [PageController::class, 'goToPersonalCard']);
-

@@ -50,3 +50,9 @@ Route::prefix('migrate')->group(function () {
         // return response()->json(['message' => $exitCode]);
     });
 });
+
+Route::get('clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+
+    return response()->json(['message' => $exitCode]);
+ });
