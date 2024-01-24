@@ -35,13 +35,15 @@
 					<p class="general-info-input__name big-general-info-input__name">ФИО</p>
 					<input type="text" class="general-info__input big-general-info__input" name="FIO" value="{{ old('FIO') }}" placeholder="не заполнено">
 					<p class="general-info-input__name big-general-info-input__name">Пол</p>
-					<div>
-						<input type="radio" name="sex" value="1" id="male" checked>
-						<label for="male">Мужчина</label>
-					</div>
-					<div>
-						<input type="radio" name="sex" value="0" id="female">
-						<label for="female">Женщина</label>
+					<div class="radio-buttons">
+						<div class="radio-button">
+							<input type="radio" name="sex" value="1" id="male" checked>
+							<label for="male">Мужчина</label>
+						</div>
+						<div class="radio-button">
+							<input type="radio" name="sex" value="0" id="female">
+							<label for="female">Женщина</label>
+						</div>
 					</div>
 					<p class="general-info-input__name big-general-info-input__name">Адрес</p>
 					<input type="text" name="address" id="" class="general-info__input big-general-info__input" value="{{ old('address') }}">
@@ -121,26 +123,28 @@
 
 
 
-					<button class="login-btn" type="submit">Добавить</button>
+					<button class="login-btn" type="submit">
+						<div class="login-btn__text">Добавить</div>
+					</button>
 				</form>
 			</div>
 		</div>
 	</div>
 
 	<div class="detail-info-editing">
-		<div>
+		<div class="detail-info">
 			<h2 class="detail-info-editing__text">Повышение квалификации</h2>
 			<a href="">Открыть форму</a>
 		</div>
-		<div>
+		<div class="detail-info">
 			<h2 class="detail-info-editing__text">Основные публикации</h2>
 			<a href="">Открыть форму</a>
 		</div>
-		<div>
+		<div class="detail-info">
 			<h2 class="detail-info-editing__text">Награды и почетные звания</h2>
 			<a href="">Открыть форму</a>
 		</div>
-		<div>
+		<div class="detail-info">
 			<h2 class="detail-info-editing__text">Трудовые договора</h2>
 			<a href="">Открыть форму</a>
 		</div>
