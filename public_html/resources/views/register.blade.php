@@ -1,15 +1,15 @@
 <form method="POST" action="/register/reg">
     @csrf
     @if ($errors->has('email'))
-    <span>
-        <strong>{{ $errors->first('email') }}</strong>
-    </span><br>
+        <span>
+            <strong>{{ $errors->first('email') }}</strong>
+        </span><br>
     @endif
 
     @if ($errors->has('password'))
-    <span>
-        <strong>{{ $errors->first('password') }}</strong>
-    </span>
+        <span>
+            <strong>{{ $errors->first('password') }}</strong>
+        </span>
     @endif
 
     <div>

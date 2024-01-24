@@ -16,15 +16,20 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::get('/', [PageController::class, 'goToStructure']);
+Route::get('/', [PageController::class, 'goToStructure'])->name('index');
 
-Route::post('/contracts/add/send', [PageController::class, 'addContract']);
-Route::get('/contracts/add', [PageController::class, 'goToContractsAdd']);
-Route::get('/contracts', [PageController::class, 'goToContracts']);
+Route::prefix('/contracts')->name('contracts.')->group(function () {
+    Route::post('/add/send', [PageController::class, 'addContract'])->name('add.send');
+    Route::get('/add', [PageController::class, 'goToContractsAdd'])->name('add');
+    Route::get('/', [PageController::class, 'goToContracts'])->name('list');
+});
 
-Route::post('/publs/add/send', [PageController::class, 'addPubl']);
-Route::get('/publs/add', [PageController::class, 'goToPublsAdd']);
-Route::get('/publs', [PageController::class, 'goToPublications']);
+Route::prefix('publs')->name('publs.')->group(function () {
+    Route::post('/add/send', [PageController::class, 'addPubl'])->name('add.send');
+    Route::get('/add', [PageController::class, 'goToPublsAdd'])->name('add');
+    Route::get('/', [PageController::class, 'goToPublications'])->name('list');
+});
+
 
 Route::get('/logout', [AuthController::class, 'logout']);
 

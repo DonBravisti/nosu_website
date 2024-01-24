@@ -80,7 +80,7 @@ class PageController extends Controller
         $positions = Position::all();
 
         $emplFIOs = array();
-        foreach ($employees as $key => $empl) {
+        foreach ($employees as $empl) {
             $fio = sprintf('%s %s %s', $empl->surname, $empl->name, $empl->patronimyc);
             $emplFIOs[] = ['id' => $empl->id, 'fio' => $fio];
         }
@@ -117,7 +117,7 @@ class PageController extends Controller
 
         EmplContract::create($credentials);
         session()->flash('success', 'Успешно сохранено!');
-        return redirect('/contracts');
+        return redirect()->route('contracts.list');
     }
 
     function goToPublications()
@@ -174,6 +174,6 @@ class PageController extends Controller
 
 
         session()->flash('success', 'публикация успешно добавлена!');
-        return redirect('/publs');
+        return redirect()->route('publs.list');
     }
 }

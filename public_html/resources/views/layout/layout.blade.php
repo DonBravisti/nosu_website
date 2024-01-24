@@ -47,7 +47,7 @@
             <div class="header-main-container">
                 <div class="header-main">
                     <div class="logo-block">
-                        <a href="/"><img src="/images/logo.png" class="logo-block__img"></a>
+                        <a href="{{ route('index') }}"><img src="/images/logo.png" class="logo-block__img"></a>
                     </div>
                     <div class="menu">
                         <div class="menu-top_container">

@@ -26,7 +26,7 @@
     </style>
 
     <section>
-        <form class="publ__creating" action="/publs/add/send" method="post">
+        <form class="publ__creating" action="{{ route('publs.add.send') }}" method="post">
             @if (count($errors) > 0)
                 <div style="background-color:lightcoral">
                     <ul>
