@@ -144,7 +144,7 @@ class PageController extends Controller
     {
         $request->flash();
         $validate = $request->validate([
-            'author' => 'required',
+            'authors.*' => 'required',
             'title' => 'required',
             'DOI' => 'required',
             'imprint' => 'required',
@@ -161,14 +161,19 @@ class PageController extends Controller
         ];
 
         $publication = Publication::create($credentials);
-        $employee = Employee::find($validate['author']);
+        $employees = Employee::find($validate['authors']);
+        // echo $employees;
+        // print_r($validate['authors']);
 
-        $emplPubl = new EmplPublication();
-        $emplPubl->empl_id = $employee->id;
-        $emplPubl->publ_id = $publication->id;
-        $publication->emplPublication()->save($emplPubl);
+        foreach ($employees as $employee) {
+            $emplPubl = new EmplPublication();
+            $emplPubl->empl_id = $employee->id;
+            $emplPubl->publ_id = $publication->id;
+            $publication->emplPublication()->save($emplPubl);
+        }
 
-        session()->flash('success', 'Успешно сохранено!');
+
+        session()->flash('success', 'публикация успешно добавлена!');
         return redirect('/publs');
     }
 }
