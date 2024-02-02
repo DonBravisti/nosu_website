@@ -11,6 +11,7 @@
             background-color: rgba(30, 84, 193, 1);
             border-radius: 10px;
             padding: 5px;
+            text-align: center;
         }
 
         .action__link p {
@@ -19,16 +20,19 @@
     </style>
 
     <section class="actions">
-        <a class="action__link" style="text-align: center;" href="/create-user">
+        <a class="action__link" href="/create-user">
             <p>Создать сотрудника</p>
         </a>
-        <a class="action__link" style="text-align: center;" href="{{ route('contracts.list') }}">
+        <a class="action__link" href="{{ route('spk.list') }}">
+            <p>СПК</p>
+        </a>
+        <a class="action__link" href="{{ route('contracts.list') }}">
             <p>Трудовые договоры</p>
         </a>
-        <a class="action__link" style="text-align: center;" href="{{ route('publs.list') }}">
+        <a class="action__link" href="{{ route('publs.list') }}">
             <p>Публикации</p>
         </a>
-        <a class="action__link" style="text-align: center;" href="/logout">
+        <a class="action__link" href="/logout">
             <p>Выйти из аккаунта</p>
         </a>
     </section>

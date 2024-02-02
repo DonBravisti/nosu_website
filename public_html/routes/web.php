@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SpkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,11 @@ Route::prefix('publs')->name('publs.')->group(function () {
     Route::get('/', [PageController::class, 'goToPublications'])->name('list');
 });
 
+Route::prefix('/spk')->name('spk.')->group(function () {
+    Route::get('/add/send', [SpkController::class, 'addSpk'])->name('send');
+    Route::get('/add', [SpkController::class, 'goToSpkAdd'])->name('add');
+    Route::get('/', [SpkController::class, 'goToSpkList'])->name('list');
+});
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
