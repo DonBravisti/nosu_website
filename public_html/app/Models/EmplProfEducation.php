@@ -10,6 +10,16 @@ class EmplProfEducation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'employee_id',
+        'number',
+        'date',
+        'doc_type_id',
+        'title',
+        'n_hours',
+        'organization'
+    ];
+
     public function employee()
     {
         return $this->belongsTo(Employee::class);

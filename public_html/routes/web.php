@@ -19,22 +19,25 @@ use App\Http\Controllers\SpkController;
 
 Route::get('/', [PageController::class, 'goToStructure'])->name('index');
 
-Route::prefix('/contracts')->name('contracts.')->group(function () {
-    Route::post('/add/send', [PageController::class, 'addContract'])->name('add.send');
-    Route::get('/add', [PageController::class, 'goToContractsAdd'])->name('add');
-    Route::get('/', [PageController::class, 'goToContracts'])->name('list');
-});
+Route::middleware('auth.basic')->group(function () {
+    Route::prefix('/contracts')->name('contracts.')->group(function () {
+        Route::post('/add/send', [PageController::class, 'addContract'])->name('add.send');
+        Route::get('/add', [PageController::class, 'goToContractsAdd'])->name('add');
+        Route::get('/', [PageController::class, 'goToContracts'])->name('list');
+    });
 
-Route::prefix('publs')->name('publs.')->group(function () {
-    Route::post('/add/send', [PageController::class, 'addPubl'])->name('add.send');
-    Route::get('/add', [PageController::class, 'goToPublsAdd'])->name('add');
-    Route::get('/', [PageController::class, 'goToPublications'])->name('list');
-});
+    Route::prefix('publs')->name('publs.')->group(function () {
+        Route::post('/add/send', [PageController::class, 'addPubl'])->name('add.send');
+        Route::get('/add', [PageController::class, 'goToPublsAdd'])->name('add');
+        Route::get('/', [PageController::class, 'goToPublications'])->name('list');
+    });
 
-Route::prefix('/spk')->name('spk.')->group(function () {
-    Route::get('/add/send', [SpkController::class, 'addSpk'])->name('send');
-    Route::get('/add', [SpkController::class, 'goToSpkAdd'])->name('add');
-    Route::get('/', [SpkController::class, 'goToSpkList'])->name('list');
+    Route::prefix('/spk')->name('spk.')->group(function () {
+        Route::post('/add/send', [SpkController::class, 'addSpk'])->name('send');
+        Route::get('/add', [SpkController::class, 'goToSpkAdd'])->name('add');
+        Route::delete('/remove/{id}', [SpkController::class, 'removeSpk'])->name('remove');
+        Route::get('/', [SpkController::class, 'goToSpkList'])->name('list');
+    });
 });
 
 Route::get('/logout', [AuthController::class, 'logout']);
