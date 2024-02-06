@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\EduPlanController;
 use App\Http\Controllers\SpkController;
 
 /*
@@ -37,6 +38,11 @@ Route::middleware('auth.basic')->group(function () {
         Route::get('/add', [SpkController::class, 'goToSpkAdd'])->name('add');
         Route::delete('/remove/{id}', [SpkController::class, 'removeSpk'])->name('remove');
         Route::get('/', [SpkController::class, 'goToSpkList'])->name('list');
+    });
+
+    Route::prefix('/edu-plan')->name('edu-plan.')->group(function () {
+        Route::get('/add', [EduPlanController::class, 'showPlanAdd'])->name('add');
+        Route::get('/', [EduPlanController::class, 'showPlans'])->name('list');
     });
 });
 

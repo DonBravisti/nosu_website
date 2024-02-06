@@ -23,6 +23,9 @@
         <a class="action__link" href="/create-user">
             <p>Создать сотрудника</p>
         </a>
+        <a class="action__link" href="{{ route('edu-plan.list') }}">
+            <p>Учебные планы</p>
+        </a>
         <a class="action__link" href="{{ route('spk.list') }}">
             <p>СПК</p>
         </a>
