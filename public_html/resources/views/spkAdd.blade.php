@@ -1,22 +1,11 @@
 @extends('layout.layout')
 @section('content')
-<a href="{{route('spk.list')}}">Вернуться к списку СПК</a>
+    <a href="{{ route('spk.list') }}">Вернуться к списку СПК</a>
 
     <h3>Добавить Сертификат/Диплом</h3>
     <form action="{{ route('spk.send') }}" method="post">
-        @if (count($errors) > 0)
-            <div style="background-color:lightcoral">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li style="color: red;">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @elseif (session('success'))
-            <div style="background-color: lightgreen;">
-                <p style="color: green;">{{ session('success') }}</p>
-            </div>
-        @endif
+
+        @include('partial.errorChecking')
 
         <select id="empls__list" name="emplId">
             @foreach ($empls as $empl)

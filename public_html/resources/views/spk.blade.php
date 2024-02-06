@@ -29,7 +29,7 @@
                     <form method="POST" action="{{ route('spk.remove', ['id' => $spkItem->id]) }}">
                         @method('DELETE')
 
-                        <button type="submit" onclick="return confirmRemove()">
+                        <button type="submit" onclick="return ConfirmDelete()">
                             Удалить
                         </button>
                     </form>
@@ -39,7 +39,7 @@
     </section>
 
     <script>
-        function confirmRemove() {
+        function ConfirmDelete() {
             return confirm('Вы уверены? Сертификат будет удалён безвозвратно.');
         }
     </script>

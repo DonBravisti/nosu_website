@@ -27,19 +27,8 @@
 
     <section>
         <form class="publ__creating" action="{{ route('publs.add.send') }}" method="post">
-            @if (count($errors) > 0)
-                <div style="background-color:lightcoral">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li style="color: red;">{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @elseif (session('success'))
-                <div style="background-color: lightgreen;">
-                    <p style="color: green;">{{ session('success') }}</p>
-                </div>
-            @endif
+
+            @include('partial.errorChecking')
 
             <div class="authors" id="authors">
                 <label for="author">Авторы</label>

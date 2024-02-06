@@ -1,6 +1,8 @@
 <form method="POST" action="/register/reg">
     @csrf
-    @if ($errors->has('email'))
+    @include('partial.errorChecking')
+
+    {{-- @if ($errors->has('email'))
         <span>
             <strong>{{ $errors->first('email') }}</strong>
         </span><br>
@@ -10,7 +12,7 @@
         <span>
             <strong>{{ $errors->first('password') }}</strong>
         </span>
-    @endif
+    @endif --}}
 
     <div>
         <label for="name">Name</label>
