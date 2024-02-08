@@ -12,17 +12,23 @@
             margin: 0 auto;
         }
 
-        td{
+        td {
             text-align: center;
         }
 
-        .table__headers {}
+        .pagination{
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
 
-        .plans-table__row {}
+        .page-item{
+            margin-right: 5px;
+        }
     </style>
 
     <section>
-        <a href="{{route('edu-plan.add')}}">Новый план</a>
+        <a href="{{ route('edu-plan.add') }}">Новый план</a>
         <h2 class="title">Учебные планы</h2>
         <table class="plans__table">
             <tr class="table__headers">
@@ -31,14 +37,15 @@
                 <th>Кафедра</th>
                 <th>Тиутльный лист(есть\нет)</th>
             </tr>
-            @foreach ($plans as $id => $plan)
+            @foreach ($plans as $plan)
                 <tr class="plans-table__row">
-                    <td>{{ ++$id }}</td>
+                    <td>{{ $plan->id }}</td>
                     <td>{{ $plan->subject->title }}</td>
                     <td>{{ $plan->department->title }}</td>
                     <td>ниче не знаю</td>
                 </tr>
             @endforeach
         </table>
+        {{ $plans->links() }}
     </section>
 @endsection

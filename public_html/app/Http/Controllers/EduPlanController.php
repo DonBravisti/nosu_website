@@ -11,7 +11,7 @@ class EduPlanController extends Controller
 {
     function showPlans()
     {
-        $plans = EduPlan::all();
+        $plans = EduPlan::paginate(20);
         foreach ($plans as $plan) {
             $plan->fillFieldsNullValues();
         }
