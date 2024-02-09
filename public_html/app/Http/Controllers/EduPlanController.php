@@ -21,7 +21,11 @@ class EduPlanController extends Controller
         ]);
     }
 
-    function showPlanAdd() {
-        return view('EduPlan.eduPlanAdd');
+    function showPlanAdd()
+    {
+        $blocks = Block::all();
+        return view('EduPlan.eduPlanAdd', [
+            'blocks' => $blocks
+        ]);
     }
 }
