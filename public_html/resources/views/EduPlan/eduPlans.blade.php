@@ -16,13 +16,13 @@
             text-align: center;
         }
 
-        .pagination{
+        .pagination {
             list-style: none;
             display: flex;
             justify-content: center;
         }
 
-        .page-item{
+        .page-item {
             margin-right: 5px;
         }
     </style>
@@ -42,7 +42,7 @@
                     <td>{{ $plan->id }}</td>
                     <td>{{ $plan->subject->title }}</td>
                     <td>{{ $plan->department->title }}</td>
-                    <td>ниче не знаю</td>
+                    <td>{{ $plan->title_plan_id == '0' ? 'нет' : 'есть' }}</td>
                 </tr>
             @endforeach
         </table>

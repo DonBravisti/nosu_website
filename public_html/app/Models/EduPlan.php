@@ -11,6 +11,13 @@ class EduPlan extends Model
     use HasFactory;
 
     protected $table = 'edu_plan';
+    protected $fillable = [
+        'block_id',
+        'subject_id',
+        'code_subject',
+        'department_id',
+        'title_plan_id'
+    ];
 
     function block()
     {

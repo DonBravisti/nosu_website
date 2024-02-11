@@ -41,6 +41,7 @@ Route::middleware('auth.basic')->group(function () {
     });
 
     Route::prefix('/edu-plan')->name('edu-plan.')->group(function () {
+        Route::post('/add/send', [EduPlanController::class, 'addPlan'])->name('send');
         Route::get('/add', [EduPlanController::class, 'showPlanAdd'])->name('add');
         Route::get('/', [EduPlanController::class, 'showPlans'])->name('list');
     });
