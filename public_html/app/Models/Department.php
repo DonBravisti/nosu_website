@@ -15,6 +15,11 @@ class Department extends Model
 
     function eduPlan()
     {
-        $this->hasOne(EduPlan::class);
+        return $this->hasOne(EduPlan::class);
+    }
+
+    function titlePlan()
+    {
+        return $this->hasOne(TitlePlan::class, 'title_plan');
     }
 }

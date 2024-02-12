@@ -16,6 +16,16 @@ class TitlePlan extends Model
 
     function eduPlan()
     {
-        $this->hasOne(EduPlan::class);
+        return $this->hasOne(EduPlan::class);
+    }
+
+    function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+
+    function speciality()
+    {
+        return $this->belongsTo(Speciality::class, 'spec_id');
     }
 }
