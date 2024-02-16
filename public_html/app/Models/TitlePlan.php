@@ -11,7 +11,16 @@ class TitlePlan extends Model
 
     protected $table = 'title_plan';
     protected $fillable = [
-        'title'
+        'spec_id',
+        'profile',
+        'date_uchsovet',
+        'number_uchsovet',
+        'current_year',
+        'date_enter',
+        'date_fgos',
+        'number_fgos',
+        'included',
+        'department_id'
     ];
 
     function eduPlan()

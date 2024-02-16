@@ -45,31 +45,54 @@ class EduPlanController extends Controller
 
     function addPlan(Request $request)
     {
+        $request->flash();
         // $titlePlanFieldsExcluded = Rule::excludeIf($request['titlePlanId'] == 0);
         $validated = $request->validate([
             'blockId' => 'required',
             'subjectId' => 'required',
             'departmentId' => 'required',
             'codeSubject' => 'required',
-            'titlePlanId' => 'required'
+            //Поля для title_plan
+            'spec' => 'required',
+            'profile' => 'required',
+            'dateUchsovet' => 'required',
+            'numberUchsovet' => 'required',
+            'currentYear' => 'required',
+            'dateEnter' => 'required',
+            'dateFgos' => 'required',
+            'numberFgos' => 'required',
+            'included' => 'required'
         ]);
 
-        $credentials = [
+        $credentialsTitlePlan = [
+            'spec_id' => $validated['spec'],
+            'profile' => $validated['profile'],
+            'date_uchsovet' =>$validated['dateUchsovet'],
+            'number_uchsovet' => $validated['numberUchsovet'],
+            'current_year' => $validated['currentYear'],
+            'date_enter' => $validated['dateEnter'],
+            'date_fgos' => $validated['dateFgos'],
+            'number_fgos' => $validated['numberFgos'],
+            'included' => $validated['included'],
+            'department_id' => $validated['departmentId']
+        ];
+
+        $titlePlan = TitlePlan::create($credentialsTitlePlan);
+
+        $credentialsEduPlan = [
             'block_id' => $validated['blockId'],
             'subject_id' => $validated['subjectId'],
             'code_subject' => $validated['codeSubject'],
             'department_id' => $validated['departmentId'],
-            'title_plan_id' => $validated['titlePlanId']
+            'title_plan_id' => $titlePlan->id
         ];
 
-        //...Вызов функции для вставки записи в title_plan...(Возможно)
-
-        if ($credentials['title_plan_id'] == '0') {
+        if ($credentialsEduPlan['title_plan_id'] == '0') {
             DB::statement('SET FOREIGN_KEY_CHECKS=0');
-            EduPlan::create($credentials);
+            EduPlan::create($credentialsEduPlan);
             DB::statement('SET FOREIGN_KEY_CHECKS=1');
         } else {
-            EduPlan::create($credentials);
+            EduPlan::create($credentialsEduPlan);
         }
 
         session()->flash('success', 'План успешно добавлен!');

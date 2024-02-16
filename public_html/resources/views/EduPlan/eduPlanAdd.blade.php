@@ -24,7 +24,7 @@
             height: 50px;
         }
 
-        .included__option{
+        .included__option {
             display: flex;
             align-items: center;
         }
@@ -65,7 +65,7 @@
                 </div>
                 <div class="field">
                     <label for="code-subject">Код дисциплины</label>
-                    <input id="code-subject" name="codeSubject" type="text">
+                    <input id="code-subject" name="codeSubject" type="text" value="{{ old('codeSubject') }}">
                 </div>
                 <input type="text" value="0" name="titlePlanId" hidden>
             </div>
@@ -82,42 +82,42 @@
                 </div>
                 <div class="field">
                     <label for="profile">Профиль</label>
-                    <input type="text" id="profile" name="profile">
+                    <input type="text" id="profile" name="profile" value="{{ old('profile') }}">
                 </div>
                 <div class="field">
                     <label for="date-uhsovet">Дата протокола ученого совета</label>
-                    <input type="date" id="date-uhsovet" name="date-uhsovet">
+                    <input type="date" id="date-uhsovet" name="dateUchsovet" value="{{ old('dateUchsovet') }}">
                 </div>
                 <div class="field">
-                    <label for="number-uhsovet">Дата протокола ученого совета</label>
-                    <input type="int" id="number-uhsovet" name="number-uhsovet">
+                    <label for="number-uhsovet">Номер протокола ученого совета</label>
+                    <input type="number" id="number-uhsovet" name="numberUchsovet" value="{{ old('numberUchsovet') }}">
                 </div>
                 <div class="field">
                     <label for="current-year">Текущий год</label>
-                    <select name="" id="current-year"></select>
+                    <select name="currentYear" id="current-year"></select>
                 </div>
                 <div class="field">
                     <label for="date-enter">Год поступления учащихся</label>
-                    <select name="" id="date-enter"></select>
+                    <select name="dateEnter" id="date-enter"></select>
                 </div>
                 <div class="field">
                     <label for="date-fgos">Дата протокола ФГОС</label>
-                    <input type="date" id="date-fgos" name="date-fgos">
+                    <input type="date" id="date-fgos" name="dateFgos" value="{{ old('dateFgos') }}">
                 </div>
                 <div class="field">
                     <label for="number-fgos">Номер протокола ФГОС</label>
-                    <input type="int" id="number-fgos" name="number-fgos">
+                    <input type="number" id="number-fgos" name="numberFgos" value="{{ old('numberFgos') }}">
                 </div>
                 <div class="field">
                     <fieldset>
                         <legend>Статус титульного листа</legend>
 
                         <div class="included__option">
-                            <input type="radio" name="included" id="active">
+                            <input type="radio" name="included" id="active" value="1">
                             <label for="active">Активный</label>
                         </div>
                         <div class="included__option">
-                            <input type="radio" name="included" id="draft">
+                            <input type="radio" name="included" id="draft" value="0">
                             <label for="draft">Черновик</label>
                         </div>
                     </fieldset>
