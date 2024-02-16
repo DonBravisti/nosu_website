@@ -36,13 +36,16 @@ Route::middleware('auth.basic')->group(function () {
     Route::prefix('/spk')->name('spk.')->group(function () {
         Route::post('/add/send', [SpkController::class, 'addSpk'])->name('send');
         Route::get('/add', [SpkController::class, 'goToSpkAdd'])->name('add');
-        Route::delete('/remove/{id}', [SpkController::class, 'removeSpk'])->name('remove');
+        Route::delete('/remove-spk/{id}', [SpkController::class, 'removeSpk'])->name('remove');
         Route::get('/', [SpkController::class, 'goToSpkList'])->name('list');
     });
 
     Route::prefix('/edu-plan')->name('edu-plan.')->group(function () {
         Route::post('/add/send', [EduPlanController::class, 'addPlan'])->name('send');
         Route::get('/add', [EduPlanController::class, 'showPlanAdd'])->name('add');
+        Route::get('/update-form/{id}', [EduPlanController::class, 'showPlanUpdate'])->name('update-form');
+        Route::put('/update/{id}', [EduPlanController::class, 'updatePlan'])->name('update');
+        Route::delete('/delete-edu-plan/{id}', [EduPlanController::class, 'deleteEduPlan'])->name('delete');
         Route::get('/', [EduPlanController::class, 'showPlans'])->name('list');
     });
 });

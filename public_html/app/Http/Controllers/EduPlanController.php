@@ -98,4 +98,14 @@ class EduPlanController extends Controller
         session()->flash('success', 'План успешно добавлен!');
         return redirect()->route('edu-plan.add');
     }
+
+    function showPlanUpdate($id) {
+        
+    }
+
+    function deleteEduPlan($id) {
+        EduPlan::destroy($id);
+
+        return redirect(route('edu-plan.list'));
+    }
 }

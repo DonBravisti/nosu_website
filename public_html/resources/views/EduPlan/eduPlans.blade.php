@@ -25,6 +25,10 @@
         .page-item {
             margin-right: 5px;
         }
+
+        .plan__controls {
+            display: flex
+        }
     </style>
 
     <section>
@@ -43,9 +47,41 @@
                     <td>{{ $plan->subject->title }}</td>
                     <td>{{ $plan->department->title }}</td>
                     <td>{{ $plan->title_plan_id == '0' ? 'нет' : 'есть' }}</td>
+                    <td class="plan__controls">
+                        <form method="POST" action="{{ route('edu-plan.update-form', ['id' => $plan->id]) }}">
+                            @method('PUT')
+
+                            <button type="submit">
+                                Редактировать
+                            </button>
+                        </form>
+                        /
+                        <form method="POST" action="{{ route('edu-plan.delete', ['id' => $plan->id]) }}">
+                            @method('DELETE')
+
+                            <button type="submit" onclick="return ConfirmDelete()">
+                                Удалить
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>
         {{ $plans->links() }}
     </section>
+
+    <script>
+        function ConfirmDeleteTitlePlan() {
+            return confirm('Удалить титульный лист вместе с планом?');
+        }
+
+        function ConfirmDeleteEduPlan() {
+            return confirm('Вы уверены? План будет удалён безвозвратно.');
+        }
+
+        function ConfirmDelete() {
+            return ConfirmDeleteEduPlan();
+            // ConfirmDeleteTitlePlan();
+        }
+    </script>
 @endsection
