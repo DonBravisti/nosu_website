@@ -14,6 +14,7 @@
 
         td {
             text-align: center;
+            /* border-bottom: 1px solid; */
         }
 
         .pagination {
@@ -27,7 +28,8 @@
         }
 
         .plan__controls {
-            display: flex
+            display: flex;
+            align-items: center;
         }
     </style>
 
@@ -48,9 +50,7 @@
                     <td>{{ $plan->department->title }}</td>
                     <td>{{ $plan->title_plan_id == '0' ? 'нет' : 'есть' }}</td>
                     <td class="plan__controls">
-                        <form method="POST" action="{{ route('edu-plan.update-form', ['id' => $plan->id]) }}">
-                            @method('PUT')
-
+                        <form method="GET" action="{{ route('edu-plan.update-form', ['id' => $plan->id]) }}">
                             <button type="submit">
                                 Редактировать
                             </button>

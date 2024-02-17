@@ -67,7 +67,7 @@ class EduPlanController extends Controller
         $credentialsTitlePlan = [
             'spec_id' => $validated['spec'],
             'profile' => $validated['profile'],
-            'date_uchsovet' =>$validated['dateUchsovet'],
+            'date_uchsovet' => $validated['dateUchsovet'],
             'number_uchsovet' => $validated['numberUchsovet'],
             'current_year' => $validated['currentYear'],
             'date_enter' => $validated['dateEnter'],
@@ -99,11 +99,78 @@ class EduPlanController extends Controller
         return redirect()->route('edu-plan.add');
     }
 
-    function showPlanUpdate($id) {
-        
+    function showPlanUpdate($id)
+    {
+        $blocks = Block::all()->sortBy('block_title');
+        $subjects = Subject::all()->sortBy('title');
+        $deps = Department::all()->sortBy('title');
+        $specialities = Speciality::all()->sortBy('title');
+
+        $eduPlan = EduPlan::find($id);
+        $eduPlan->fillFieldsNullValues();
+        $titlePlan = $eduPlan->titlePlan;
+
+        return view('EduPlan.eduPlanEdit', [
+            'blocks' => $blocks,
+            'subjects' => $subjects,
+            'departments' => $deps,
+            'eduPlan' => $eduPlan,
+            'specs' => $specialities,
+            'titlePlan' => $titlePlan
+        ]);
     }
 
-    function deleteEduPlan($id) {
+    function updatePlan($id)
+    {
+        $validated = request()->validate([
+            'blockId' => 'required',
+            'subjectId' => 'required',
+            'departmentId' => 'required',
+            'codeSubject' => 'required',
+            //Поля для title_plan
+            'spec' => 'required',
+            'profile' => 'required',
+            'dateUchsovet' => 'required',
+            'numberUchsovet' => 'required',
+            'currentYear' => 'required',
+            'dateEnter' => 'required',
+            'dateFgos' => 'required',
+            'numberFgos' => 'required',
+            'included' => 'required'
+        ]);
+
+        $eduPlan = EduPlan::findOrFail($id);
+        $titlePlan = $eduPlan->titlePlan;
+
+        $credentialsTitlePlan = [
+            'spec_id' => $validated['spec'],
+            'profile' => $validated['profile'],
+            'date_uchsovet' => $validated['dateUchsovet'],
+            'number_uchsovet' => $validated['numberUchsovet'],
+            'current_year' => $validated['currentYear'],
+            'date_enter' => $validated['dateEnter'],
+            'date_fgos' => $validated['dateFgos'],
+            'number_fgos' => $validated['numberFgos'],
+            'included' => $validated['included'],
+            'department_id' => $validated['departmentId']
+        ];
+
+        $credentialsEduPlan = [
+            'block_id' => $validated['blockId'],
+            'subject_id' => $validated['subjectId'],
+            'code_subject' => $validated['codeSubject'],
+            'department_id' => $validated['departmentId']
+        ];
+
+        $eduPlan->update($credentialsEduPlan);
+        $titlePlan->update($credentialsTitlePlan);
+
+        session()->flash('success', 'Успешно обновлено!');
+        return redirect()->back();
+    }
+
+    function deleteEduPlan($id)
+    {
         EduPlan::destroy($id);
 
         return redirect(route('edu-plan.list'));
