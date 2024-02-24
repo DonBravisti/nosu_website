@@ -9,6 +9,11 @@
         .contract__field {
             text-align: left;
         }
+
+        .contract__controls {
+            display: flex;
+            align-items: center;
+        }
     </style>
 
     <section class="contracts">
@@ -31,34 +36,47 @@
                     Тип сотрудника
                 </th>
             </tr>
+
             @foreach ($contracts as $key => $contract)
                 <tr class="contract">
                     <td class="contract__field">
                         {{ ++$key }}
                     </td>
                     <td class="contract__field">
-                        <?php
-                        $emplId = $contract->employee_id - 1;
-                        $employee = $employees[$emplId];
-                        $fio = sprintf('%s %s %s', $employee->surname, $employee->name, $employee->patronimyc);
-                        echo $fio;
-                        ?>
+                        {{ $contract->employee->FIO() }}
                     </td>
                     <td class="contract__field">
-                        <?php
-                        $positionId = $contract->position_id - 1;
-                        $position = $positions[$positionId];
-                        echo $position->title;
-                        ?>
+                        {{ $contract->position->title }}
                     </td>
                     <td class="contract__field">
                         {{ $contract->date_to }}
                     </td>
                     <td class="contract__field">
-                        {{ is_null($contract->emplContractType) ? 'Не указано' : $contract->emplContractType->title }}
+                        {{ $contract->emplContractType->title }}
+                    </td>
+                    <td class="contract__controls">
+                        <form method="GET" action="{{ route('contracts.update-form', ['id' => $contract->id]) }}">
+                            <button type="submit">
+                                Редактировать
+                            </button>
+                        </form>
+                        /
+                        <form method="POST" action="{{ route('contracts.delete', ['id' => $contract->id]) }}">
+                            @method('DELETE')
+
+                            <button type="submit" onclick="return ConfirmDelete()">
+                                Удалить
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
         </table>
     </section>
+
+    <script>
+        function ConfirmDelete() {
+            return confirm('Вы уверены? Договор будет удалён безвозвратно.');
+        }
+    </script>
 @endsection

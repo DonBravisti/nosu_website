@@ -18,8 +18,21 @@ class EmplContract extends Model
         'empl_contract_type'
     ];
 
+    function fillFieldsNullValues() {
+        $this->emplContractType = $this->emplContractType ?: new EmplContractType(['title' => 'Не указано']);
+    }
+
+    function position() {
+        return $this->belongsTo(Position::class);
+    }
+
+    function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
+
     public function emplContractType()
     {
-        return $this->belongsTo(EmplContractType::class);
+        return $this->belongsTo(EmplContractType::class, 'empl_contract_type');
     }
 }

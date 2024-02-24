@@ -25,6 +25,9 @@ Route::middleware('auth.basic')->group(function () {
     Route::prefix('/contracts')->name('contracts.')->group(function () {
         Route::post('/add/send', [ContractController::class, 'addContract'])->name('add.send');
         Route::get('/add', [ContractController::class, 'showContractsAdd'])->name('add');
+        Route::get('/update-form/{id}', [ContractController::class, 'showContractUpdate'])->name('update-form');
+        Route::put('/update/{id}', [ContractController::class, 'updateContract'])->name('update');
+        Route::delete('/delete-empl-contract/{id}', [ContractController::class, 'deleteContract'])->name('delete');
         Route::get('/', [ContractController::class, 'showContracts'])->name('list');
     });
 

@@ -9,8 +9,10 @@ class EmplContractType extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title'];
+
     public function emplContract()
     {
-        return $this->hasOne(EmplContract::class);
+        return $this->hasOne(EmplContract::class, 'empl_contract_type');
     }
 }

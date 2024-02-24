@@ -35,6 +35,10 @@ class Employee extends Model
         return $fio;
     }
 
+    function emplContract() {
+        return $this->hasOne(EmplContract::class);
+    }
+
     public function emplDegree()
     {
         return $this->hasOne(EmplDegree::class);
