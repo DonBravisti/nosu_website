@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
+use function PHPSTORM_META\type;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -47,7 +49,13 @@ Route::prefix('migrate')->group(function () {
         $exitCode = Artisan::call('migrate:status');
         $output = Artisan::output();
         print_r($output);
-        // return response()->json(['message' => $exitCode]);
+        return response()->json(['message' => $exitCode]);
+    });
+    Route::get('/', function () {
+        $exitCode = Artisan::call('migrate');
+        $output = Artisan::output();
+        print_r($output);
+        return response()->json(['message' => $exitCode]);
     });
 });
 
