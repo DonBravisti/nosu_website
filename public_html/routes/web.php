@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContractController;
 use App\Http\Controllers\EduPlanController;
 use App\Http\Controllers\SpkController;
 
@@ -22,9 +23,9 @@ Route::get('/', [PageController::class, 'goToStructure'])->name('index');
 
 Route::middleware('auth.basic')->group(function () {
     Route::prefix('/contracts')->name('contracts.')->group(function () {
-        Route::post('/add/send', [PageController::class, 'addContract'])->name('add.send');
-        Route::get('/add', [PageController::class, 'goToContractsAdd'])->name('add');
-        Route::get('/', [PageController::class, 'goToContracts'])->name('list');
+        Route::post('/add/send', [ContractController::class, 'addContract'])->name('add.send');
+        Route::get('/add', [ContractController::class, 'showContractsAdd'])->name('add');
+        Route::get('/', [ContractController::class, 'showContracts'])->name('list');
     });
 
     Route::prefix('publs')->name('publs.')->group(function () {
