@@ -17,6 +17,7 @@
     </style>
 
     <section>
+        <a href="{{ route('contracts.list') }}">Вернуться к договорам</a>
         <form class="contract__creating" action="{{ route('contracts.add.send') }}" method="post">
 
             @include('partial.errorChecking')
@@ -44,10 +45,11 @@
             <label for="">Действует по</label>
             <input name="date_to" type="date">
 
-            <label for="">Конкурс</label>
-            <select name="competition" id="competition">
-                <option value="1">Выбран</option>
-                <option value="0">Не выбран</option>
+            <label for="">Тип сотрудника</label>
+            <select name="empl-type_id" id="empl-type_id">
+                @foreach ($emplTypes as $type)
+                    <option value="{{ $type->id }}">{{ $type->title }}</option>
+                @endforeach
             </select>
 
             <button type="submit">Добавить договор</button>

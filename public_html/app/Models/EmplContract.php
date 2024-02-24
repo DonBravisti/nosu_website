@@ -15,6 +15,11 @@ class EmplContract extends Model
         'date_to',
         'number',
         'position_id',
-        'competition'
+        'empl_contract_type'
     ];
+
+    public function emplContractType()
+    {
+        return $this->belongsTo(EmplContractType::class);
+    }
 }

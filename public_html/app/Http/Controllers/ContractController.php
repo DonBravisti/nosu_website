@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EmplContract;
+use App\Models\EmplContractType;
 use App\Models\Employee;
 use App\Models\Position;
 
@@ -29,6 +30,7 @@ class ContractController extends Controller
     {
         $employees = Employee::all();
         $positions = Position::all();
+        $emplTypes = EmplContractType::all();
 
         $emplFIOs = array();
         foreach ($employees as $empl) {
@@ -40,7 +42,8 @@ class ContractController extends Controller
             'addContract',
             [
                 'employees' => $emplFIOs,
-                'positions' => $positions
+                'positions' => $positions,
+                'emplTypes' => $emplTypes
             ]
         );
     }
@@ -54,7 +57,7 @@ class ContractController extends Controller
             'position_id' => 'required',
             'date_from' => 'required',
             'date_to' => 'required',
-            'competition' => 'required'
+            'empl-type_id' => 'required'
         ]);
 
         $credentials = [
@@ -63,7 +66,7 @@ class ContractController extends Controller
             'date_to' => $validate['date_to'],
             'number' => $validate['number'],
             'position_id' => $validate['position_id'],
-            'competition' => $validate['competition']
+            'empl_contract_type' => $validate['empl-type_id']
         ];
 
         EmplContract::create($credentials);

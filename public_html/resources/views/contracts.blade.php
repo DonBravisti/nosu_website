@@ -19,28 +19,22 @@
                     №
                 </th>
                 <th class="contract__field">
-                    Номер
-                </th>
-                <th class="contract__field">
                     ФИО
                 </th>
                 <th class="contract__field">
                     Должность
                 </th>
                 <th class="contract__field">
-                    Действует с
+                    Действует по
                 </th>
                 <th class="contract__field">
-                    Действует по
+                    Тип сотрудника
                 </th>
             </tr>
             @foreach ($contracts as $key => $contract)
                 <tr class="contract">
                     <td class="contract__field">
                         {{ ++$key }}
-                    </td>
-                    <td class="contract__field">
-                        {{ $contract->number }}
                     </td>
                     <td class="contract__field">
                         <?php
@@ -58,10 +52,10 @@
                         ?>
                     </td>
                     <td class="contract__field">
-                        {{ $contract->date_from }}
+                        {{ $contract->date_to }}
                     </td>
                     <td class="contract__field">
-                        {{ $contract->date_to }}
+                        {{ is_null($contract->emplContractType) ? 'Не указано' : $contract->emplContractType->title }}
                     </td>
                 </tr>
             @endforeach
