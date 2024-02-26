@@ -11,6 +11,11 @@
             display: flex;
             justify-content: space-between;
         }
+
+        .spk__controls {
+            display: flex;
+            align-items: center;
+        }
     </style>
     <section class="spk__list">
         <h3>
@@ -26,13 +31,21 @@
                         <p>Сертификат: {{ $spkItem->title }}, {{ $spkItem->profDocType->title }}</p>
                         <br>
                     </div>
-                    <form method="POST" action="{{ route('spk.remove', ['id' => $spkItem->id]) }}">
-                        @method('DELETE')
+                    <div class="spk__controls">
+                        <form method="GET" action="{{ route('spk.update-form', ['id' => $spkItem->id]) }}">
+                            <button type="submit">
+                                Редактировать
+                            </button>
+                        </form>
+                        /
+                        <form method="POST" action="{{ route('spk.remove', ['id' => $spkItem->id]) }}">
+                            @method('DELETE')
 
-                        <button type="submit" onclick="return ConfirmDelete()">
-                            Удалить
-                        </button>
-                    </form>
+                            <button type="submit" onclick="return ConfirmDelete()">
+                                Удалить
+                            </button>
+                        </form>
+                    </div>
                 </div>
             @endforeach
         </div>

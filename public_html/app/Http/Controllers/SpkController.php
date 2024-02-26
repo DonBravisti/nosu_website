@@ -47,6 +47,43 @@ class SpkController extends Controller
         return redirect(route('spk.add'));
     }
 
+    function showSpkUpdate($id) {
+        $empls = Employee::all();
+        $docTypes = ProfDocType::all();
+
+        $sertificate = EmplProfEducation::findOrFail($id);
+
+        return view('FPK.FpkEdit', ['empls' => $empls, 'docTypes' => $docTypes, 'sertificate' => $sertificate]);
+    }
+
+    function updateSpk(Request $request, $id) {
+        $validated = $request->validate([
+            'emplId'=>'required',
+            'sertNum'=>'required',
+            'givenDate'=>'required',
+            'docTypeId'=>'required',
+            'sertTitle'=>'required',
+            'nHours'=>'required',
+            'organization'=>'required'
+        ]);
+
+        $credentials = [
+            'employee_id'=>$validated['emplId'],
+            'number'=>$validated['sertNum'],
+            'date'=>$validated['givenDate'],
+            'doc_type_id'=>$validated['docTypeId'],
+            'title'=>$validated['sertTitle'],
+            'n_hours'=>$validated['nHours'],
+            'organization'=>$validated['organization']
+        ];
+
+        $sertificate = EmplProfEducation::findOrFail($id);
+        $sertificate->update($credentials);
+
+        session()->flash('success', 'Успешно обновлено!');
+        return redirect()->back();
+    }
+
     function removeSpk($id) {
         EmplProfEducation::destroy($id);
 

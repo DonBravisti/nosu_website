@@ -40,6 +40,8 @@ Route::middleware('auth.basic')->group(function () {
     Route::prefix('/spk')->name('spk.')->group(function () {
         Route::post('/add/send', [SpkController::class, 'addSpk'])->name('send');
         Route::get('/add', [SpkController::class, 'goToSpkAdd'])->name('add');
+        Route::get('/update-form/{id}', [SpkController::class, 'showSpkUpdate'])->name('update-form');
+        Route::put('/update/{id}', [SpkController::class, 'updateSpk'])->name('update');
         Route::delete('/remove-spk/{id}', [SpkController::class, 'removeSpk'])->name('remove');
         Route::get('/', [SpkController::class, 'goToSpkList'])->name('list');
     });

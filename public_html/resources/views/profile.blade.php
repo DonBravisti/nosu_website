@@ -27,7 +27,7 @@
             <p>Учебные планы</p>
         </a>
         <a class="action__link" href="{{ route('spk.list') }}">
-            <p>СПК</p>
+            <p>ФПК</p>
         </a>
         <a class="action__link" href="{{ route('contracts.list') }}">
             <p>Трудовые договоры</p>
