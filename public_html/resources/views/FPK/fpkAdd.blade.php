@@ -1,9 +1,9 @@
 @extends('layout.layout')
 @section('content')
-    <a href="{{ route('spk.list') }}">Вернуться к списку ФПК</a>
+    <a href="{{ route('fpk.list') }}">Вернуться к списку ФПК</a>
 
     <h3>Добавить Сертификат/Диплом</h3>
-    <form action="{{ route('spk.send') }}" method="post">
+    <form action="{{ route('fpk.send') }}" method="post">
 
         @include('partial.errorChecking')
 

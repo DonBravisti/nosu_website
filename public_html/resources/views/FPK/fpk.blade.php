@@ -1,44 +1,44 @@
 @extends('layout.layout')
 @section('content')
     <style>
-        .spk__list {
+        .fpk__list {
             margin: 0 auto;
             width: 100%;
             max-width: 700px;
         }
 
-        .spk-item {
+        .fpk-item {
             display: flex;
             justify-content: space-between;
         }
 
-        .spk__controls {
+        .fpk__controls {
             display: flex;
             align-items: center;
         }
     </style>
-    <section class="spk__list">
+    <section class="fpk__list">
         <h3>
-            <a href="{{ route('spk.add') }}">Добавить сертификат</a>
+            <a href="{{ route('fpk.add') }}">Добавить сертификат</a>
         </h3>
         <br><br>
 
         <div>
-            @foreach ($spk as $spkItem)
-                <div class="spk-item">
+            @foreach ($fpk as $fpkItem)
+                <div class="fpk-item">
                     <div>
-                        <p>ФИО: {{ $spkItem->employee->FIO() }}</p>
-                        <p>Сертификат: {{ $spkItem->title }}, {{ $spkItem->profDocType->title }}</p>
+                        <p>ФИО: {{ $fpkItem->employee->FIO() }}</p>
+                        <p>Сертификат: {{ $fpkItem->title }}, {{ $fpkItem->profDocType->title }}</p>
                         <br>
                     </div>
-                    <div class="spk__controls">
-                        <form method="GET" action="{{ route('spk.update-form', ['id' => $spkItem->id]) }}">
+                    <div class="fpk__controls">
+                        <form method="GET" action="{{ route('fpk.update-form', ['id' => $fpkItem->id]) }}">
                             <button type="submit">
                                 Редактировать
                             </button>
                         </form>
                         /
-                        <form method="POST" action="{{ route('spk.remove', ['id' => $spkItem->id]) }}">
+                        <form method="POST" action="{{ route('fpk.remove', ['id' => $fpkItem->id]) }}">
                             @method('DELETE')
 
                             <button type="submit" onclick="return ConfirmDelete()">

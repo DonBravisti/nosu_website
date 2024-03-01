@@ -37,13 +37,14 @@ Route::middleware('auth.basic')->group(function () {
         Route::get('/', [PageController::class, 'goToPublications'])->name('list');
     });
 
-    Route::prefix('/spk')->name('spk.')->group(function () {
+    Route::prefix('/fpk')->name('fpk.')->group(function () {
         Route::post('/add/send', [SpkController::class, 'addSpk'])->name('send');
         Route::get('/add', [SpkController::class, 'goToSpkAdd'])->name('add');
         Route::get('/update-form/{id}', [SpkController::class, 'showSpkUpdate'])->name('update-form');
         Route::put('/update/{id}', [SpkController::class, 'updateSpk'])->name('update');
-        Route::delete('/remove-spk/{id}', [SpkController::class, 'removeSpk'])->name('remove');
-        Route::get('/', [SpkController::class, 'goToSpkList'])->name('list');
+        Route::delete('/remove-fpk/{id}', [SpkController::class, 'removeSpk'])->name('remove');
+        Route::get('/{id}', [SpkController::class, 'showFpkEmployee'])->name('empl');
+        Route::get('/', [SpkController::class, 'showFpkEmplsList'])->name('list');
     });
 
     Route::prefix('/edu-plan')->name('edu-plan.')->group(function () {

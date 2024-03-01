@@ -1,9 +1,9 @@
 @extends('layout.layout')
 @section('content')
-    <a href="{{ route('spk.list') }}">Вернуться к списку ФПК</a>
+    <a href="{{ route('fpk.list') }}">Вернуться к списку ФПК</a>
 
     <h3>Добавить Сертификат/Диплом</h3>
-    <form action="{{ route('spk.update', ['id' => $sertificate->id]) }}" method="POST">
+    <form action="{{ route('fpk.update', ['id' => $sertificate->id]) }}" method="POST">
 
         @method('PUT')
         @include('partial.errorChecking')

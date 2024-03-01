@@ -9,15 +9,23 @@ use Illuminate\Http\Request;
 
 class SpkController extends Controller
 {
-    function goToSpkList () {
-        $spk = EmplProfEducation::all();
-        return view('spk', ['spk' => $spk]);
+    function showFpkEmplsList() {
+        $employees = Employee::all();
+
+        return view('FPK.FpkEmployees', compact('employees'));
+    }
+
+    function showFpkEmployee ($id) {
+        $empl = Employee::findOrFail($id);
+        $fpk = EmplProfEducation::all()->where('employee_id', $id);
+
+        return view('FPK.fpk', compact('empl', 'fpk'));
     }
 
     function goToSpkAdd() {
         $empls = Employee::all();
         $docTypes = ProfDocType::all();
-        return view('spkAdd', ['empls' => $empls, 'docTypes' => $docTypes]);
+        return view('FPK.fpkAdd', ['empls' => $empls, 'docTypes' => $docTypes]);
     }
 
     function addSpk(Request $request) {
@@ -44,7 +52,7 @@ class SpkController extends Controller
 
         EmplProfEducation::create($credentials);
         session()->flash('success', 'Успешно добавлено');
-        return redirect(route('spk.add'));
+        return redirect(route('fpk.add'));
     }
 
     function showSpkUpdate($id) {
@@ -87,6 +95,6 @@ class SpkController extends Controller
     function removeSpk($id) {
         EmplProfEducation::destroy($id);
 
-        return redirect(route('spk.list'));
+        return redirect(route('fpk.list'));
     }
 }
