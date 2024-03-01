@@ -37,7 +37,8 @@ class SpkController extends Controller
             'docTypeId'=>'required',
             'sertTitle'=>'required',
             'nHours'=>'required',
-            'organization'=>'required'
+            'organization'=>'required',
+            'image' => 'nullable'
         ]);
 
         $credentials = [
@@ -51,6 +52,9 @@ class SpkController extends Controller
         ];
 
         EmplProfEducation::create($credentials);
+
+        // ImageController::uploadImage($request->file('image'));
+
         session()->flash('success', 'Успешно добавлено');
         return redirect(route('fpk.add'));
     }

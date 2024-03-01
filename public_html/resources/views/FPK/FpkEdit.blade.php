@@ -46,6 +46,11 @@
             <input type="text" id="organization__input" name="organization" value="{{ $sertificate->organization }}">
         </div>
 
+        <div>
+            <label for="image">Загрузить фото сертификата: </label>
+            <input type="file" name="image" id="image" >
+        </div>
+
         <button type="submit">Обновить</button>
     </form>
 @endsection

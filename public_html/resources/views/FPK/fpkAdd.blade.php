@@ -3,7 +3,7 @@
     <a href="{{ route('fpk.list') }}">Вернуться к списку ФПК</a>
 
     <h3>Добавить Сертификат/Диплом</h3>
-    <form action="{{ route('fpk.send') }}" method="post">
+    <form action="{{ route('fpk.send') }}" method="post" enctype="multipart/form-data">
 
         @include('partial.errorChecking')
 
@@ -43,6 +43,11 @@
         <div id="organization">
             <label for="organization__input">Организация</label>
             <input type="text" id="organization__input" name="organization" value="{{ old('organization') }}">
+        </div>
+
+        <div>
+            <label for="image">Загрузить фото сертификата: </label>
+            <input type="file" name="image" id="image" >
         </div>
 
         <button type="submit">Добавить</button>
