@@ -47,8 +47,12 @@
 
         <div>
             <label for="image">Загрузить фото сертификата: </label>
-            <input type="file" name="image" id="image" >
+            <input type="file" name="image" id="image">
         </div>
+
+        @isset($imgPath)
+            {{ $imgPath }}
+        @endisset
 
         <button type="submit">Добавить</button>
     </form>
