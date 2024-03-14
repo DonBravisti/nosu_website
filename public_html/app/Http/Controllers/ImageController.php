@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 
 class ImageController extends Controller
@@ -15,6 +14,6 @@ class ImageController extends Controller
 
     private static function generateImageName($emplId, $fpkId)
     {
-        return "empl-{$emplId}_fpk-{$fpkId}";
+        return "empl-{$emplId}_fpk-{$fpkId}.png";
     }
 }
