@@ -115,7 +115,7 @@
                                         <div class="learn-more__icon"></div>
                                     </button>
                                     @if (Auth::check())
-                                        <button class="learn-more__btn">
+                                        <button class="learn-more__btn edit__button">
                                             <a href="/edit/{{ $employee['id'] }}" class="learn-more__text">
                                                 Редактировать
                                             </a>

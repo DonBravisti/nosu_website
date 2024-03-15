@@ -53,13 +53,15 @@
                         <!-- <input type="text" class="general-info__input big-general-info__input" placeholder="не заполнено"> -->
                         <p class="general-info-input__name">Ученое звание</p>
                         <select name="selectTitle" id="">
-                            <option value="{{ $titles[0]->id }}">{{ $titles[0]->title }}</option>
-                            <option value="{{ $titles[1]->id }}">{{ $titles[1]->title }}</option>
+                            @foreach ($titles as $title)
+                                <option value="{{ $title->id }}">{{ $title->title }}</option>
+                            @endforeach
                         </select>
                         <p class="general-info-input__name">Ученая степень</p>
                         <select name="selectDegree" id="">
-                            <option value="{{ $degrees[0]->id }}">{{ $degrees[0]->title }}</option>
-                            <option value="{{ $degrees[1]->id }}">{{ $degrees[1]->title }}</option>
+                            @foreach ($degrees as $degree)
+                                <option value="{{ $degree->id }}">{{ $degree->title }}</option>
+                            @endforeach
                         </select>
                         <p class="general-info-input__name">Базовое образование</p>
                         <input type="text" class="general-info__input" name="baseEdu" placeholder="не заполнено"
