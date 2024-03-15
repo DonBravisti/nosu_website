@@ -23,6 +23,10 @@
             display: flex;
             flex-direction: column;
         }
+
+        textarea {
+            resize: vertical;
+        }
     </style>
 
     <section>
@@ -45,7 +49,7 @@
             <label for="DOI">DOI адрес</label>
             <input id="DOI" name="DOI" type="text">
             <label for="imprint">Выходные данные статьи</label>
-            <input id="imprint" name="imprint" type="text">
+            <textarea id="imprint" name="imprint" cols="30" rows="10"></textarea>
             <label for="publ_level">Уровень публикации</label>
             <select name="publ_level" id="publ_level">
                 @foreach ($publLevels as $level)
