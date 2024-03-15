@@ -11,6 +11,25 @@
     <title>Nosu</title>
 </head>
 
+<style>
+    .actions {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 20px;
+    }
+
+    .action__link {
+        background-color: rgba(30, 84, 193, 1);
+        border-radius: 10px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .action__link p {
+        color: white;
+    }
+</style>
+
 <body>
     <div class="container">
         <header>
@@ -76,6 +95,28 @@
                             <a href="#" class="navbar__item">Наука и образование</a>
                             <a href="#" class="navbar__item">О факультете</a>
                         </nav>
+                        @if (Auth::check() and Route::currentRouteName() != 'profile')
+                            <div class="actions">
+                                <a class="action__link" href="{{ route('empls.list') }}">
+                                    <p>Сотрудники</p>
+                                </a>
+                                <a class="action__link" href="{{ route('edu-plan.list') }}">
+                                    <p>Учебные планы</p>
+                                </a>
+                                <a class="action__link" href="{{ route('fpk.list') }}">
+                                    <p>ФПК</p>
+                                </a>
+                                <a class="action__link" href="{{ route('contracts.list') }}">
+                                    <p>Трудовые договоры</p>
+                                </a>
+                                <a class="action__link" href="{{ route('publs.list') }}">
+                                    <p>Публикации</p>
+                                </a>
+                                <a class="action__link" href="/logout">
+                                    <p>Выйти из аккаунта</p>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="header-main-mobile">

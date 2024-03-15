@@ -6,6 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\EduPlanController;
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\SpkController;
 
 /*
@@ -55,17 +56,20 @@ Route::middleware('auth.basic')->group(function () {
         Route::delete('/delete-edu-plan/{id}', [EduPlanController::class, 'deleteEduPlan'])->name('delete');
         Route::get('/', [EduPlanController::class, 'showPlans'])->name('list');
     });
+
+    Route::prefix('/empls')->name('empls.')->group(function () {
+        Route::get('/', [EmployeesController::class,'showEmployees'])->name('list');
+    });
+
+    Route::get('/profile', function () {
+        return view('profile');
+    })->name('profile');
 });
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::get('/register', [AuthController::class, 'showRegForm']);
 Route::post('/register/reg', [AuthController::class, 'register']);
-
-Route::get('/profile', function () {
-    // Only authenticated users may access this route...
-    return view('profile');
-})->middleware('auth.basic');
 
 Route::get('/edit/{id}', [EditController::class, 'goToProfileEditing']);
 Route::post('/edit/{id}/update', [EditController::class, 'update']);

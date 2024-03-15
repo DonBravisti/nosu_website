@@ -20,8 +20,8 @@
     </style>
 
     <section class="actions">
-        <a class="action__link" href="/create-user">
-            <p>Создать сотрудника</p>
+        <a class="action__link" href="{{ route('empls.list') }}">
+            <p>Сотрудники</p>
         </a>
         <a class="action__link" href="{{ route('edu-plan.list') }}">
             <p>Учебные планы</p>
