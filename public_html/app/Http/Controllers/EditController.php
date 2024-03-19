@@ -164,8 +164,8 @@ class EditController extends Controller
 
     function goToProfileEditing($id)
     {
-        $employee = Employee::all()->where('id', $id)->first();
-        $fio = sprintf('%s %s %s', $employee->surname, $employee->name, $employee->patronimyc);
+        $employee = Employee::findOrFail( $id );
+        $fio = $employee->FIO();
 
         $degrees = DB::table('degrees')->get();
         $emplDegrees = DB::table('empl_degrees')->get();
@@ -194,9 +194,9 @@ class EditController extends Controller
                 'id' => $id,
                 'fio' => $fio,
                 'emplDegree' => $emplDegree,
-                'degree' => $degree,
+                'degrees' => $degrees,
                 'emplTitle' => $emplTitle,
-                'title' => $title,
+                'titles' => $titles,
                 'address' => $address,
                 'birthdate' => $birthdate,
                 'phone' => $phone,
