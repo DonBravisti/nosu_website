@@ -8,6 +8,7 @@ use App\Http\Controllers\ContractController;
 use App\Http\Controllers\EduPlanController;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\SpkController;
+use App\Http\Controllers\PublicationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,12 @@ Route::middleware('auth.basic')->group(function () {
     });
 
     Route::prefix('publs')->name('publs.')->group(function () {
-        Route::post('/add/send', [PageController::class, 'addPubl'])->name('add.send');
-        Route::get('/add', [PageController::class, 'goToPublsAdd'])->name('add');
-        Route::get('/', [PageController::class, 'goToPublications'])->name('list');
+        Route::post('/add/send', [PublicationController::class, 'addPubl'])->name('add.send');
+        Route::get('/add', [PublicationController::class, 'goToPublsAdd'])->name('add');
+        Route::get('/update-form/{id}', [PublicationController::class, 'showPublUpdate'])->name('update-form');
+        Route::put('/update/{id}', [PublicationController::class, 'updatePubl'])->name('update');
+        Route::delete('/remove/{id}', [PublicationController::class, 'removePubl'])->name('remove');
+        Route::get('/', [PublicationController::class, 'goToPublications'])->name('list');
     });
 
     Route::prefix('/fpk')->name('fpk.')->group(function () {

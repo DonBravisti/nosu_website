@@ -9,11 +9,13 @@ class EmplPublication extends Model
 {
     use HasFactory;
 
-    public function employee() {
-        return $this->belongsTo(Employee::class);
-    }
+    // public function employee()
+    // {
+    //     return $this->belongsTo(Employee::class);
+    // }
 
-    public function publication() {
-        return $this->belongsTo(Publication::class);
-    }
+    // public function publication()
+    // {
+    //     return $this->belongsTo(Publication::class);
+    // }
 }

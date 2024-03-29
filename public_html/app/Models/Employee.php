@@ -22,6 +22,7 @@ class Employee extends Model
         'phone',
         'email',
         'base_education',
+        'qualification',
         'orcid_url',
         'scopus_url',
         'mathnet_url',
@@ -49,9 +50,14 @@ class Employee extends Model
         return $this->hasOne(EmplTitle::class);
     }
 
-    public function emplPublication()
+    // public function emplPublication()
+    // {
+    //     return $this->hasOne(EmplPublication::class);
+    // }
+
+    public function publications()
     {
-        return $this->hasOne(EmplPublication::class);
+        return $this->belongsToMany(Publication::class, 'empl_publications', 'empl_id', 'publ_id');
     }
 
     public function profEducation()

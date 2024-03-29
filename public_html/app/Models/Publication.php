@@ -15,16 +15,22 @@ class Publication extends Model
         'DOI',
         'imprint',
         'publ_level_id',
-        'type'
+        'type',
+        'publication_year'
     ];
 
     public function publLevel()
     {
-        return $this->hasOne(PublLevel::class);
+        return $this->belongsTo(PublLevel::class);
     }
 
-    public function emplPublication()
+    // public function emplPublication()
+    // {
+    //     return $this->hasMany(EmplPublication::class, 'publ_id');
+    // }
+
+    public function authors()
     {
-        return $this->hasMany(EmplPublication::class, 'publ_id');
+        return $this->belongsToMany(Employee::class, 'empl_publications', 'publ_id', 'empl_id');
     }
 }
