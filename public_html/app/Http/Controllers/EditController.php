@@ -22,6 +22,7 @@ class EditController extends Controller
             'email' => 'required',
             'birthdate' => 'required',
             'baseEdu' => 'required',
+            'qualification'=> 'required',
             'orcid' => 'required',
             'scopus' => 'required',
             'math-net' => 'required',
@@ -44,6 +45,7 @@ class EditController extends Controller
         $employee->email = $validate['email'];
         $employee->birthdate = $validate['birthdate'];
         $employee->base_education = $validate['baseEdu'];
+        $employee->qualification = $validate['qualification'];
         $employee->orcid_url = $validate['orcid'];
         $employee->scopus_url = $validate['scopus'];
         $employee->mathnet_url = $validate['math-net'];
@@ -94,6 +96,7 @@ class EditController extends Controller
             'email' => 'required',
             'birthdate' => 'required',
             'baseEdu' => 'required',
+            'qualification' => 'required',
             'orcid' => 'required',
             'scopus' => 'required',
             'math-net' => 'required',
@@ -114,6 +117,7 @@ class EditController extends Controller
             'phone' => $validate['phone'],
             'email' => $validate['email'],
             'base_education' => $validate['baseEdu'],
+            'qualification'=> $validate['qualification'],
             'orcid_url' => $validate['orcid'],
             'scopus_url' => $validate['scopus'],
             'mathnet_url' => $validate['math-net'],
@@ -183,6 +187,7 @@ class EditController extends Controller
         $email = $employee->email;
         $sex = $employee->sex;
         $baseEdu = $employee->base_education;
+        $qualification = $employee->qualification;
         $orcid = $employee->orcid_url;
         $scopus = $employee->scopus_url;
         $mathnet = $employee->mathnet_url;
@@ -203,6 +208,7 @@ class EditController extends Controller
                 'email' => $email,
                 'sex' => $sex,
                 'baseEdu' => $baseEdu,
+                'qualification'=> $qualification,
                 'orcid' => $orcid,
                 'scopus' => $scopus,
                 'mathnet' => $mathnet,

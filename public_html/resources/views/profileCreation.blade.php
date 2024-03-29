@@ -66,6 +66,9 @@
                         <p class="general-info-input__name">Базовое образование</p>
                         <input type="text" class="general-info__input" name="baseEdu" placeholder="не заполнено"
                             value="{{ old('baseEdu') }}">
+                        <label for="qualification" class="general-info-input__name">Квалификация</label>
+                        <input type="text" class="general-info__input" name="qualification" id="qualification"
+                            placeholder="не заполнено" value="{{ old('qualification') }}">
 
 
 
