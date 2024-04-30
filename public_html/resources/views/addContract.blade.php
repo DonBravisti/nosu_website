@@ -25,12 +25,19 @@
             <label for="">ФИО</label>
             <select name="emplId" id="emplId">
                 @foreach ($employees as $empl)
-                    <option value="{{ $empl['id'] }}">{{ $empl['fio'] }}</option>
+                    <option value="{{ $empl->id }}">{{ $empl->FIO() }}</option>
                 @endforeach
             </select>
 
             <label for="">Номер</label>
             <input name="number" type="text" value="123">
+
+            <label for="">Кафедра</label>
+            <select name="department_id" id="department_id">
+                @foreach ($departments as $dep)
+                    <option value="{{ $dep->id }}">{{ $dep->title }}</option>
+                @endforeach
+            </select>
 
             <label for="">Должность</label>
             <select name="position_id" id="position_id">

@@ -22,4 +22,9 @@ class Department extends Model
     {
         return $this->hasOne(TitlePlan::class, 'title_plan');
     }
+
+    function emplContract()
+    {
+        return $this->hasMany(EmplContract::class, 'title_plan');
+    }
 }

@@ -33,6 +33,13 @@
             <label for="">Номер</label>
             <input name="number" type="text" value="{{ $contract->number }}">
 
+            <label for="">Кафедра</label>
+            <select name="department_id" id="department_id">
+                @foreach ($departments as $dep)
+                    <option @selected($dep->id == $contract->department->id) value="{{ $dep->id }}">{{ $dep->title }}</option>
+                @endforeach
+            </select>
+
             <label for="">Должность</label>
             <select name="position_id" id="position_id">
                 @foreach ($positions as $pos)

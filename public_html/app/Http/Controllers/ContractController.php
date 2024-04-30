@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use Illuminate\Http\Request;
 use App\Models\EmplContract;
 use App\Models\EmplContractType;
@@ -35,45 +36,46 @@ class ContractController extends Controller
         $employees = Employee::all();
         $positions = Position::all();
         $emplTypes = EmplContractType::all();
+        $departments = Department::all()->sortBy('title');
 
-        $emplFIOs = array();
-        foreach ($employees as $empl) {
-            $fio = sprintf('%s %s %s', $empl->surname, $empl->name, $empl->patronimyc);
-            $emplFIOs[] = ['id' => $empl->id, 'fio' => $fio];
-        }
+        // $emplFIOs = array();
+        // foreach ($employees as $empl) {
+        //     $fio = sprintf('%s %s %s', $empl->surname, $empl->name, $empl->patronimyc);
+        //     $emplFIOs[] = ['id' => $empl->id, 'fio' => $fio];
+        // }
 
         return view(
             'addContract',
-            [
-                'employees' => $emplFIOs,
-                'positions' => $positions,
-                'emplTypes' => $emplTypes
-            ]
+            compact('employees', 'positions', 'emplTypes', 'departments')
         );
     }
 
     function showContractUpdate($id)
     {
         $contract = EmplContract::find($id);
+        $contract->fillFieldsNullValues();
 
         $employees = Employee::all();
         $positions = Position::all();
         $emplTypes = EmplContractType::all();
+        $departments = Department::all()->sortBy('title');
 
         $emplTypeId = !is_null($contract->emplContractType)
             ? $contract->emplContractType->id
             : 0;
 
-        return view('EmplContracts.updateContract', [
-            'contract' => $contract,
-            'employees' => $employees,
-            'positions' => $positions,
-            'emplTypes' => $emplTypes,
-            'emplTypeId' => $emplTypeId
-        ]);
+        return view('EmplContracts.updateContract', compact(
+            'contract',
+            'employees',
+            'positions',
+            'emplTypes',
+            'emplTypeId',
+            'departments'
+        ));
     }
 
-    function updateContract(Request $request, $id) {
+    function updateContract(Request $request, $id)
+    {
 
         $validated = $request->validate([
             'emplId' => 'required',
@@ -81,7 +83,8 @@ class ContractController extends Controller
             'position_id' => 'required',
             'date_from' => 'required',
             'date_to' => 'required',
-            'empl-type_id' => 'required'
+            'empl-type_id' => 'required',
+            'department_id' => 'required'
         ]);
 
         $credentials = [
@@ -90,7 +93,8 @@ class ContractController extends Controller
             'date_to' => $validated['date_to'],
             'number' => $validated['number'],
             'position_id' => $validated['position_id'],
-            'empl_contract_type' => $validated['empl-type_id']
+            'empl_contract_type' => $validated['empl-type_id'],
+            'department_id' => $validated['department_id']
         ];
 
         $contract = EmplContract::findOrFail($id);
@@ -109,7 +113,8 @@ class ContractController extends Controller
             'position_id' => 'required',
             'date_from' => 'required',
             'date_to' => 'required',
-            'empl-type_id' => 'required'
+            'empl-type_id' => 'required',
+            'department_id' => 'required'
         ]);
 
         $credentials = [
@@ -118,7 +123,8 @@ class ContractController extends Controller
             'date_to' => $validate['date_to'],
             'number' => $validate['number'],
             'position_id' => $validate['position_id'],
-            'empl_contract_type' => $validate['empl-type_id']
+            'empl_contract_type' => $validate['empl-type_id'],
+            'department_id' => $validate['department_id']
         ];
 
         EmplContract::create($credentials);
@@ -126,7 +132,8 @@ class ContractController extends Controller
         return redirect()->route('contracts.list');
     }
 
-    function deleteContract($id) {
+    function deleteContract($id)
+    {
         EmplContract::destroy($id);
 
         return redirect(route('contracts.list'));

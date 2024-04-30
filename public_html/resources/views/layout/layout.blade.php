@@ -23,6 +23,7 @@
         border-radius: 10px;
         padding: 5px;
         text-align: center;
+        /* width: 170px; */
     }
 
     .action__link p {

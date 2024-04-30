@@ -27,6 +27,9 @@
                     ФИО
                 </th>
                 <th class="contract__field">
+                    Кафедра
+                </th>
+                <th class="contract__field">
                     Должность
                 </th>
                 <th class="contract__field">
@@ -44,6 +47,9 @@
                     </td>
                     <td class="contract__field">
                         {{ $contract->employee->FIO() }}
+                    </td>
+                    <td class="contract__field">
+                        {{ $contract->department->title }}
                     </td>
                     <td class="contract__field">
                         {{ $contract->position->title }}
