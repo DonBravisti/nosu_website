@@ -9,7 +9,7 @@ class PublLevel extends Model
 {
     use HasFactory;
 
-    public function publication() {
-        return $this->hasOne(Publication::class);
+    public function publications() {
+        return $this->belongsToMany(Publication::class);
     }
 }

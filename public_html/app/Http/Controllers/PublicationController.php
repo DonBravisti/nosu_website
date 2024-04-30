@@ -36,14 +36,13 @@ class PublicationController extends Controller
         $validate = $request->validate([
             'authors.*' => 'required',
             'imprint' => 'required',
-            'publ_level' => 'required',
+            'publ_levels.*' => 'required',
             'article_type' => 'required',
             'publication_year' => 'required'
         ]);
 
         $credentials = [
             'imprint' => $validate['imprint'],
-            'publ_level_id' => $validate['publ_level'],
             'publ_type_id' => $validate['article_type'],
             'publication_year' => $validate['publication_year'],
         ];
@@ -53,12 +52,9 @@ class PublicationController extends Controller
 
         foreach ($employees as $employee) {
             $employee->publications()->attach($publication->id);
-            // $emplPubl = new EmplPublication();
-            // $emplPubl->empl_id = $employee->id;
-            // $emplPubl->publ_id = $publication->id;
-            // $publication->emplPublication()->save($emplPubl);
         }
-
+        // $publication->employees()->attach($validate['authors']);
+        $publication->publLevels()->attach($validate['publ_levels']);
 
         session()->flash('success', 'публикация успешно добавлена!');
         return redirect()->route('publs.list');

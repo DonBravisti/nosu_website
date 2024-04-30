@@ -19,15 +19,16 @@ class Publication extends Model
         'publication_year'
     ];
 
-    public function publLevel()
+    public function employees()
     {
-        return $this->belongsTo(PublLevel::class);
+        return $this->belongsToMany(Employee::class, 'empl_publications', 'empl_id', 'publ_id');
     }
 
-    // public function emplPublication()
-    // {
-    //     return $this->hasMany(EmplPublication::class, 'publ_id');
-    // }
+
+    public function publLevels()
+    {
+        return $this->belongsToMany(PublLevel::class, 'publication_publ_level');
+    }
 
     public function authors()
     {

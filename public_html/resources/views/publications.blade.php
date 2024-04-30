@@ -36,7 +36,12 @@
                     </td>
                     <td class="publ__table-cell">{{ $publ->imprint }}</td>
                     <td class="publ__table-cell">{{ $publ->publication_year }}</td>
-                    <td class="publ__table-cell">{{ $publ->publLevel->title }}</td>
+                    <td class="publ__table-cell">
+                        @foreach ($publ->publLevels as $level)
+                            <p>{{ $level->title }};</p>
+                        @endforeach
+
+                    </td>
                     <td class="plan__controls publ__table-cell">
                         <form method="GET" action="{{ route('publs.update-form', ['id' => $publ->id]) }}">
                             <button type="submit">
