@@ -63,12 +63,22 @@
             <input id="publication_year" type="number" name="publication_year" min="1900" max="2999"
                 value="{{ $publ->publication_year }}">
 
-            <label for="publ_level">Уровень публикации</label>
+            <label for="publLevels">Уровни публикации</label>
+            <div class="publLevels" id="publLevels">
+                @foreach ($publLevels as $level)
+                    <div class="publLevel" id="publLevel">
+                        <input type="checkbox" id="publ_level{{ $level->id }}" name="publ_levels[]"
+                            value="{{ $level->id }}" @checked($publ->publLevels->contains($level))>
+                        <label for="publ_level{{ $level->id }}">{{ $level->title }}</label>
+                    </div>
+                @endforeach
+            </div>
+            {{-- <label for="publ_level">Уровень публикации</label>
             <select name="publ_level" id="publ_level">
                 @foreach ($publLevels as $level)
                     <option @selected($level->id == $publ->publ_level_id) value="{{ $level->id }}">{{ $level->title }}</option>
                 @endforeach
-            </select>
+            </select> --}}
 
             <label for="article_type">Тип публикации</label>
             <select name="article_type" id="article_type">

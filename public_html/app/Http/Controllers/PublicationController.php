@@ -66,7 +66,7 @@ class PublicationController extends Controller
         $employees = Employee::all();
         $publLevels = PublLevel::all();
         $publTypes = PublType::all();
-
+        
         return view('publEdit', compact('publ', 'employees', 'publLevels', 'publTypes'));
     }
 
@@ -75,14 +75,13 @@ class PublicationController extends Controller
         $validate = $request->validate([
             'authors.*' => 'required',
             'imprint' => 'required',
-            'publ_level' => 'required',
+            'publ_levels.*' => 'required',
             'article_type' => 'required',
             'publication_year' => 'required'
         ]);
 
         $credentials = [
             'imprint' => $validate['imprint'],
-            'publ_level_id' => $validate['publ_level'],
             'publ_type_id' => $validate['article_type'],
             'publication_year' => $validate['publication_year'],
         ];
@@ -100,6 +99,8 @@ class PublicationController extends Controller
         foreach ($employeesNew as $employee) {
             $employee->publications()->attach($publ->id);
         }
+
+        $publ->publLevels()->sync($validate['publ_levels']);
 
         session()->flash('success', 'публикация успешно обновлена!');
         return redirect()->route('publs.list');
