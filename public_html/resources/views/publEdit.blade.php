@@ -121,14 +121,11 @@
             document.getElementById('authors').appendChild(container);
         });
 
-        var anotherAuthors = document.querySelectorAll('.another__author');
-        var removeAuthorBtns = document.querySelectorAll('.remove__author-btn');
-        for (let i = 0; i < removeAuthorBtns.length; i++) {
-            console.log(removeAuthorBtns[i]);
-            console.log(anotherAuthors[i]);
-            // removeAuthorBtns[i].addEventListener('click', function() {
-            //     anotherAuthor[i].remove();
-            // });
-        }
+        document.querySelectorAll('.remove__author-btn').forEach(function(button) {
+            button.addEventListener('click', function() {
+                var div = button.closest('.another__author');
+                div.remove();
+            });
+        });
     </script>
 @endsection
