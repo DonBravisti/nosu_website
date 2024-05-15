@@ -62,6 +62,7 @@ Route::middleware('auth.basic')->group(function () {
     });
 
     Route::prefix('/empls')->name('empls.')->group(function () {
+        Route::post('/sort-filter', [EmployeesController::class,'sortFilter'])->name('sort-filter');
         Route::get('/', [EmployeesController::class,'showEmployees'])->name('list');
     });
 

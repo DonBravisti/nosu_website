@@ -23,8 +23,8 @@ class Department extends Model
         return $this->hasOne(TitlePlan::class, 'title_plan');
     }
 
-    function emplContract()
+    function emplContracts()
     {
-        return $this->hasMany(EmplContract::class, 'title_plan');
+        return $this->hasMany(EmplContract::class);
     }
 }

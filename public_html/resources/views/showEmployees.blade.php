@@ -13,13 +13,73 @@
         .action__link p {
             color: white;
         }
+
+        .filter select {
+            /* height: 100px; */
+        }
+
+        .sort-filter {
+            width: 50%;
+        }
+
+        .sort-filter_container {
+            display: flex;
+            align-items: center;
+        }
+
+        .sort-filter_container div {
+            width: 50%;
+        }
+
+        .sort-filter_container select {
+            height: 20px;
+        }
+
+        .controls_container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
     </style>
 
     <section>
         <div class="workers-container">
-            <a class="action__link" href="/create-user">
-                <p>Создать сотрудника</p>
-            </a>
+            <div class="controls_container">
+                <a class="action__link" href="/create-user">
+                    <p>Создать сотрудника</p>
+                </a>
+
+                <form class="sort-filter" action="{{ route('empls.sort-filter') }}" method="post">
+                    <div class="sort-filter_container">
+                        <div class="sort">
+                            <label for="sort">Сортировка по ФИО</label>
+                            <select name="sort" id="sort">
+                                <option value="0" selected>А-Я</option>
+                                <option value="1"
+                                    @isset($sortBy)
+                                        @selected($sortBy)
+                                    @endisset>
+                                    Я-А</option>
+                            </select>
+                        </div>
+                        <div class="filter">
+                            <label for="filter">Сортировка по кафедре</label>
+                            <select name="filter" id="filter">
+                                <option value="0" selected>Нет</option>
+                                @foreach ($departments as $dep)
+                                    <option
+                                        @isset($depId)
+                                            @selected($depId == $dep->id)
+                                        @endisset
+                                        value="{{ $dep->id }}">{{ $dep->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <button type="submit">Применить</button>
+                    </div>
+
+                </form>
+            </div>
             <div class="swiper-wrapper workers-list">
                 @foreach ($empls as $empl)
                     <div class="worker-card swiper-slide">

@@ -29,6 +29,10 @@ class Employee extends Model
         'clarivate_url'
     ];
 
+    public function getFioAttribute() {
+        return sprintf('%s %s %s', $this->surname, $this->name, $this->patronimyc);
+    }
+
     public function FIO()
     {
         $fio = $fio = sprintf('%s %s %s', $this->surname, $this->name, $this->patronimyc);
