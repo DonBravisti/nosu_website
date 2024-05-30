@@ -13,12 +13,46 @@ class PublicationController extends Controller
 {
     function goToPublications()
     {
-        $publications = Publication::all();
+        $publs = Publication::all();
+        $employees = Employee::all();
+        $years = Publication::select('publication_year')->distinct()->pluck('publication_year');
 
-        return view('publications', [
-            'publs' => $publications,
+        return view('publications', compact('publs', 'employees', 'years'));
+    }
 
-        ]);
+    function filter(Request $request)
+    {
+        $authors = $request->input('authors', []);
+        // $years = $request->input('years', []);
+        $start_year = $request->input('start_year');
+        $end_year = $request->input('end_year');
+
+        $query = Publication::query();
+
+        if (!empty($authors)) {
+            $query->whereHas('authors', function ($q) use ($authors) {
+                $q->whereIn('employees.id', $authors);
+            });
+        }
+
+        // if (!empty($years)) {
+        //     $query->whereIn('publication_year', $years);
+        // }
+
+        if ($start_year) {
+            $query->where('publication_year', '>=', $start_year);
+        }
+
+        if ($end_year) {
+            $query->where('publication_year', '<=', $end_year);
+        }
+
+        $publs = $query->get();
+
+        $employees = Employee::all();
+        $years = Publication::select('publication_year')->distinct()->pluck('publication_year');
+
+        return view('publications', compact('publs', 'employees', 'years'));
     }
 
     function goToPublsAdd()
@@ -66,7 +100,7 @@ class PublicationController extends Controller
         $employees = Employee::all();
         $publLevels = PublLevel::all();
         $publTypes = PublType::all();
-        
+
         return view('publEdit', compact('publ', 'employees', 'publLevels', 'publTypes'));
     }
 

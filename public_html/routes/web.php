@@ -39,6 +39,7 @@ Route::middleware('auth.basic')->group(function () {
         Route::get('/update-form/{id}', [PublicationController::class, 'showPublUpdate'])->name('update-form');
         Route::put('/update/{id}', [PublicationController::class, 'updatePubl'])->name('update');
         Route::delete('/remove/{id}', [PublicationController::class, 'removePubl'])->name('remove');
+        Route::get('/filter', [PublicationController::class, 'filter'])->name('filter');
         Route::get('/', [PublicationController::class, 'goToPublications'])->name('list');
     });
 
