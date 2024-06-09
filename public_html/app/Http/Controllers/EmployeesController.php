@@ -8,10 +8,11 @@ use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
-    function showEmployees()
+    function showEmployees($faculty_id = 1) // По умолчанию $faculty_id = 1, выбран факультет МиКН
     {
         $empls = Employee::all()->sortBy('Fio');
-        $departments = Department::all()->sortBy('title');
+        // Подргружаются только кафедры выбранного факультета
+        $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');
 
         return view("showEmployees", compact("empls", "departments"));
     }
