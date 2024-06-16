@@ -20,34 +20,48 @@ class PublicationController extends Controller
         return view('publications', compact('publs', 'employees', 'years'));
     }
 
-    function filter(Request $request)
-    {
-        $authors = $request->input('authors', []);
-        // $years = $request->input('years', []);
+    public function filter(Request $request) {
+        $author = $request->input('author');
         $start_year = $request->input('start_year');
         $end_year = $request->input('end_year');
+        $sort_by = $request->input('sort_by', 'publication_year');
+        $sort_order = $request->input('sort_order', 'asc');
 
         $query = Publication::query();
 
-        if (!empty($authors)) {
-            $query->whereHas('authors', function ($q) use ($authors) {
-                $q->whereIn('employees.id', $authors);
+        // Фильтрация по автору
+        if ($author) {
+            $query->whereHas('authors', function($q) use ($author) {
+                $q->where('surname', 'like', "%$author%")
+                  ->orWhere('name', 'like', "%$author%")
+                  ->orWhere('patronimyc', 'like', "%$author%");
             });
         }
 
-        // if (!empty($years)) {
-        //     $query->whereIn('publication_year', $years);
-        // }
-
+        // Фильтрация по началу периода
         if ($start_year) {
             $query->where('publication_year', '>=', $start_year);
         }
 
+        // Фильтрация по концу периода
         if ($end_year) {
             $query->where('publication_year', '<=', $end_year);
         }
 
-        $publs = $query->get();
+        // Сортировка
+        if ($sort_by == 'authors') {
+            $query->with(['authors' => function($q) use ($sort_order) {
+                $q->orderBy('surname', $sort_order)->orderBy('name', $sort_order)->orderBy('patronimyc', $sort_order);
+            }]);
+        } else {
+            $query->orderBy($sort_by, $sort_order);
+        }
+
+        $publs = $query->with(['authors', 'publLevels'])->get();
+
+        if ($request->ajax()) {
+            return response()->json(['publs' => $publs]);
+        }
 
         $employees = Employee::all();
         $years = Publication::select('publication_year')->distinct()->pluck('publication_year');

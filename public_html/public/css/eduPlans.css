@@ -1,0 +1,30 @@
+.title {
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.plans__table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+td {
+    text-align: center;
+    /* border-bottom: 1px solid; */
+}
+
+.pagination {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.page-item {
+    margin-right: 5px;
+}
+
+.plan__controls {
+    display: flex;
+    align-items: center;
+}

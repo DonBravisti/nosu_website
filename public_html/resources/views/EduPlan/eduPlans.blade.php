@@ -1,38 +1,9 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/eduPlans.css') }}">
+@endsection
+
 @section('content')
-    <style>
-        .title {
-            margin: 0 auto;
-            width: fit-content;
-        }
-
-        .plans__table {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        td {
-            text-align: center;
-            /* border-bottom: 1px solid; */
-        }
-
-        .pagination {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-        }
-
-        .page-item {
-            margin-right: 5px;
-        }
-
-        .plan__controls {
-            display: flex;
-            align-items: center;
-        }
-    </style>
-
     <section>
         <a href="{{ route('edu-plan.add') }}">Новый план</a>
         <h2 class="title">Учебные планы</h2>
@@ -69,19 +40,7 @@
         </table>
         {{ $plans->links() }}
     </section>
-
-    <script>
-        function ConfirmDeleteTitlePlan() {
-            return confirm('Удалить титульный лист вместе с планом?');
-        }
-
-        function ConfirmDeleteEduPlan() {
-            return confirm('Вы уверены? План будет удалён безвозвратно.');
-        }
-
-        function ConfirmDelete() {
-            return ConfirmDeleteEduPlan();
-            // ConfirmDeleteTitlePlan();
-        }
-    </script>
+@section('scripts')
+    <script src="{{ asset('js/eduPlans.js') }}"></script>
+@endsection
 @endsection
