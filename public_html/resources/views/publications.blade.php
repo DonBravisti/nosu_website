@@ -1,5 +1,6 @@
 @extends('layout.layout')
 @section('styles')
+    <meta name="route_publs-filter" content="{{ route('publs.filter') }}">
     <link rel="stylesheet" href="{{ asset('css/publs.css') }}">
 @endsection
 @section('content')
@@ -18,7 +19,7 @@
                 <tr>
                     <th class="sort__link" data-sort-by="authors">Авторы</th>
                     <th>Выходные данные</th>
-                    <th class="sort__link" data-sort-by="year">Год издания</th>
+                    <th class="sort__link" data-sort-by="publication_year">Год издания</th>
                     <th>Уровень</th>
                 </tr>
             </thead>

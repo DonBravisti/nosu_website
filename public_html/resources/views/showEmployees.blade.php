@@ -8,6 +8,7 @@
             padding: 5px;
             text-align: center;
             width: fit-content;
+            cursor: pointer;
         }
 
         .action__link p {
@@ -39,6 +40,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 10px;
         }
     </style>
 
@@ -75,7 +77,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit">Применить</button>
+                        <button class="action__link" type="submit"><p>Применить</p></button>
                     </div>
 
                 </form>
@@ -86,7 +88,7 @@
                         <div class="worker-card-container">
                             <img src="/images/avatar.jpg">
                             <h3 class="worker__name">
-                                {{ $empl->FIO() }}
+                                {{ $empl->FIO }}
                             </h3>
                             <p class="worker__status">{{ $empl->emplDegree->degree->title }}</p>
                             <button class="learn-more__btn">

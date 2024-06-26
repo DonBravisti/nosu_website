@@ -16,8 +16,9 @@ document.querySelectorAll('.sort__link').forEach(function (header) {
     header.addEventListener('click', function () {
         const sortBy = header.getAttribute('data-sort-by');
         const sortOrder = header.classList.contains('sort__link--asc') ? 'desc' : 'asc';
+        const filterRoute = document.querySelector('meta[name=route_publs-filter]').getAttribute('content');
 
-        fetch(`{{ route('publs.filter') }}?sort_by=${sortBy}&sort_order=${sortOrder}`, {
+        fetch(`${filterRoute}?sort_by=${sortBy}&sort_order=${sortOrder}`, {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
@@ -31,7 +32,8 @@ document.querySelectorAll('.sort__link').forEach(function (header) {
                     const authors = publ.authors.map(author =>
                         `${author.surname} ${author.name} ${author.patronimyc}`)
                         .join('<br>');
-                    const levels = publ.publLevels.map(level =>
+                    console.log(publ);
+                    const levels = (publ.publLevels || []).map(level =>
                         `<p>${level.title};</p>`).join('');
 
                     const row = `

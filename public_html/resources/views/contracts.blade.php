@@ -1,6 +1,20 @@
 @extends('layout.layout')
 @section('content')
     <style>
+        .action__link {
+            display: block;
+            background-color: rgba(30, 84, 193, 1);
+            border-radius: 10px;
+            padding: 5px;
+            text-align: center;
+            width: fit-content;
+            cursor: pointer;
+        }
+
+        .action__link p {
+            color: white;
+        }
+
         .contracts__content {
             width: 1200px;
             margin: 0 auto;
@@ -17,7 +31,7 @@
     </style>
 
     <section class="contracts">
-        <a href="{{ route('contracts.add') }}">Добавить договор</a>
+        <a class="action__link" href="{{ route('contracts.add') }}"><p>Добавить договор</p></a>
         <table class="contracts__content">
             <tr>
                 <th class="contract__field">
