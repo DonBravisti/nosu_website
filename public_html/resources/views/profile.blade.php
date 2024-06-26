@@ -1,24 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
+@endsection
 @section('content')
-    <style>
-        .actions {
-            display: flex;
-            justify-content: space-evenly;
-            margin: 150px 0;
-        }
-
-        .action__link {
-            background-color: rgba(30, 84, 193, 1);
-            border-radius: 10px;
-            padding: 5px;
-            text-align: center;
-        }
-
-        .action__link p {
-            color: white;
-        }
-    </style>
-
     <section class="actions">
         <a class="action__link" href="{{ route('empls.list') }}">
             <p>Сотрудники</p>

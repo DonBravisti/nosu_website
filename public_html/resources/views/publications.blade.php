@@ -1,7 +1,7 @@
 @extends('layout.layout')
 @section('styles')
     <meta name="route_publs-filter" content="{{ route('publs.filter') }}">
-    <link rel="stylesheet" href="{{ asset('css/publs.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Publs/publs.css') }}">
 @endsection
 @section('content')
     <section class="publications">
@@ -83,6 +83,6 @@
         </div>
     </section>
 @section('scripts')
-    <script src="{{ asset('js/publs.js') }}"></script>
+    <script src="{{ asset('js/Publs/publs.js') }}"></script>
 @endsection
 @endsection

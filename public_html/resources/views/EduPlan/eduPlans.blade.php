@@ -41,6 +41,6 @@
         {{ $plans->links() }}
     </section>
 @section('scripts')
-    <script src="{{ asset('js/eduPlans.js') }}"></script>
+    <script src="{{ asset('js/EduPlan/eduPlans.js') }}"></script>
 @endsection
 @endsection

@@ -1,34 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/Publs/publEdit.css') }}">
+@endsection
 @section('content')
-    <style>
-        .publ__creating {
-            display: flex;
-            flex-direction: column;
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        form>input,
-        select {
-            width: 500px;
-            height: 30px;
-            margin: 10px 0;
-        }
-
-        .article_type {
-            padding: 10px;
-        }
-
-        .authors {
-            display: flex;
-            flex-direction: column;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-    </style>
-
     <section>
         <form class="publ__creating" action="{{ route('publs.update', ['id' => $publ->id]) }}" method="post">
 
@@ -90,42 +64,7 @@
             <button type="submit">Сохранить изменения</button>
         </form>
     </section>
-
-    <script>
-        var selectButton = document.getElementById('addSelectButton');
-        var divAuthors = document.getElementById('authors');
-        var authorsCount = divAuthors.querySelectorAll('div').length + 1;
-
-        selectButton.addEventListener('click', function() {
-            authorsCount++;
-            var select = document.createElement('select');
-            select.name = 'authors[]';
-            select.id = 'author' + authorsCount;
-            select.innerHTML = `
-                @foreach ($employees as $empl)
-                    <option value="{{ $empl->id }}">{{ $empl->FIO() }}</option>
-                @endforeach
-            `;
-
-            var deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Удалить';
-            deleteButton.addEventListener('click', function() {
-                select.remove();
-                deleteButton.remove();
-            });
-
-            var container = document.createElement('div');
-            container.appendChild(select);
-            container.appendChild(deleteButton);
-
-            document.getElementById('authors').appendChild(container);
-        });
-
-        document.querySelectorAll('.remove__author-btn').forEach(function(button) {
-            button.addEventListener('click', function() {
-                var div = button.closest('.another__author');
-                div.remove();
-            });
-        });
-    </script>
+@section('scripts')
+    <script src="{{ asset('js/Publs/publEdit.js') }}"></script>
+@endsection
 @endsection

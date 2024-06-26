@@ -1,22 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/FPK/fpk.css') }}">
+@endsection
 @section('content')
-    <style>
-        .fpk__list {
-            margin: 0 auto;
-            width: 100%;
-            max-width: 700px;
-        }
-
-        .fpk-item {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .fpk__controls {
-            display: flex;
-            align-items: center;
-        }
-    </style>
     <section class="fpk__list">
         <h3>
             <a href="{{ route('fpk.add') }}">Добавить сертификат</a>
@@ -50,10 +36,7 @@
             @endforeach
         </div>
     </section>
-
-    <script>
-        function ConfirmDelete() {
-            return confirm('Вы уверены? Сертификат будет удалён безвозвратно.');
-        }
-    </script>
+@section('scripts')
+    <script src="{{ asset('js/FPK/fpk.js') }}"></script>
+@endsection
 @endsection

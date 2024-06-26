@@ -1,21 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/EmplContracts/addContract.css') }}">
+@endsection
 @section('content')
-    <style>
-        .contract__creating {
-            display: flex;
-            flex-direction: column;
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        input,
-        select {
-            width: 500px;
-            height: 30px;
-            margin: 10px 0;
-        }
-    </style>
-
     <section>
         <a href="{{ route('contracts.list') }}">Вернуться к договорам</a>
         <form class="contract__creating" action="{{ route('contracts.add.send') }}" method="post">

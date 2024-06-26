@@ -1,37 +1,12 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/EmplContracts/contracts.css') }}">
+@endsection
 @section('content')
-    <style>
-        .action__link {
-            display: block;
-            background-color: rgba(30, 84, 193, 1);
-            border-radius: 10px;
-            padding: 5px;
-            text-align: center;
-            width: fit-content;
-            cursor: pointer;
-        }
-
-        .action__link p {
-            color: white;
-        }
-
-        .contracts__content {
-            width: 1200px;
-            margin: 0 auto;
-        }
-
-        .contract__field {
-            text-align: left;
-        }
-
-        .contract__controls {
-            display: flex;
-            align-items: center;
-        }
-    </style>
-
     <section class="contracts">
-        <a class="action__link" href="{{ route('contracts.add') }}"><p>Добавить договор</p></a>
+        <a class="action__link" href="{{ route('contracts.add') }}">
+            <p>Добавить договор</p>
+        </a>
         <table class="contracts__content">
             <tr>
                 <th class="contract__field">
@@ -93,10 +68,7 @@
             @endforeach
         </table>
     </section>
-
-    <script>
-        function ConfirmDelete() {
-            return confirm('Вы уверены? Договор будет удалён безвозвратно.');
-        }
-    </script>
+@section('scripts')
+    <script src="{{ asset('js/EmplContrats/contracts.js') }}"></script>
+@endsection
 @endsection

@@ -1,49 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/Empls/showEmployees.css') }}">
+@endsection
 @section('content')
-    <style>
-        .action__link {
-            display: block;
-            background-color: rgba(30, 84, 193, 1);
-            border-radius: 10px;
-            padding: 5px;
-            text-align: center;
-            width: fit-content;
-            cursor: pointer;
-        }
-
-        .action__link p {
-            color: white;
-        }
-
-        .filter select {
-            /* height: 100px; */
-        }
-
-        .sort-filter {
-            width: 50%;
-        }
-
-        .sort-filter_container {
-            display: flex;
-            align-items: center;
-        }
-
-        .sort-filter_container div {
-            width: 50%;
-        }
-
-        .sort-filter_container select {
-            height: 20px;
-        }
-
-        .controls_container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-    </style>
-
     <section>
         <div class="workers-container">
             <div class="controls_container">

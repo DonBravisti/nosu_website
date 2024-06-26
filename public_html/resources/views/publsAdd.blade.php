@@ -1,34 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/Publs/publAdd.css') }}">
+@endsection
 @section('content')
-    <style>
-        .publ__creating {
-            display: flex;
-            flex-direction: column;
-            width: fit-content;
-            margin: 0 auto;
-        }
-
-        form>input,
-        select {
-            width: 500px;
-            height: 30px;
-            margin: 10px 0;
-        }
-
-        .article_type {
-            padding: 10px;
-        }
-
-        .authors {
-            display: flex;
-            flex-direction: column;
-        }
-
-        textarea {
-            resize: vertical;
-        }
-    </style>
-
     <section>
         <form class="publ__creating" action="{{ route('publs.add.send') }}" method="post">
 

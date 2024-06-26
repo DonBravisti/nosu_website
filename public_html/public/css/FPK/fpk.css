@@ -1,0 +1,15 @@
+.fpk__list {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 700px;
+}
+
+.fpk-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fpk__controls {
+    display: flex;
+    align-items: center;
+}

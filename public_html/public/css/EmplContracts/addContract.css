@@ -1,0 +1,13 @@
+.contract__creating {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+input,
+select {
+    width: 500px;
+    height: 30px;
+    margin: 10px 0;
+}

@@ -1,4 +1,7 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/FPK/fpkAdd.css') }}">
+@endsection
 @section('content')
     <a href="{{ route('fpk.list') }}">Вернуться к списку ФПК</a>
 

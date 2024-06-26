@@ -1,35 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/EduPlan/eduPlanAdd.css') }}">
+@endsection
 @section('content')
-    <style>
-        .title {
-            margin: 0 auto;
-            width: fit-content;
-        }
-
-        .field {
-            margin-bottom: 20px;
-        }
-
-        section {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        button[type='submit'] {
-            display: block;
-            font-size: 20px;
-            margin: 20px auto 0;
-            width: 300px;
-            height: 50px;
-        }
-
-        .included__option {
-            display: flex;
-            align-items: center;
-        }
-    </style>
-
     <section>
         <a href="{{ route('edu-plan.list') }}">Вернуться к списку Учебных планов</a>
 
@@ -127,14 +100,7 @@
             <button type="submit">Добавить план</button>
         </form>
     </section>
-
-    <script>
-        let currentYear = new Date().getFullYear();
-        for (let year = currentYear - 20; year <= currentYear; year++) {
-            let optionCurrYear = document.createElement("OPTION");
-            let optionDateEnter = document.createElement("OPTION");
-            document.getElementById("current-year").appendChild(optionCurrYear).innerHTML = year;
-            document.getElementById("date-enter").appendChild(optionDateEnter).innerHTML = year;
-        }
-    </script>
+@section('scripts')
+    <script src="{{ asset('js/EduPlan/eduPlanAdd.js') }}"></script>
+@endsection
 @endsection

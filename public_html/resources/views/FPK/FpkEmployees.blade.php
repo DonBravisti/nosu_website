@@ -1,27 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/FPK/fpkEmployees.css') }}">
+@endsection
 @section('content')
-    <style>
-        .container {
-            max-width: 1100px;
-            width: 100%;
-            margin: 0 auto;
-
-        }
-
-        .action__link {
-            display: block;
-            background-color: rgba(30, 84, 193, 1);
-            border-radius: 10px;
-            padding: 5px;
-            text-align: center;
-            width: fit-content;
-            cursor: pointer;
-        }
-
-        .action__link p {
-            color: white;
-        }
-    </style>
     <section>
         <div class="container">
             <h3>

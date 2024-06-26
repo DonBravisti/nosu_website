@@ -1,35 +1,8 @@
 @extends('layout.layout')
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/EduPlan/eduPlanEdit.css') }}">
+@endsection
 @section('content')
-    <style>
-        .title {
-            margin: 0 auto;
-            width: fit-content;
-        }
-
-        .field {
-            margin-bottom: 20px;
-        }
-
-        section {
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        button[type='submit'] {
-            display: block;
-            font-size: 20px;
-            margin: 20px auto 0;
-            width: 300px;
-            height: 50px;
-        }
-
-        .included__option {
-            display: flex;
-            align-items: center;
-        }
-    </style>
-
     <section>
         <a href="{{ route('edu-plan.list') }}">Вернуться к списку Учебных планов(Изменения не сохранятся)</a>
 
@@ -139,17 +112,7 @@
             <button type="submit">Сохранить изменения</button>
         </form>
     </section>
-
-    <script>
-        const inputCurrentYear = document.getElementById('current-year');
-        const inputDateEnter = document.getElementById('date-enter');
-
-        inputCurrentYear.addEventListener('input', FilterNumericInput);
-        inputDateEnter.addEventListener('input', FilterNumericInput);
-
-        function FilterNumericInput() {
-            const filteredValue = this.value.replace(/\D/g, '');
-            this.value = filteredValue;
-        }
-    </script>
+@section('scripts')
+    <script src="{{ asset('js/EduPlan/eduPlanEdit.js') }}"></script>
+@endsection
 @endsection
