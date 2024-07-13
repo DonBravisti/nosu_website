@@ -20,21 +20,28 @@ class PublicationController extends Controller
         return view('publications', compact('publs', 'employees', 'years'));
     }
 
-    public function filter(Request $request) {
+    public function filter(Request $request)
+    {
         $author = $request->input('author');
         $start_year = $request->input('start_year');
         $end_year = $request->input('end_year');
-        $sort_by = $request->input('sort_by', 'publication_year');
-        $sort_order = $request->input('sort_order', 'asc');
+
+        $sort = $request->input('sort');
+        if ($sort) {
+            $sort_by = explode('-', $sort)[0];
+            $sort_order = explode('-', $sort)[1];
+        } else {
+            $sort_by = 'none';
+        }
 
         $query = Publication::query();
 
         // Фильтрация по автору
         if ($author) {
-            $query->whereHas('authors', function($q) use ($author) {
+            $query->whereHas('authors', function ($q) use ($author) {
                 $q->where('surname', 'like', "%$author%")
-                  ->orWhere('name', 'like', "%$author%")
-                  ->orWhere('patronimyc', 'like', "%$author%");
+                    ->orWhere('name', 'like', "%$author%")
+                    ->orWhere('patronimyc', 'like', "%$author%");
             });
         }
 
@@ -50,17 +57,32 @@ class PublicationController extends Controller
 
         // Сортировка
         if ($sort_by == 'authors') {
-            $query->with(['authors' => function($q) use ($sort_order) {
-                $q->orderBy('surname', $sort_order)->orderBy('name', $sort_order)->orderBy('patronimyc', $sort_order);
+            $query->with(['authors' => function ($q) use ($sort_order) {
+                $q->orderBy('surname', $sort_order)
+                  ->orderBy('name', $sort_order)
+                  ->orderBy('patronimyc', $sort_order);
             }]);
-        } else {
+
+            $publs = $query->with('authors')->get();
+
+            $publs = $publs->sortBy(function ($publication) use ($sort_order) {
+                $authorsString = $publication->authors->map(function ($author) {
+                    return $author->surname . ' ' . $author->name . ' ' . $author->patronimyc;
+                })->implode(', ');
+
+                return $authorsString;
+            });
+
+            if ($sort_order === 'desc') {
+                $publs = $publs->reverse();
+            }
+
+            $publs = $publs->values()->all();
+        } else if ($sort_by == 'publication_year') {
             $query->orderBy($sort_by, $sort_order);
-        }
-
-        $publs = $query->with(['authors', 'publLevels'])->get();
-
-        if ($request->ajax()) {
-            return response()->json(['publs' => $publs]);
+            $publs = $query->with(['authors', 'publLevels'])->get();
+        } else {
+            $publs = $query->with(['authors', 'publLevels'])->get();
         }
 
         $employees = Employee::all();

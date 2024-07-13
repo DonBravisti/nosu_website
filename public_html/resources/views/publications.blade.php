@@ -11,7 +11,7 @@
             </a>
 
             <button id="filters__btn" class="filters__btn action__link">
-                <p>Фильтры</p>
+                <p>Фильтры и Сортировка</p>
             </button>
         </div>
         <table class="publs__table">
@@ -78,11 +78,20 @@
                         <input type="number" name="end_year" id="end_year" min="1900" max="{{ date('Y') }}">
                     </div>
                 </div>
+
+                <h3>Сортировка</h3>
+                <div class="filter-group">
+                    <p><input type="radio" name="sort" value="authors-asc">А-Я Авторы</p>
+                    <p><input type="radio" name="sort" value="authors-desc">Я-А Авторы</p>
+                    <p><input type="radio" name="sort" value="publication_year-asc">Год издания, по возрастанию</p>
+                    <p><input type="radio" name="sort" value="publication_year-desc">Год издания, по убыванию</p>
+                </div>
+
                 <button type="submit">Применить</button>
             </form>
         </div>
     </section>
 @section('scripts')
-    <script src="{{ asset('js/Publs/publs.js') }}"></script>
+    <script src="{{ asset('js/Publ/publs.js') }}"></script>
 @endsection
 @endsection
