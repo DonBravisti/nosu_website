@@ -30,6 +30,7 @@ Route::middleware('auth.basic')->group(function () {
         Route::get('/update-form/{id}', [ContractController::class, 'showContractUpdate'])->name('update-form');
         Route::put('/update/{id}', [ContractController::class, 'updateContract'])->name('update');
         Route::delete('/delete-empl-contract/{id}', [ContractController::class, 'deleteContract'])->name('delete');
+        Route::get('/filter', [ContractController::class, 'filter'])->name('filter');
         Route::get('/', [ContractController::class, 'showContracts'])->name('list');
     });
 

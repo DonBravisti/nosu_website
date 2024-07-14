@@ -8,6 +8,7 @@ use App\Models\EmplContract;
 use App\Models\EmplContractType;
 use App\Models\Employee;
 use App\Models\Position;
+use Carbon\Carbon;
 
 class ContractController extends Controller
 {
@@ -19,6 +20,19 @@ class ContractController extends Controller
 
         foreach ($contracts as $contract) {
             $contract->fillFieldsNullValues();
+
+            $contract->warning_class = '';
+            $contract->warning_message = '';
+            $now = Carbon::now();
+            $date_to = Carbon::parse($contract->date_to);
+
+            if ($date_to->isPast()) {
+                $contract->warning_class = 'expired';
+                $contract->warning_message = 'Срок действия договора истёк.';
+            } elseif ($date_to->diffInMonths($now) < 6) {
+                $contract->warning_class = 'expiring';
+                $contract->warning_message = 'Срок действия договора истекает в течение 6 месяцев.';
+            }
         }
 
         return view(
@@ -137,5 +151,53 @@ class ContractController extends Controller
         EmplContract::destroy($id);
 
         return redirect(route('contracts.list'));
+    }
+
+    public function filter(Request $request)
+    {
+        $sort = $request->input('sort');
+        if ($sort) {
+            $sort_by = explode('-', $sort)[0];
+            $sort_order = explode('-', $sort)[1];
+        } else {
+            $sort_by = 'none';
+        }
+
+        $query = EmplContract::query();
+
+        // Сортировка
+        if ($sort_by == 'fio') {
+            $query->join('employees', 'empl_contracts.employee_id', '=', 'employees.id')
+                ->orderBy('employees.surname', $sort_order)
+                ->orderBy('employees.name', $sort_order)
+                ->orderBy('employees.patronimyc', $sort_order);
+        } else if ($sort_by == 'position') {
+            $query->join('positions', 'empl_contracts.position_id', '=', 'positions.id')
+                ->orderBy('positions.title', $sort_order);
+        } else if ($sort_by == 'date_to') {
+            $query->orderBy('date_to', $sort_order);
+        }
+
+        $contracts = $query->with(['employee', 'department', 'position', 'emplContractType'])->get();
+
+        foreach ($contracts as $contract) {
+            $contract->fillFieldsNullValues();
+
+            $contract->warning_class = '';
+            $contract->warning_message = '';
+            $now = Carbon::now();
+            $date_to = Carbon::parse($contract->date_to);
+
+            if ($date_to->isPast()) {
+                $contract->warning_class = 'expired';
+                $contract->warning_message = 'Срок действия договора истёк.';
+            } elseif ($date_to->diffInMonths($now) < 6) {
+                $contract->warning_class = 'expiring';
+                $contract->warning_message = 'Срок действия договора истекает в течение 6 месяцев.';
+            }
+        }
+
+
+        return view('contracts', compact('contracts'));
     }
 }

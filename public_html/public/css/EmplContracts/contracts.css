@@ -21,7 +21,31 @@
     text-align: left;
 }
 
+.contract__field p {
+    width: 90px;
+}
+
 .contract__controls {
     display: flex;
     align-items: center;
+}
+
+.expiring {
+    background-color: #ffffcc;
+    /* Желтый цвет */
+}
+
+.expired {
+    background-color: #ffcccc;
+    /* Красный цвет */
+}
+
+.warning-icon {
+    color: red;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.field-date_to {
+    display: flex;
 }
