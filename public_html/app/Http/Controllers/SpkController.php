@@ -110,6 +110,6 @@ class SpkController extends Controller
     {
         EmplProfEducation::destroy($id);
 
-        return redirect(route('fpk.list'));
+        return redirect()->back();
     }
 }

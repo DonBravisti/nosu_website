@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -92,33 +92,22 @@
                         </div>
                         <nav class="navbar">
                             <a href="#" class="navbar__item">Абитуриентам</a>
-                            <a href="#" class="navbar__item navbar__item-active">Обучающимся</a>
-                            <a href="#" class="navbar__item">Сотрудникам</a>
+                            <a href="#" class="navbar__item">Обучающимся</a>
+                            <div class="navbar__item dropdown">
+                                <a href="#">Сотрудникам</a>
+                                @if (Auth::check() and Route::currentRouteName() != 'profile')
+                                    <div class="dropdown-content">
+                                        <a href="{{ route('empls.list') }}">Сотрудники</a>
+                                        <a href="{{ route('edu-plan.list') }}">Учебные планы</a>
+                                        <a href="{{ route('fpk.list') }}">ФПК</a>
+                                        <a href="{{ route('contracts.list') }}">Трудовые договоры</a>
+                                        <a href="{{ route('publs.list') }}">Публикации</a>
+                                    </div>
+                                @endif
+                            </div>
                             <a href="#" class="navbar__item">Наука и образование</a>
                             <a href="#" class="navbar__item">О факультете</a>
                         </nav>
-                        @if (Auth::check() and Route::currentRouteName() != 'profile')
-                            <div class="actions">
-                                <a class="action__link" href="{{ route('empls.list') }}">
-                                    <p>Сотрудники</p>
-                                </a>
-                                <a class="action__link" href="{{ route('edu-plan.list') }}">
-                                    <p>Учебные планы</p>
-                                </a>
-                                <a class="action__link" href="{{ route('fpk.list') }}">
-                                    <p>ФПК</p>
-                                </a>
-                                <a class="action__link" href="{{ route('contracts.list') }}">
-                                    <p>Трудовые договоры</p>
-                                </a>
-                                <a class="action__link" href="{{ route('publs.list') }}">
-                                    <p>Публикации</p>
-                                </a>
-                                <a class="action__link" href="/logout">
-                                    <p>Выйти из аккаунта</p>
-                                </a>
-                            </div>
-                        @endif
                     </div>
                 </div>
                 <div class="header-main-mobile">
