@@ -93,5 +93,6 @@
     </section>
 @section('scripts')
     <script src="{{ asset('js/Publ/publs.js') }}"></script>
+    <script src="{{ asset('js/filter-sidebar/sidebar.js') }}"></script>
 @endsection
 @endsection

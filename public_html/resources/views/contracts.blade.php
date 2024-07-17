@@ -118,5 +118,6 @@
     </div>
 @section('scripts')
     <script src="{{ asset('js/EmplContracts/contracts.js') }}"></script>
+    <script src="{{ asset('js/filter-sidebar/sidebar.js') }}"></script>
 @endsection
 @endsection
