@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 class EmployeesController extends Controller
 {
-    function showEmployees($faculty_id = 1) // По умолчанию $faculty_id = 1, выбран факультет МиКН
+    function showEmployees()
     {
+        $faculty_id = Config::get('faculty.default_faculty_id');
         $empls = Employee::all()->sortBy('Fio');
-        // Подргружаются только кафедры выбранного факультета
         $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');
 
         return view("showEmployees", compact("empls", "departments"));
@@ -41,7 +42,8 @@ class EmployeesController extends Controller
         if (!empty($empls)) {
             $sortBy ? krsort($empls) : ksort($empls);
         }
-        $departments = Department::all()->sortBy('title');
+        $faculty_id = Config::get('faculty.default_faculty_id');
+        $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');
 
         // print_r($empls);
         return view("showEmployees", compact("empls", "departments", "sortBy", "depId"));

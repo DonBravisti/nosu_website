@@ -9,6 +9,7 @@ use App\Models\EmplContractType;
 use App\Models\Employee;
 use App\Models\Position;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
 
 class ContractController extends Controller
 {
@@ -50,7 +51,8 @@ class ContractController extends Controller
         $employees = Employee::all();
         $positions = Position::all();
         $emplTypes = EmplContractType::all();
-        $departments = Department::all()->sortBy('title');
+        $faculty_id = Config::get('faculty.default_faculty_id');
+        $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');
 
         // $emplFIOs = array();
         // foreach ($employees as $empl) {
@@ -72,7 +74,8 @@ class ContractController extends Controller
         $employees = Employee::all();
         $positions = Position::all();
         $emplTypes = EmplContractType::all();
-        $departments = Department::all()->sortBy('title');
+        $faculty_id = Config::get('faculty.default_faculty_id');
+        $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');
 
         $emplTypeId = !is_null($contract->emplContractType)
             ? $contract->emplContractType->id
