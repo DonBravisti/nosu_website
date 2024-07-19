@@ -50,6 +50,7 @@ Route::middleware('auth.basic')->group(function () {
         Route::get('/update-form/{id}', [SpkController::class, 'showSpkUpdate'])->name('update-form');
         Route::put('/update/{id}', [SpkController::class, 'updateSpk'])->name('update');
         Route::delete('/remove-fpk/{id}', [SpkController::class, 'removeSpk'])->name('remove');
+        Route::get('/filter', [SpkController::class, 'filter'])->name('filter');
         Route::get('/{id}', [SpkController::class, 'showFpkEmployee'])->name('empl');
         Route::get('/', [SpkController::class, 'showFpkEmplsList'])->name('list');
     });
@@ -64,8 +65,8 @@ Route::middleware('auth.basic')->group(function () {
     });
 
     Route::prefix('/empls')->name('empls.')->group(function () {
-        Route::post('/sort-filter', [EmployeesController::class,'sortFilter'])->name('sort-filter');
-        Route::get('/', [EmployeesController::class,'showEmployees'])->name('list');
+        Route::post('/sort-filter', [EmployeesController::class, 'sortFilter'])->name('sort-filter');
+        Route::get('/', [EmployeesController::class, 'showEmployees'])->name('list');
     });
 
     Route::get('/profile', function () {
@@ -74,6 +75,7 @@ Route::middleware('auth.basic')->group(function () {
 });
 
 Route::get('/logout', [AuthController::class, 'logout']);
+
 
 Route::get('/register', [AuthController::class, 'showRegForm']);
 Route::post('/register/reg', [AuthController::class, 'register']);

@@ -1,43 +1,44 @@
 @extends('layout.layout')
 @section('styles')
+    <link rel="stylesheet" href="{{ asset('css/FPK/fpkFilter.css') }}">
     <link rel="stylesheet" href="{{ asset('css/FPK/fpkEmployees.css') }}">
     <link rel="stylesheet" href="{{ asset('css/filter-sidebar/sidebar.css') }}">
 @endsection
 @section('content')
-    <section>
-        <div class="container">
-            <div class="fpk__controls">
-                <a class="action__link" href="{{ route('fpk.add') }}">
-                    <p>Добавить сертификат</p>
-                </a>
+    <section class="">
+        <div class="fpk__controls">
+            <a class="action__link" href="{{ route('fpk.add') }}">
+                <p>Добавить сертификат</p>
+            </a>
 
-                <button id="filters__btn" class="filters__btn action__link">
-                    <p>Фильтры и Сортировка</p>
-                </button>
-            </div>
-
-            <div class="swiper-wrapper workers-list">
-                @foreach ($employees as $empl)
-                    <div class="worker-card swiper-slide">
-                        <div class="worker-card-container">
-                            <img src="/images/avatar.jpg">
-                            <h3 class="worker__name">
-                                {{ $empl->FIO }}
-                            </h3>
-                            <p class="worker__status">{{ $empl->emplDegree->degree->title }}</p>
-                            @if (Auth::check())
-                                <button class="learn-more__btn edit__button">
-                                    <a href="{{ route('fpk.empl', ['id' => $empl->id]) }}" class="learn-more__text">
-                                        Посмотреть сертификаты
-                                    </a>
-                                    <div class="learn-more__icon"></div>
-                                </button>
-                            @endif
-                        </div>
-                    </div>
-                @endforeach
-            </div>
+            <button id="filters__btn" class="filters__btn action__link">
+                <p>Фильтры и Сортировка</p>
+            </button>
         </div>
+
+        <table class="fpk__content">
+            <tr>
+                <th class="fpk__field">№</th>
+                <th class="fpk__field">ФИО</th>
+                <th class="fpk__field">Год</th>
+                <th class="fpk__field">Организация</th>
+                <th class="fpk__field">Номер</th>
+                <th class="fpk__field">Кол-во часов</th>
+                <th class="fpk__field">Название</th>
+            </tr>
+
+            @foreach ($fpk as $key => $fpkItem)
+                <tr class="">
+                    <td class="fpk__field">{{ ++$key }}</td>
+                    <td class="fpk__field">{{ $fpkItem->employee->FIO() }}</td>
+                    <td class="fpk__field">{{ date('Y', strtotime($fpkItem->date)) }}</td>
+                    <td class="fpk__field">{{ $fpkItem->organization }}</td>
+                    <td class="fpk__field">{{ $fpkItem->number }}</td>
+                    <td class="fpk__field">{{ $fpkItem->n_hours }}</td>
+                    <td class="fpk__field">{{ $fpkItem->title }}</td>
+                </tr>
+            @endforeach
+        </table>
     </section>
 
     <div id="sidebar" class="sidebar">

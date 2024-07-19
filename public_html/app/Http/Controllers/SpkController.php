@@ -112,4 +112,55 @@ class SpkController extends Controller
 
         return redirect()->back();
     }
+
+    public function filter(Request $request)
+    {
+        $fio = $request->input('fio');
+        $start_year = $request->input('start_year');
+        $end_year = $request->input('end_year');
+
+        $sort = $request->input('sort');
+        if ($sort) {
+            $sort_by = explode('-', $sort)[0];
+            $sort_order = explode('-', $sort)[1];
+        } else {
+            $sort_by = 'none';
+        }
+
+        $query = EmplProfEducation::query();
+
+        // Фильтрация по автору
+        if ($fio) {
+            $query->whereHas('employee', function ($q) use ($fio) {
+                $q->where('surname', 'like', "%$fio%")
+                    ->orWhere('name', 'like', "%$fio%")
+                    ->orWhere('patronimyc', 'like', "%$fio%");
+            });
+        }
+
+        // Фильтрация по началу периода
+        if ($start_year) {
+            $query->where('date', '>=', $start_year);
+        }
+
+        // Фильтрация по концу периода
+        if ($end_year) {
+            $query->where('date', '<=', $end_year);
+        }
+
+        // Сортировка
+        if ($sort_by == 'fio') {
+            $query->join('employees', 'empl_prof_education.employee_id', '=', 'employees.id')
+                ->orderBy('employees.surname', $sort_order)
+                ->orderBy('employees.name', $sort_order)
+                ->orderBy('employees.patronimyc', $sort_order);
+        } elseif ($sort_by == 'year') {
+            $query->orderBy('date', $sort_order);
+        }
+
+        $fpk = $query->with(['employee', 'profDocType'])->get();
+
+        // print_r($fpk);
+        return view('FPK.fpkFilter', compact('fpk'));
+    }
 }
