@@ -216,4 +216,12 @@ class EditController extends Controller
             ]
         );
     }
+
+    function deleteEmployee($emplId) {
+        EmplDegree::where('employee_id', $emplId)->delete();
+        EmplTitle::where('employee_id', $emplId)->delete();
+        Employee::destroy($emplId);
+
+        return redirect()->route('empls.list');
+    }
 }

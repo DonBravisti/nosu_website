@@ -36,7 +36,9 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button class="action__link" type="submit"><p>Применить</p></button>
+                        <button class="action__link" type="submit">
+                            <p>Применить</p>
+                        </button>
                     </div>
 
                 </form>
@@ -58,12 +60,25 @@
                                 <div class="learn-more__icon"></div>
                             </button>
                             @if (Auth::check())
-                                <button class="learn-more__btn edit__button">
-                                    <a href="/edit/{{ $empl->id }}" class="learn-more__text">
-                                        Редактировать
-                                    </a>
-                                    <div class="learn-more__icon"></div>
-                                </button>
+                                <div class="edit-delete__block">
+                                    <button class="learn-more__btn edit__button">
+                                        <a href="{{ route('empls.edit', ['id' => $empl->id]) }}" class="learn-more__text">
+                                            Редактировать
+                                        </a>
+                                        <div class="learn-more__icon"></div>
+                                    </button>
+                                    {{-- <form method="POST" action="{{ route('empls.delete', ['id' => $empl->id]) }}">
+                                        @method('DELETE')
+                                        @csrf
+
+                                        <button class="learn-more__btn delete__button">
+                                            <p class="learn-more__text">
+                                                Удалить
+                                            </p>
+                                            <div class="learn-more__icon"></div>
+                                        </button>
+                                    </form> --}}
+                                </div>
                             @endif
                         </div>
                     </div>
@@ -71,4 +86,7 @@
             </div>
         </div>
     </section>
+@section('scripts')
+    <script src="{{ asset('js/Empls/showEmployees.js') }}"></script>
+@endsection
 @endsection

@@ -66,6 +66,8 @@ Route::middleware('auth.basic')->group(function () {
 
     Route::prefix('/empls')->name('empls.')->group(function () {
         Route::post('/sort-filter', [EmployeesController::class, 'sortFilter'])->name('sort-filter');
+        Route::get('/edit/{id}', [EditController::class, 'goToProfileEditing'])->name('edit');
+        Route::delete('/delete-empl/{id}', [EditController::class, 'deleteEmployee'])->name('delete');
         Route::get('/', [EmployeesController::class, 'showEmployees'])->name('list');
     });
 
@@ -80,7 +82,7 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'showRegForm']);
 Route::post('/register/reg', [AuthController::class, 'register']);
 
-Route::get('/edit/{id}', [EditController::class, 'goToProfileEditing']);
+
 Route::post('/edit/{id}/update', [EditController::class, 'update']);
 Route::get('/create-user', [EditController::class, 'showCreationForm']);
 Route::post('/create', [EditController::class, 'create']);

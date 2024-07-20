@@ -39,3 +39,13 @@
     justify-content: space-between;
     margin-bottom: 10px;
 }
+
+.delete__button {
+    background-color: brown;
+    margin-left: 5px;
+}
+
+.edit-delete__block{
+    display: flex;
+    justify-content: space-between;
+}
