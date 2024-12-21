@@ -18,24 +18,39 @@
 
         <table class="fpk__content">
             <tr>
-                <th class="fpk__field">№</th>
+                <th class="fpk__field fpk__field--narrow">№</th>
                 <th class="fpk__field">ФИО</th>
                 <th class="fpk__field">Год</th>
                 <th class="fpk__field">Организация</th>
                 <th class="fpk__field">Номер</th>
                 <th class="fpk__field">Кол-во часов</th>
                 <th class="fpk__field">Название</th>
+                <th class="fpk__field">Действия</th>
             </tr>
 
             @foreach ($fpk as $key => $fpkItem)
-                <tr class="">
-                    <td class="fpk__field">{{ ++$key }}</td>
+                <tr class="{{ $key % 2 == 0 ? 'alt-row' : '' }}">
+                    <td class="fpk__field fpk__field--narrow">{{ ++$key }}</td>
                     <td class="fpk__field">{{ $fpkItem->employee->FIO() }}</td>
                     <td class="fpk__field">{{ date('Y', strtotime($fpkItem->date)) }}</td>
                     <td class="fpk__field">{{ $fpkItem->organization }}</td>
                     <td class="fpk__field">{{ $fpkItem->number }}</td>
                     <td class="fpk__field">{{ $fpkItem->n_hours }}</td>
                     <td class="fpk__field">{{ $fpkItem->title }}</td>
+                    <td class="fpk__field">
+                        <a href="{{ route('fpk.update-form', ['id' => $fpkItem->id]) }}" class="action__link-buttons">
+                            <p>Редактировать</p>
+                        </a>
+                        <form action="{{ route('fpk.remove', ['id' => $fpkItem->id]) }}" method="POST"
+                            onsubmit="return confirm('Вы уверены, что хотите удалить этот сертификат?');"
+                            style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="action__link-buttons">
+                                <p>Удалить</p>
+                            </button>
+                        </form>
+                    </td>
                 </tr>
             @endforeach
         </table>

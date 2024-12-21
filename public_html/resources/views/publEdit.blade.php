@@ -13,14 +13,14 @@
                 <label for="author">Авторы</label>
                 <select name="authors[]" id="author1">
                     @foreach ($employees as $empl)
-                        <option @selected($publ->authors[0]->id == $empl->id) value="{{ $empl->id }}">{{ $empl->FIO() }}</option>
+                        <option @selected($authors[0]->id == $empl->id) value="{{ $empl->id }}">{{ $empl->FIO() }}</option>
                     @endforeach
                 </select>
-                @for ($i = 1; $i < count($publ->authors); $i++)
+                @for ($i = 1; $i < count($authors); $i++)
                     <div class="another__author">
                         <select name="authors[]" id="{{ 'author' . $i + 1 }}">
                             @foreach ($employees as $empl)
-                                <option @selected($publ->authors[$i]->id == $empl->id) value="{{ $empl->id }}">{{ $empl->FIO() }}
+                                <option @selected($authors[$i]->id == $empl->id) value="{{ $empl->id }}">{{ $empl->FIO() }}
                                 </option>
                             @endforeach
                         </select>

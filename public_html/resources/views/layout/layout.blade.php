@@ -78,15 +78,20 @@
                                     <input type="submit" class="search-btn" value="">
                                 </form>
                                 @if (Auth::check())
-                                    <button class="login-btn">
-                                        <div class="login-btn__icon"></div>
-                                        <a href="/profile" class="login-btn__text">{{ Auth::user()->name }}</a>
-                                    </button>
+                                    {{-- <div class="login__container"> --}}
+                                        {{-- <button class="login-btn">
+                                            <div class="login-btn__icon"></div>
+                                            <a href="/profile" class="login-btn__text">{{ Auth::user()->name }}</a>
+                                        </button> --}}
+                                        <a href="/logout" class="logout-btn">
+                                            <div class="logout-btn__icon"></div>
+                                        </a>
+                                    {{-- </div> --}}
                                 @else
-                                    <button class="login-btn">
+                                    <a href="{{ route('empls.list') }}" class="login-btn">
                                         <div class="login-btn__icon"></div>
-                                        <a href="/profile" class="login-btn__text">Войти</a>
-                                    </button>
+                                        <p class="login-btn__text">Войти</p>
+                                    </a>
                                 @endif
                             </div>
                         </div>

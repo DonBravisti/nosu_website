@@ -12,7 +12,8 @@ class EmplDegree extends Model
     use HasFactory;
 
     protected $fillable = [
-        'spec_id'
+        'spec_id',
+        'degree_id'
     ];
 
     public function employee()

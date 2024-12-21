@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class SpkController extends Controller
 {
+    function showFpkTable()
+    {
+        $fpk = EmplProfEducation::all();
+
+        return view('FPK.fpkFilter', compact('fpk'));
+    }
+
     function showFpkEmplsList()
     {
         $employees = Employee::all();

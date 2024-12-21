@@ -23,13 +23,22 @@ class Employee extends Model
         'email',
         'base_education',
         'qualification',
+        'bachelor_speciality',
+        'master_speciality',
+        'specialist_speciality',
+        'phd_speciality',
+        'bachelor_qualification',
+        'master_qualification',
+        'specialist_qualification',
+        'phd_qualification',
         'orcid_url',
         'scopus_url',
         'mathnet_url',
         'clarivate_url'
     ];
 
-    public function getFioAttribute() {
+    public function getFioAttribute()
+    {
         return sprintf('%s %s %s', $this->surname, $this->name, $this->patronimyc);
     }
 
@@ -40,14 +49,16 @@ class Employee extends Model
         return $fio;
     }
 
-    function emplContract() {
+    function emplContract()
+    {
         return $this->hasOne(EmplContract::class);
     }
 
-    public function emplDegree()
+    public function emplDegrees()
     {
-        return $this->hasOne(EmplDegree::class);
+        return $this->hasMany(EmplDegree::class,);
     }
+
 
     public function emplTitle()
     {
@@ -67,5 +78,10 @@ class Employee extends Model
     public function profEducation()
     {
         return $this->hasMany(EmplProfEducation::class);
+    }
+
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'empl_contracts', 'employee_id', 'department_id');
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\EmplPublication;
 use App\Models\Publication;
+use App\Models\PublicationPublLevel;
 use App\Models\PublLevel;
 use App\Models\PublType;
 
@@ -59,8 +60,8 @@ class PublicationController extends Controller
         if ($sort_by == 'authors') {
             $query->with(['authors' => function ($q) use ($sort_order) {
                 $q->orderBy('surname', $sort_order)
-                  ->orderBy('name', $sort_order)
-                  ->orderBy('patronimyc', $sort_order);
+                    ->orderBy('name', $sort_order)
+                    ->orderBy('patronimyc', $sort_order);
             }]);
 
             $publs = $query->with('authors')->get();
@@ -137,8 +138,14 @@ class PublicationController extends Controller
         $publLevels = PublLevel::all();
         $publTypes = PublType::all();
 
-        return view('publEdit', compact('publ', 'employees', 'publLevels', 'publTypes'));
+        // Получаем коллекцию авторов и фильтруем записи с id = 0
+        $authors = $publ->authors->reject(function ($author) {
+            return $author->id === 0;
+        })->values();
+
+        return view('publEdit', compact('publ', 'employees', 'publLevels', 'publTypes', 'authors'));
     }
+
 
     function updatePubl(Request $request, $id)
     {
@@ -179,6 +186,7 @@ class PublicationController extends Controller
     function removePubl($id)
     {
         EmplPublication::where('publ_id', $id)->delete();
+        PublicationPublLevel::where('publication_id', $id)->delete();
         Publication::destroy($id);
 
         return redirect()->route('publs.list');

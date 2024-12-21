@@ -52,7 +52,7 @@ Route::middleware('auth.basic')->group(function () {
         Route::delete('/remove-fpk/{id}', [SpkController::class, 'removeSpk'])->name('remove');
         Route::get('/filter', [SpkController::class, 'filter'])->name('filter');
         Route::get('/{id}', [SpkController::class, 'showFpkEmployee'])->name('empl');
-        Route::get('/', [SpkController::class, 'showFpkEmplsList'])->name('list');
+        Route::get('/', [SpkController::class, 'showFpkTable'])->name('list');
     });
 
     Route::prefix('/edu-plan')->name('edu-plan.')->group(function () {
@@ -67,7 +67,9 @@ Route::middleware('auth.basic')->group(function () {
     Route::prefix('/empls')->name('empls.')->group(function () {
         Route::post('/sort-filter', [EmployeesController::class, 'sortFilter'])->name('sort-filter');
         Route::get('/edit/{id}', [EditController::class, 'goToProfileEditing'])->name('edit');
-        Route::delete('/delete-empl/{id}', [EditController::class, 'deleteEmployee'])->name('delete');
+        Route::post('/mark-as-deleted/{id}', [EditController::class, 'markAsDeleted'])->name('markAsDeleted');
+        Route::post('/restore/{id}', [EditController::class, 'restoreEmployee'])->name('restore');
+        Route::delete('/permanent-delete/{id}', [EditController::class, 'permanentDeleteEmpl'])->name('permanentDelete');
         Route::get('/', [EmployeesController::class, 'showEmployees'])->name('list');
     });
 
@@ -88,5 +90,6 @@ Route::get('/create-user', [EditController::class, 'showCreationForm']);
 Route::post('/create', [EditController::class, 'create']);
 
 Route::get('/kafedra-prikladnoj-matematiki-i-informatiki', [PageController::class, 'goToDepartment']);
+Route::get('/kafedra-algebra-analysis', [PageController::class, 'departmentAlgebraAnalysis'])->name('algebra-analysis');
 
 Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/{id}', [PageController::class, 'goToPersonalCard']);

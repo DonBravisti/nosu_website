@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Employee;
 use App\Models\EmplContract;
 use App\Models\EmplPublication;
@@ -15,20 +16,70 @@ class PageController extends Controller
 {
     function goToDepartment()
     {
-        $employees = DB::table('employees')->get();
-        $degrees = DB::table('degrees')->get();
-        $emplDegrees = DB::table('empl_degrees')->get();
-
-        $emplFIOs = array();
-        for ($i = 0; $i < count($employees); $i++) {
-            $emplDegree = $this->getEmployeeDegree($employees[$i]->id, $emplDegrees, $degrees);
-            $fio = sprintf('%s %s %s', $employees[$i]->surname, $employees[$i]->name, $employees[$i]->patronimyc);
-
-            $emplFIOs[] = ['id' => $employees[$i]->id, 'fio' => $fio, 'degree' => $emplDegree];
+        $department = Department::where('title', 'Кафедра прикладной математики и информатики')->first();
+        if (!$department) {
+            abort(404, 'Кафедра не найдена.');
         }
 
-        return view('department', ['emplFIOs' => $emplFIOs]);
+        $employees = EmplContract::where('department_id', $department->id)
+            ->with('employee.emplDegrees.degree')
+            ->get()
+            ->map(function ($contract) {
+                $employee = $contract->employee;
+                $degree = $employee->emplDegrees->first()?->degree->title ?? 'Без ученой степени';
+
+                return [
+                    'id' => $employee->id,
+                    'fio' => "{$employee->surname} {$employee->name} {$employee->patronymic}",
+                    'degree' => $degree,
+                ];
+            });
+
+        return view('department', [
+            'employees' => $employees
+        ]);
+
+        // $employees = DB::table('employees')->get();
+        // $degrees = DB::table('degrees')->get();
+        // $emplDegrees = DB::table('empl_degrees')->get();
+
+        // $emplFIOs = array();
+        // for ($i = 0; $i < count($employees); $i++) {
+        //     $emplDegree = $this->getEmployeeDegree($employees[$i]->id, $emplDegrees, $degrees);
+        //     $fio = sprintf('%s %s %s', $employees[$i]->surname, $employees[$i]->name, $employees[$i]->patronimyc);
+
+        //     $emplFIOs[] = ['id' => $employees[$i]->id, 'fio' => $fio, 'degree' => $emplDegree];
+        // }
+
+        // return view('department', ['emplFIOs' => $emplFIOs]);
     }
+
+    public function departmentAlgebraAnalysis()
+    {
+        $department = Department::where('title', 'Кафедра алгебры и анализа')->first();
+        if (!$department) {
+            abort(404, 'Кафедра не найдена.');
+        }
+
+        $employees = EmplContract::where('department_id', $department->id)
+            ->with('employee.emplDegrees.degree')
+            ->get()
+            ->map(function ($contract) {
+                $employee = $contract->employee;
+                $degree = $employee->emplDegrees->first()?->degree->title ?? 'Без ученой степени';
+
+                return [
+                    'id' => $employee->id,
+                    'fio' => "{$employee->surname} {$employee->name} {$employee->patronymic}",
+                    'degree' => $degree,
+                ];
+            });
+
+        return view('department_algebra_analysis', [
+            'employees' => $employees,
+        ]);
+    }
+
 
     private function getEmployeeDegree($emplID, $emplDegrees, $degrees)
     {

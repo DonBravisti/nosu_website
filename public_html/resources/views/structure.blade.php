@@ -21,7 +21,8 @@
                         «Кибербезопасность», 44.03.05 «Педагогическое образование» с двумя профилями подготовки «Математика.
                         Информатика».</div>
                     <div class="card__button">
-                        <button><span>Узнать больше</span><img src="/images/arrow-right.svg" alt="Arrow-right"></button>
+                        <a href="{{route('algebra-analysis')}}"><button><span>Узнать больше</span><img
+                            src="/images/arrow-right.svg" alt="Arrow-right"></button></a>
                     </div>
                 </div>
                 <div class="card">

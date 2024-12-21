@@ -97,9 +97,9 @@
         <div class="workers-block">
             <h2 class="section-title">Сотрудники кафедры</h2>
             <div class="workers-body slider-container">
-                <div class="swiper">
+                <div class="swiper" style="width: 100%">
                     <div class="swiper-wrapper workers-list">
-                        @foreach ($emplFIOs as $key => $employee)
+                        @foreach ($employees as $employee)
                             <div class="worker-card swiper-slide">
                                 <div class="worker-card-container">
                                     <img src="/images/avatar.jpg">

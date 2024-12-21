@@ -1,4 +1,4 @@
-.action__link {
+.action__link-buttons {
     display: block;
     background-color: rgba(30, 84, 193, 1);
     border-radius: 10px;
@@ -8,22 +8,41 @@
     cursor: pointer;
 }
 
-.action__link p {
-    color: white;
-}
+
 
 .fpk__content {
-    width: 1200px;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
+    table-layout: fixed;
 }
 
 .fpk__field {
     text-align: left;
+    word-wrap: break-word;
 }
 
 .fpk__field p {
     width: 90px;
 }
+
+.action__link-buttons p {
+    color: white;
+    width: fit-content;
+    font-size: 15px;
+}
+
+/* Уменьшение ширины ячейки для номера */
+.fpk__field--narrow {
+    width: 5%;
+    text-align: center;
+}
+
+/* Чередующиеся строки */
+.fpk__content tr.alt-row {
+    background-color: #f2f2f2;
+}
+
 
 /* .fpk__controls {
     display: flex;

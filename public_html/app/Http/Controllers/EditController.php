@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Degree;
+use App\Models\Department;
+use App\Models\EmplContract;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\EmplDegree;
+use App\Models\EmplProfEducation;
+use App\Models\EmplPublication;
 use App\Models\EmplTitle;
+use App\Models\Title;
+use App\Models\TitlePlan;
 use Illuminate\Support\Facades\DB;
 
 class EditController extends Controller
@@ -14,25 +21,32 @@ class EditController extends Controller
     {
         $validate = $request->validate([
             'FIO' => 'required|string|max:255',
-            'selectDegree' => 'required',
-            'selectTitle' => 'required',
-            'sex' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'birthdate' => 'required',
-            'baseEdu' => 'required',
-            'qualification'=> 'required',
-            'orcid' => 'required',
-            'scopus' => 'required',
-            'math-net' => 'required',
-            'clarivate' => 'required'
+            'degree_1' => 'required|integer',
+            'degree_2' => 'nullable|integer',
+            'selectTitle' => 'required|integer',
+            'sex' => 'required|string',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email',
+            'birthdate' => 'nullable|date',
+            'bachelor_speciality' => 'nullable|string|max:255',
+            'master_speciality' => 'nullable|string|max:255',
+            'specialist_speciality' => 'nullable|string|max:255',
+            'phd_speciality' => 'nullable|string|max:255',
+            'bachelor_qualification' => 'nullable|string|max:255',
+            'master_qualification' => 'nullable|string|max:255',
+            'specialist_qualification' => 'nullable|string|max:255',
+            'phd_qualification' => 'nullable|string|max:255',
+            'orcid' => 'nullable|url',
+            'scopus' => 'nullable|url',
+            'math-net' => 'nullable|url',
+            'clarivate' => 'nullable|url'
         ]);
         // print_r($validate['FIO']);
         $employee = Employee::find($id);
         $fioSplited = explode(" ", $validate['FIO']);
         if (count($fioSplited) < 3) {
-            return redirect('/edit/' . $id)->withErrors(['ФИО указано неверно']);
+            return redirect(route('empls.edit', ['id' => $id]))->withErrors(['ФИО указано неверно']);
         }
         // print_r($validate);
 
@@ -44,17 +58,34 @@ class EditController extends Controller
         $employee->phone = $validate['phone'];
         $employee->email = $validate['email'];
         $employee->birthdate = $validate['birthdate'];
-        $employee->base_education = $validate['baseEdu'];
-        $employee->qualification = $validate['qualification'];
+        $employee->bachelor_speciality = $validate['bachelor_speciality'];
+        $employee->master_speciality = $validate['master_speciality'];
+        $employee->specialist_speciality = $validate['specialist_speciality'];
+        $employee->phd_speciality = $validate['phd_speciality'];
+        $employee->bachelor_qualification = $validate['bachelor_qualification'];
+        $employee->master_qualification = $validate['master_qualification'];
+        $employee->specialist_qualification = $validate['specialist_qualification'];
+        $employee->phd_qualification = $validate['phd_qualification'];
         $employee->orcid_url = $validate['orcid'];
         $employee->scopus_url = $validate['scopus'];
         $employee->mathnet_url = $validate['math-net'];
         $employee->clarivate_url = $validate['clarivate'];
         $employee->save();
 
-        $emplDegree = $employee->emplDegree;
-        $emplDegree->degree_id = $validate['selectDegree'];
+        $emplDegree = $employee->emplDegrees[0];
+        $emplDegree->degree_id = $validate['degree_1'];
         $emplDegree->save();
+
+        if (count($employee->emplDegrees) == 2) {
+            $emplDegree = $employee->emplDegrees[1];
+            $emplDegree->degree_id = $validate['degree_2'];
+            $emplDegree->save();
+        } else if ($validate['degree_2'] != 9) {
+            $employee->emplDegrees()->create([
+                'degree_id' => $validate['degree_2'],
+                'spec_id' => 1
+            ]);
+        }
 
         $emplTitle = $employee->emplTitle;
         $emplTitle->title_id = $validate['selectTitle'];
@@ -62,7 +93,7 @@ class EditController extends Controller
 
         session()->flash('success', 'Успешно сохранено!');
 
-        return redirect('/edit/' . $id);
+        return redirect()->route('empls.edit', ['id' => $id]);
     }
 
     // public function save(Request $request)
@@ -86,59 +117,88 @@ class EditController extends Controller
     function create(Request $request)
     {
         $request->flash();
+
+        // Валидация
         $validate = $request->validate([
             'FIO' => 'required|string|max:255',
-            'selectDegree' => 'required',
-            'selectTitle' => 'required',
-            'sex' => 'required',
-            'address' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'birthdate' => 'required',
-            'baseEdu' => 'required',
-            'qualification' => 'required',
-            'orcid' => 'required',
-            'scopus' => 'required',
-            'math-net' => 'required',
-            'clarivate' => 'required'
+            'degree_1' => 'required|integer',
+            'degree_2' => 'nullable|integer',
+            'selectTitle' => 'required|integer',
+            'sex' => 'required|string',
+            'address' => 'nullable|string|max:255',
+            'phone' => 'nullable|string|max:20',
+            'email' => 'nullable|email',
+            'birthdate' => 'nullable|date',
+            'bachelor_speciality' => 'nullable|string|max:255',
+            'master_speciality' => 'nullable|string|max:255',
+            'specialist_speciality' => 'nullable|string|max:255',
+            'phd_speciality' => 'nullable|string|max:255',
+            'bachelor_qualification' => 'nullable|string|max:255',
+            'master_qualification' => 'nullable|string|max:255',
+            'specialist_qualification' => 'nullable|string|max:255',
+            'phd_qualification' => 'nullable|string|max:255',
+            'orcid' => 'nullable|url',
+            'scopus' => 'nullable|url',
+            'math-net' => 'nullable|url',
+            'clarivate' => 'nullable|url'
         ]);
 
+        // Разделение ФИО
         $fioSplited = explode(" ", $validate['FIO']);
         if (count($fioSplited) < 3) {
-            return redirect('/create-user')->withErrors(['ФИО указано неверно']);
+            return redirect()->back()->withErrors(['ФИО указано неверно']);
         }
-        $credentials = [
+
+        // Создание сотрудника
+        $employee = Employee::create([
             'surname' => $fioSplited[0],
             'name' => $fioSplited[1],
             'patronimyc' => $fioSplited[2],
-            'address' => $validate['address'],
-            'birthdate' => $validate['birthdate'],
+            'address' => $validate['address'] ?? null,
+            'birthdate' => $validate['birthdate'] ?? null,
             'sex' => $validate['sex'],
-            'phone' => $validate['phone'],
-            'email' => $validate['email'],
-            'base_education' => $validate['baseEdu'],
-            'qualification'=> $validate['qualification'],
-            'orcid_url' => $validate['orcid'],
-            'scopus_url' => $validate['scopus'],
-            'mathnet_url' => $validate['math-net'],
-            'clarivate_url' => $validate['clarivate']
-        ];
+            'phone' => $validate['phone'] ?? null,
+            'email' => $validate['email'] ?? null,
+            'base_education' => $validate['baseEdu'] ?? null,
+            'qualification' => $validate['qualification'] ?? null,
+            'bachelor_speciality' => $validate['bachelor_speciality'] ?? null,
+            'master_speciality' => $validate['master_speciality'] ?? null,
+            'specialist_speciality' => $validate['specialist_speciality'] ?? null,
+            'phd_speciality' => $validate['phd_speciality'] ?? null,
+            'bachelor_qualification' => $validate['bachelor_qualification'] ?? null,
+            'master_qualification' => $validate['master_qualification'] ?? null,
+            'specialist_qualification' => $validate['specialist_qualification'] ?? null,
+            'phd_qualification' => $validate['phd_qualification'] ?? null,
+            'orcid_url' => $validate['orcid'] ?? null,
+            'scopus_url' => $validate['scopus'] ?? null,
+            'mathnet_url' => $validate['math-net'] ?? null,
+            'clarivate_url' => $validate['clarivate'] ?? null
+        ]);
 
-        $employee = Employee::create($credentials);
+        // Присвоение 1 ученой степени
+        $employee->emplDegrees()->create([
+            'degree_id' => $validate['degree_1'],
+            'spec_id' => 1
+        ]);
 
-        $emplDegree = new EmplDegree();
-        $emplDegree->degree_id = $validate['selectDegree'];
-        $emplDegree->spec_id = 1;
-        $employee->emplDegree()->save($emplDegree);
+        // Присвоение 2 ученой степени
+        if ($validate['degree_2'] != 9) {
+            $employee->emplDegrees()->create([
+                'degree_id' => $validate['degree_2'],
+                'spec_id' => 1
+            ]);
+        }
 
-        $emplTitle = new EmplTitle();
-        $emplTitle->title_id = $validate['selectTitle'];
-        $emplTitle->date = '1900-01-01';
-        $employee->emplTitle()->save($emplTitle);
+        // Присвоение ученого звания
+        $employee->emplTitle()->create([
+            'title_id' => $validate['selectTitle'],
+            'date' => '1900-01-01' // Возможно, стоит сделать динамическим
+        ]);
 
-        session()->flash('success', 'Успешно сохранено!');
-        return redirect('/create-user');
+        // Успешное выполнение
+        return redirect()->route('empls.list')->with('success', 'Успешно сохранено!');
     }
+
 
     private function getEmployeeDegree($emplID, $emplDegrees, $degrees)
     {
@@ -166,60 +226,71 @@ class EditController extends Controller
         );
     }
 
-    function goToProfileEditing($id)
+    public function goToProfileEditing($id)
     {
-        $employee = Employee::findOrFail( $id );
-        $fio = $employee->FIO();
+        $employee = Employee::with(['emplDegrees', 'emplTitle'])->findOrFail($id);
 
-        $degrees = DB::table('degrees')->get();
-        $emplDegrees = DB::table('empl_degrees')->get();
-        $emplDegree = $this->getEmployeeDegree($id, $emplDegrees, $degrees);
-        $degree = $emplDegree->id == 1 ? $degrees[1] : $degrees[0];
-
-        $titles = DB::table('titles')->get();
-        $emplTitles = DB::table('empl_titles')->get();
-        $emplTitle = $this->getEmployeeTitle($id, $emplTitles, $titles);
-        $title = $emplTitle->id == 1 ? $titles[1] : $titles[0];
-
-        $address = $employee->address;
-        $birthdate = $employee->birthdate;
-        $phone = $employee->phone;
-        $email = $employee->email;
-        $sex = $employee->sex;
-        $baseEdu = $employee->base_education;
-        $qualification = $employee->qualification;
-        $orcid = $employee->orcid_url;
-        $scopus = $employee->scopus_url;
-        $mathnet = $employee->mathnet_url;
-        $clarivate = $employee->clarivate_url;
-
-        return view(
-            'profileEditing',
-            [
-                'id' => $id,
-                'fio' => $fio,
-                'emplDegree' => $emplDegree,
-                'degrees' => $degrees,
-                'emplTitle' => $emplTitle,
-                'titles' => $titles,
-                'address' => $address,
-                'birthdate' => $birthdate,
-                'phone' => $phone,
-                'email' => $email,
-                'sex' => $sex,
-                'baseEdu' => $baseEdu,
-                'qualification'=> $qualification,
-                'orcid' => $orcid,
-                'scopus' => $scopus,
-                'mathnet' => $mathnet,
-                'clarivate' => $clarivate
-            ]
-        );
+        return view('profileEditing', [
+            'id' => $employee->id,
+            'fio' => $employee->FIO(),
+            'emplDegree1' => $employee->emplDegrees[0],
+            'emplDegree2' => $employee->emplDegrees[1] ?? new EmplDegree(['degree_id' => 9]),
+            'degrees' => Degree::all(),
+            'emplTitle' => $employee->emplTitle,
+            'titles' => Title::all(),
+            'address' => $employee->address,
+            'birthdate' => $employee->birthdate,
+            'phone' => $employee->phone,
+            'email' => $employee->email,
+            'sex' => $employee->sex,
+            'baseEdu' => $employee->base_education,
+            'qualification' => $employee->qualification,
+            'orcid' => $employee->orcid_url,
+            'scopus' => $employee->scopus_url,
+            'mathnet' => $employee->mathnet_url,
+            'clarivate' => $employee->clarivate_url,
+            'bachelor_speciality' => $employee->bachelor_speciality,
+            'master_speciality' => $employee->master_speciality,
+            'specialist_speciality' => $employee->specialist_speciality,
+            'phd_speciality' => $employee->phd_speciality,
+            'bachelor_qualification' => $employee->bachelor_qualification,
+            'master_qualification' => $employee->master_qualification,
+            'specialist_qualification' => $employee->specialist_qualification,
+            'phd_qualification' => $employee->phd_qualification
+        ]);
     }
 
-    function deleteEmployee($emplId) {
+
+    public function markAsDeleted($id)
+    {
+        $employee = Employee::find($id);
+        if ($employee) {
+            $employee->deleted = true;
+            $employee->save();
+        }
+
+        return redirect()->route('empls.list')->with('success', 'Сотрудник помечен как удаленный.');
+    }
+
+    function restoreEmployee($id)
+    {
+        $employee = Employee::find($id);
+        if ($employee) {
+            $employee->deleted = false;
+            $employee->save();
+        }
+
+        return redirect()->route('empls.list')->with('success', 'Сотрудник восстановлен.');
+    }
+
+    function permanentDeleteEmpl($emplId)
+    {
         EmplDegree::where('employee_id', $emplId)->delete();
         EmplTitle::where('employee_id', $emplId)->delete();
+        EmplProfEducation::where('employee_id', $emplId)->delete();
+        EmplContract::where('employee_id', $emplId)->delete();
+        EmplPublication::where('empl_id', $emplId)->update(['empl_id' => 0]);
+        Department::where('head_id', $emplId)->update(['head_id' => 0]);
         Employee::destroy($emplId);
 
         return redirect()->route('empls.list');
