@@ -93,25 +93,30 @@ class ContractController extends Controller
 
     function updateContract(Request $request, $id)
     {
-
         $validated = $request->validate([
             'emplId' => 'required',
-            'number' => 'required|int',
             'position_id' => 'required',
-            'date_from' => 'required',
-            'date_to' => 'required',
+            'date_from' => 'required|date',
+            'date_to' => 'required|date',
             'empl-type_id' => 'required',
-            'department_id' => 'required'
+            'department_id' => 'required',
+            'rate' => 'required|numeric|min:0',
+            'pedagogical_experience' => 'required|numeric|min:0',
+            'research_experience' => 'required|numeric|min:0',
+            'workplace' => 'required|string|max:255',
         ]);
 
         $credentials = [
             'employee_id' => $validated['emplId'],
             'date_from' => $validated['date_from'],
             'date_to' => $validated['date_to'],
-            'number' => $validated['number'],
             'position_id' => $validated['position_id'],
             'empl_contract_type' => $validated['empl-type_id'],
-            'department_id' => $validated['department_id']
+            'department_id' => $validated['department_id'],
+            'rate' => $validated['rate'],
+            'pedagogical_experience' => $validated['pedagogical_experience'],
+            'research_experience' => $validated['research_experience'],
+            'workplace' => $validated['workplace'],
         ];
 
         $contract = EmplContract::findOrFail($id);
@@ -126,22 +131,28 @@ class ContractController extends Controller
         $request->flash();
         $validate = $request->validate([
             'emplId' => 'required',
-            'number' => 'required|int',
             'position_id' => 'required',
-            'date_from' => 'required',
-            'date_to' => 'required',
+            'date_from' => 'required|date',
+            'date_to' => 'required|date',
             'empl-type_id' => 'required',
-            'department_id' => 'required'
+            'department_id' => 'required',
+            'rate' => 'required|numeric|min:0',
+            'pedagogical_experience' => 'required|numeric|min:0',
+            'research_experience' => 'required|numeric|min:0',
+            'workplace' => 'required|string|max:255',
         ]);
 
         $credentials = [
             'employee_id' => $validate['emplId'],
             'date_from' => $validate['date_from'],
             'date_to' => $validate['date_to'],
-            'number' => $validate['number'],
             'position_id' => $validate['position_id'],
             'empl_contract_type' => $validate['empl-type_id'],
-            'department_id' => $validate['department_id']
+            'department_id' => $validate['department_id'],
+            'rate' => $validate['rate'],
+            'pedagogical_experience' => $validate['pedagogical_experience'],
+            'research_experience' => $validate['research_experience'],
+            'workplace' => $validate['workplace'],
         ];
 
         EmplContract::create($credentials);
@@ -167,6 +178,9 @@ class ContractController extends Controller
         }
 
         $query = EmplContract::query();
+
+        // Явно указываем атрибуты таблицы empl_contracts
+        $query->select('empl_contracts.*');
 
         // Сортировка
         if ($sort_by == 'fio') {
@@ -199,7 +213,6 @@ class ContractController extends Controller
                 $contract->warning_message = 'Срок действия договора истекает в течение 6 месяцев.';
             }
         }
-
 
         return view('contracts', compact('contracts'));
     }

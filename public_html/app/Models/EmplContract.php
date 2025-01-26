@@ -17,7 +17,11 @@ class EmplContract extends Model
         'number',
         'position_id',
         'empl_contract_type',
-        'department_id'
+        'department_id',
+        'rate',
+        'pedagogical_experience',
+        'research_experience',
+        'workplace'
     ];
 
     function fillFieldsNullValues()

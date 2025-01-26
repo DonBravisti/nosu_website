@@ -7,7 +7,7 @@
     <section class="contracts">
         <div class="publ__controls">
             <a class="action__link" href="{{ route('contracts.add') }}">
-                <p>Добавить договор</p>
+                <p>Добавить книжку</p>
             </a>
 
             <button id="filters__btn" class="filters__btn action__link">
