@@ -1,17 +1,5 @@
 @extends('layout.layout')
 @section('content')
-    <div class="nav-path-container">
-        <div class="nav-path">
-            <a href="#" class="nav-path__link not-mobile__link">Главная</a>
-            <span class="nav-path__img not-mobile__link"></span>
-            <a href="#" class="nav-path__link not-mobile__link">Факультет математики и компьютерных наук</a>
-            <span class="nav-path__img not-mobile__link"></span>
-            <a href="#" class="nav-path__link not-mobile__link">Структура</a>
-            <span class="nav-path__img not-mobile__link"></span>
-            <span class="nav-path__img mobile__link"></span>
-            <a href="#" class="nav-path__link">Кафедра алгебры и анализа</a>
-        </div>
-    </div>
     <div class="department-container">
         <div class="department-block">
             <h2 class="section-title">Кафедра алгебры и анализа</h2>
@@ -103,14 +91,14 @@
                                         </a>
                                         <div class="learn-more__icon"></div>
                                     </button>
-                                    @if (Auth::check())
+                                    {{-- @if (Auth::check())
                                         <button class="learn-more__btn edit__button">
                                             <a href="/edit/{{ $employee['id'] }}" class="learn-more__text">
                                                 Редактировать
                                             </a>
                                             <div class="learn-more__icon"></div>
                                         </button>
-                                    @endif
+                                    @endif --}}
                                 </div>
                             </div>
                         @endforeach

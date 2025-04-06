@@ -30,7 +30,7 @@ class PageController extends Controller
 
                 return [
                     'id' => $employee->id,
-                    'fio' => "{$employee->surname} {$employee->name} {$employee->patronymic}",
+                    'fio' => "{$employee->surname} {$employee->name} {$employee->patronimyc}",
                     'degree' => $degree,
                 ];
             });
@@ -70,7 +70,7 @@ class PageController extends Controller
 
                 return [
                     'id' => $employee->id,
-                    'fio' => "{$employee->surname} {$employee->name} {$employee->patronymic}",
+                    'fio' => "{$employee->surname} {$employee->name} {$employee->patronimyc}",
                     'degree' => $degree,
                 ];
             });

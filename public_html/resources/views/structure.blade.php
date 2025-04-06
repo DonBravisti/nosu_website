@@ -1,14 +1,5 @@
 @extends('layout.layout')
 @section('content')
-    <div class="nav-path-container _container">
-        <div class="nav-path">
-            <a href="#" class="nav-path__link not-mobile__link">Главная</a>
-            <span class="nav-path__img not-mobile__link"></span>
-            <a href="#" class="nav-path__link not-mobile__link">Факультет математики и компьютерных наук</a>
-            <span class="nav-path__img not-mobile__link"></span>
-            <a href="#" class="nav-path__link not-mobile__link">Структура</a>
-        </div>
-    </div>
     <section class="section__cards-block cards-block">
         <div class="section__inner _container">
             <div class="cards-block__title">
