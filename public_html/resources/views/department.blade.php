@@ -117,14 +117,8 @@
                     <div class="swiper-scrollbar scrollbar"></div>
                 </div>
             </div>
-            <div class="workers-pagination">
-                <a href="#" class="workers-pagination__link">1</a>
-                <a href="#" class="workers-pagination__link">2</a>
-                <a href="#" class="workers-pagination__link">3</a>
-                <a href="#" class="workers-pagination__link">4</a>
-                <a href="#" class="workers-pagination__img"></a>
-            </div>
         </div>
+
         <div class="contacts-block">
             <h2 class="section-title">Контактные данные</h2>
             <div class="contacts-body">

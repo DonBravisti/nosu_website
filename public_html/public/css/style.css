@@ -577,7 +577,8 @@ main {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 5%;
 }
 
 .mobile-workers-body {

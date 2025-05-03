@@ -31,10 +31,10 @@
             </select>
 
             <label for="date_from">Действует с</label>
-            <input name="date_from" type="date">
+            <input name="date_from" type="date" min="1900-01-01" max="2100-12-31">
 
             <label for="date_to">Действует по</label>
-            <input name="date_to" type="date">
+            <input name="date_to" type="date" min="1900-01-01" max="2100-12-31">
 
             <label for="empl-type_id">Тип сотрудника</label>
             <select name="empl-type_id" id="empl-type_id">

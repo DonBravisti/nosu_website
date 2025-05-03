@@ -1,6 +1,5 @@
 @extends('layout.layout')
 @section('content')
-    @include('partial.navPath')
     <div class="content-container">
         <div class="general-info">
             <h2 class="section-title">Редактировать профиль сотрудника</h2>

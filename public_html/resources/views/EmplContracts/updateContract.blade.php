@@ -33,10 +33,10 @@
             </select>
 
             <label for="date_from">Действует с</label>
-            <input name="date_from" type="date" id="date_from" value="{{ $contract->date_from }}">
+            <input name="date_from" type="date" id="date_from" value="{{ $contract->date_from }}" min="1900-01-01" max="2100-12-31">
 
             <label for="date_to">Действует по</label>
-            <input name="date_to" type="date" id="date_to" value="{{ $contract->date_to }}">
+            <input name="date_to" type="date" id="date_to" value="{{ $contract->date_to }}" min="1900-01-01" max="2100-12-31">
 
             <label for="empl-type_id">Тип сотрудника</label>
             <select name="empl-type_id" id="empl-type_id">
