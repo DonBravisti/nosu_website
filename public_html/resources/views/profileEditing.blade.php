@@ -17,7 +17,7 @@
                     </form>
                 </div>
                 <div class="general-info-editing-block">
-                    <form method="post" action="/edit/{{ $id }}/update">
+                    <form method="post" action="{{ route('empls.update') }}">
 
                         @include('partial.errorChecking')
 

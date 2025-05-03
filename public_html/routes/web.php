@@ -66,10 +66,13 @@ Route::middleware('auth.basic')->group(function () {
 
     Route::prefix('/empls')->name('empls.')->group(function () {
         Route::post('/sort-filter', [EmployeesController::class, 'sortFilter'])->name('sort-filter');
+        Route::post('/edit/{id}/update', [EditController::class, 'update'])->name('update');
         Route::get('/edit/{id}', [EditController::class, 'goToProfileEditing'])->name('edit');
         Route::post('/mark-as-deleted/{id}', [EditController::class, 'markAsDeleted'])->name('markAsDeleted');
         Route::post('/restore/{id}', [EditController::class, 'restoreEmployee'])->name('restore');
         Route::delete('/permanent-delete/{id}', [EditController::class, 'permanentDeleteEmpl'])->name('permanentDelete');
+        Route::get('/create-user', [EditController::class, 'showCreationForm'])->name('add');
+        Route::post('/create', [EditController::class, 'create'])->name('add.send');
         Route::get('/', [EmployeesController::class, 'showEmployees'])->name('list');
     });
 
@@ -80,16 +83,10 @@ Route::middleware('auth.basic')->group(function () {
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
-
 Route::get('/register', [AuthController::class, 'showRegForm']);
 Route::post('/register/reg', [AuthController::class, 'register']);
 
-
-Route::post('/edit/{id}/update', [EditController::class, 'update']);
-Route::get('/create-user', [EditController::class, 'showCreationForm']);
-Route::post('/create', [EditController::class, 'create']);
-
-Route::get('/kafedra-prikladnoj-matematiki-i-informatiki', [PageController::class, 'goToDepartment']);
+Route::get('/kafedra-prikladnoj-matematiki-i-informatiki', [PageController::class, 'goToDepartment'])->name('pmi');
 Route::get('/kafedra-algebra-analysis', [PageController::class, 'departmentAlgebraAnalysis'])->name('algebra-analysis');
 
-Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/{id}', [PageController::class, 'goToPersonalCard']);
+Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/{id}', [PageController::class, 'goToPersonalCard'])->name('pers-card');

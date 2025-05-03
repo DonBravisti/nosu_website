@@ -8,7 +8,7 @@
     <section>
         <div class="workers-container">
             <div class="controls_container">
-                <a class="action__link" href="/create-user">
+                <a class="action__link" href="{{ route('empls.add') }}">
                     <p>Создать сотрудника</p>
                 </a>
 

@@ -17,7 +17,7 @@
                     </form>
                 </div>
                 <div class="general-info-editing-block">
-                    <form method="post" action="/create">
+                    <form method="post" action="{{ route('empls.add.send') }}">
 
                         @include('partial.errorChecking')
 
