@@ -13,9 +13,9 @@ class EmployeesController extends Controller
     {
         $faculty_id = Config::get('faculty.default_faculty_id');
         $empls = Employee::with('departments') // Загружаем связанные кафедры
-        ->where('deleted', false)
-        ->get()
-        ->sortBy('Fio');
+            ->where('deleted', false)
+            ->get()
+            ->sortBy('Fio');
         $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');
 
         return view("showEmployees", compact("empls", "departments"));
@@ -50,8 +50,14 @@ class EmployeesController extends Controller
         }
 
         if (!empty($empls)) {
-            $sortBy ? krsort($empls) : ksort($empls);
+            uasort($empls, function ($a, $b) use ($sortBy) {
+                if ($a->deleted === $b->deleted) {
+                    return $sortBy ? strcmp($b->Fio, $a->Fio) : strcmp($a->Fio, $b->Fio);
+                }
+                return $a->deleted < $b->deleted ? 1 : -1;
+            });
         }
+
 
         $faculty_id = Config::get('faculty.default_faculty_id');
         $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');

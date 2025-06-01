@@ -233,10 +233,10 @@ class EditController extends Controller
         return view('profileEditing', [
             'id' => $employee->id,
             'fio' => $employee->FIO(),
-            'emplDegree1' => $employee->emplDegrees[0],
+            'emplDegree1' => $employee->emplDegrees[0] ?? new EmplDegree(['degree_id' => 9]),
             'emplDegree2' => $employee->emplDegrees[1] ?? new EmplDegree(['degree_id' => 9]),
             'degrees' => Degree::all(),
-            'emplTitle' => $employee->emplTitle,
+            'emplTitle' => $employee->emplTitle ?? new EmplTitle(['title_id' => 3]),
             'titles' => Title::all(),
             'address' => $employee->address,
             'birthdate' => $employee->birthdate,
