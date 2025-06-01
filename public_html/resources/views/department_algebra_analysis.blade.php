@@ -13,7 +13,7 @@
                     <p class="director-info__el">Базовое образование: Высшее. Математик.</p>
                     <p class="director-info__el">Преподаватель</p>
                     <p class="director-info__el">Общий стаж работы: 35 лет</p>
-                    <a href="/kafedra-algebry-i-analiza/1" class="director-info-link">
+                    <a href={{ route('pers-card', ['id' => 1]) }} class="director-info-link">
                         <button class="director-info-btn">
                             <p class="info-btn__text">Узнать больше</p>
                             <div class="info-btn__icon"></div>
@@ -85,12 +85,14 @@
                                         {{ $employee['fio'] }}
                                     </h3>
                                     <p class="worker__status">{{ $employee['degree'] }}</p>
-                                    <button class="learn-more__btn">
-                                        <a href="/kafedra-algebry-i-analiza/{{ $employee['id'] }}" class="learn-more__text">
-                                            Узнать больше
-                                        </a>
+                                    {{-- <button class="learn-more__btn"> --}}
+                                    <a class="learn-more__btn" href={{ route('pers-card', ['id' => $employee['id']]) }}
+                                        class="learn-more__text">
+                                        Узнать больше
                                         <div class="learn-more__icon"></div>
-                                    </button>
+                                    </a>
+
+                                    {{-- </button> --}}
                                     {{-- @if (Auth::check())
                                         <button class="learn-more__btn edit__button">
                                             <a href="/edit/{{ $employee['id'] }}" class="learn-more__text">

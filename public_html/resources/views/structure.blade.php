@@ -12,7 +12,7 @@
                         «Кибербезопасность», 44.03.05 «Педагогическое образование» с двумя профилями подготовки «Математика.
                         Информатика».</div>
                     <div class="card__button">
-                        <a href="{{route('algebra-analysis')}}"><button><span>Узнать больше</span><img
+                        <a href={{route('algebra-analysis')}}><button><span>Узнать больше</span><img
                             src="/images/arrow-right.svg" alt="Arrow-right"></button></a>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
                         моделирование», 09.03.01 «Информатика и вычислительная техника», профиль «Информатика и
                         вычислительная техника».</div>
                     <div class="card__button">
-                        <a href="/kafedra-prikladnoj-matematiki-i-informatiki"><button><span>Узнать больше</span><img
+                        <a href={{route('pmi')}}><button><span>Узнать больше</span><img
                                     src="/images/arrow-right.svg" alt="Arrow-right"></button></a>
                     </div>
                 </div>

@@ -89,20 +89,21 @@ class PageController extends Controller
 
     function goToPersonalCard($id)
     {
-        $employee = Employee::all()->where('id', $id)->first();
-        $degrees = DB::table('degrees')->get();
-        $titles = DB::table('titles')->get();
-        $emplDegrees = DB::table('empl_degrees')->get();
-        // $emplDegree = $this->getEmployeeDegree($id, $emplDegrees, $degrees);
-        $emplDegree = $degrees[$employee->emplDegree->degree_id - 1]->title;
-        $emplTitle = $titles[$employee->emplTitle->title_id - 1]->title;
+        $employee = Employee::with(['emplDegrees.degree', 'emplTitle.title'])->findOrFail($id);
+
+        $emplDegree = $employee->emplDegrees->first();
+        $degreeTitle = $emplDegree && $emplDegree->degree ? $emplDegree->degree->title : 'Степень не указана';
+
+        $emplTitle = $employee->emplTitle;
+        $titleTitle = $emplTitle && $emplTitle->title ? $emplTitle->title->title : 'Звание не указано';
 
         return view('persCard', [
             'fio' => sprintf('%s %s %s', $employee->surname, $employee->name, $employee->patronimyc),
-            'degree' => $emplDegree,
-            'title' => $emplTitle
+            'degree' => $degreeTitle,
+            'title' => $titleTitle
         ]);
     }
+
 
     function goToStructure()
     {

@@ -114,7 +114,7 @@
                                         </form>
                                     @endif
 
-                                    <a href="/kafedra-prikladnoj-matematiki-i-informatiki/{{ $empl->id }}"
+                                    <a href={{ route('pers-card', ['id' => $empl->id]) }}
                                         class="btn btn-sm btn-info">Узнать больше</a>
 
                                 </td>

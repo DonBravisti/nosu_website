@@ -89,4 +89,4 @@ Route::post('/register/reg', [AuthController::class, 'register']);
 Route::get('/kafedra-prikladnoj-matematiki-i-informatiki', [PageController::class, 'goToDepartment'])->name('pmi');
 Route::get('/kafedra-algebra-analysis', [PageController::class, 'departmentAlgebraAnalysis'])->name('algebra-analysis');
 
-Route::get('/kafedra-prikladnoj-matematiki-i-informatiki/{id}', [PageController::class, 'goToPersonalCard'])->name('pers-card');
+Route::get('/pers-card/{id}', [PageController::class, 'goToPersonalCard'])->name('pers-card');
