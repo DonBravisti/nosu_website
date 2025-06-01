@@ -43,8 +43,8 @@
                             value="{{ $address }}">
 
                         <p class="general-info-input__name big-general-info-input__name">Дата рождения</p>
-                        <input type="date" name="birthdate" class="general-info__input big-general-info__input"
-                            value="{{ $birthdate }}">
+                        <input type="date" name="birthdate" max={{ date('Y-m-d') }}
+                            class="general-info__input big-general-info__input" value="{{ $birthdate }}">
 
                         <p class="general-info-input__name big-general-info-input__name">Телефон</p>
                         <input type="tel" name="phone" class="general-info__input big-general-info__input"
