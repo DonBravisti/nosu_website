@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EditController;
+use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\EduPlanController;
-use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\SpkController;
 use App\Http\Controllers\PublicationController;
 
@@ -66,13 +65,13 @@ Route::middleware('auth.basic')->group(function () {
 
     Route::prefix('/empls')->name('empls.')->group(function () {
         Route::post('/sort-filter', [EmployeesController::class, 'sortFilter'])->name('sort-filter');
-        Route::post('/edit/{id}/update', [EditController::class, 'update'])->name('update');
-        Route::get('/edit/{id}', [EditController::class, 'goToProfileEditing'])->name('edit');
-        Route::post('/mark-as-deleted/{id}', [EditController::class, 'markAsDeleted'])->name('markAsDeleted');
-        Route::post('/restore/{id}', [EditController::class, 'restoreEmployee'])->name('restore');
-        Route::delete('/permanent-delete/{id}', [EditController::class, 'permanentDeleteEmpl'])->name('permanentDelete');
-        Route::get('/create-user', [EditController::class, 'showCreationForm'])->name('add');
-        Route::post('/create', [EditController::class, 'create'])->name('add.send');
+        Route::post('/edit/{id}/update', [EmployeesController::class, 'update'])->name('update');
+        Route::get('/edit/{id}', [EmployeesController::class, 'goToProfileEditing'])->name('edit');
+        Route::post('/mark-as-deleted/{id}', [EmployeesController::class, 'markAsDeleted'])->name('markAsDeleted');
+        Route::post('/restore/{id}', [EmployeesController::class, 'restoreEmployee'])->name('restore');
+        Route::delete('/permanent-delete/{id}', [EmployeesController::class, 'permanentDeleteEmpl'])->name('permanentDelete');
+        Route::get('/create-user', [EmployeesController::class, 'showCreationForm'])->name('add');
+        Route::post('/create', [EmployeesController::class, 'create'])->name('add.send');
         Route::get('/', [EmployeesController::class, 'showEmployees'])->name('list');
     });
 
