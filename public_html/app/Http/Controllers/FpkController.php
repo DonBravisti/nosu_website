@@ -7,7 +7,7 @@ use App\Models\EmplProfEducation;
 use App\Models\ProfDocType;
 use Illuminate\Http\Request;
 
-class SpkController extends Controller
+class FpkController extends Controller
 {
     function showFpkTable()
     {
@@ -31,14 +31,14 @@ class SpkController extends Controller
         return view('FPK.fpk', compact('empl', 'fpk'));
     }
 
-    function goToSpkAdd()
+    function goToFpkAdd()
     {
         $empls = Employee::all();
         $docTypes = ProfDocType::all();
         return view('FPK.fpkAdd', ['empls' => $empls, 'docTypes' => $docTypes]);
     }
 
-    function addSpk(Request $request)
+    function addFpk(Request $request)
     {
         $request->flash();
         $validated = $request->validate([
@@ -74,7 +74,7 @@ class SpkController extends Controller
         return redirect(route('fpk.add', compact('imgPath')));
     }
 
-    function showSpkUpdate($id)
+    function showFpkUpdate($id)
     {
         $empls = Employee::all();
         $docTypes = ProfDocType::all();
@@ -84,7 +84,7 @@ class SpkController extends Controller
         return view('FPK.FpkEdit', ['empls' => $empls, 'docTypes' => $docTypes, 'sertificate' => $sertificate]);
     }
 
-    function updateSpk(Request $request, $id)
+    function updateFpk(Request $request, $id)
     {
         $validated = $request->validate([
             'emplId' => 'required',
@@ -113,7 +113,7 @@ class SpkController extends Controller
         return redirect()->back();
     }
 
-    function removeSpk($id)
+    function removeFpk($id)
     {
         EmplProfEducation::destroy($id);
 

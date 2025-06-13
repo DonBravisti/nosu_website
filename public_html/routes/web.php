@@ -6,7 +6,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\EduPlanController;
-use App\Http\Controllers\SpkController;
+use App\Http\Controllers\FpkController;
 use App\Http\Controllers\PublicationController;
 
 /*
@@ -44,14 +44,14 @@ Route::middleware('auth.basic')->group(function () {
     });
 
     Route::prefix('/fpk')->name('fpk.')->group(function () {
-        Route::post('/add/send', [SpkController::class, 'addSpk'])->name('send');
-        Route::get('/add', [SpkController::class, 'goToSpkAdd'])->name('add');
-        Route::get('/update-form/{id}', [SpkController::class, 'showSpkUpdate'])->name('update-form');
-        Route::put('/update/{id}', [SpkController::class, 'updateSpk'])->name('update');
-        Route::delete('/remove-fpk/{id}', [SpkController::class, 'removeSpk'])->name('remove');
-        Route::get('/filter', [SpkController::class, 'filter'])->name('filter');
-        Route::get('/{id}', [SpkController::class, 'showFpkEmployee'])->name('empl');
-        Route::get('/', [SpkController::class, 'showFpkTable'])->name('list');
+        Route::post('/add/send', [FpkController::class, 'addFpk'])->name('send');
+        Route::get('/add', [FpkController::class, 'goToFpkAdd'])->name('add');
+        Route::get('/update-form/{id}', [FpkController::class, 'showFpkUpdate'])->name('update-form');
+        Route::put('/update/{id}', [FpkController::class, 'updateFpk'])->name('update');
+        Route::delete('/remove-fpk/{id}', [FpkController::class, 'removeFpk'])->name('remove');
+        Route::get('/filter', [FpkController::class, 'filter'])->name('filter');
+        Route::get('/{id}', [FpkController::class, 'showFpkEmployee'])->name('empl');
+        Route::get('/', [FpkController::class, 'showFpkTable'])->name('list');
     });
 
     Route::prefix('/edu-plan')->name('edu-plan.')->group(function () {
