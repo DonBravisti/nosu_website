@@ -37,7 +37,7 @@ class ContractController extends Controller
         }
 
         return view(
-            'contracts',
+            'contracts.contracts',
             [
                 'contracts' => $contracts,
                 'employees' => $employees,
@@ -61,7 +61,7 @@ class ContractController extends Controller
         // }
 
         return view(
-            'addContract',
+            'contracts.addContract',
             compact('employees', 'positions', 'emplTypes', 'departments')
         );
     }
@@ -81,7 +81,7 @@ class ContractController extends Controller
             ? $contract->emplContractType->id
             : 0;
 
-        return view('EmplContracts.updateContract', compact(
+        return view('contracts.updateContract', compact(
             'contract',
             'employees',
             'positions',
@@ -214,6 +214,6 @@ class ContractController extends Controller
             }
         }
 
-        return view('contracts', compact('contracts'));
+        return view('contracts.contracts', compact('contracts'));
     }
 }

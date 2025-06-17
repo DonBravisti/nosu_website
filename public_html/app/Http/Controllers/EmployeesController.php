@@ -27,7 +27,7 @@ class EmployeesController extends Controller
             ->sortBy('Fio');
         $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');
 
-        return view("showEmployees", compact("empls", "departments"));
+        return view('employees.showEmployees', compact('empls', 'departments'));
     }
 
     function sortFilter(Request $request)
@@ -71,7 +71,7 @@ class EmployeesController extends Controller
         $faculty_id = Config::get('faculty.default_faculty_id');
         $departments = Department::all()->where('faculty_id', $faculty_id)->sortBy('title');
 
-        return view("showEmployees", compact("empls", "departments", "sortBy", "depId", "showDeleted"));
+        return view('employees.showEmployees', compact('empls', 'departments', 'sortBy', 'depId', 'showDeleted'));
     }
 
     public function update(Request $request, $id)
@@ -157,7 +157,7 @@ class EmployeesController extends Controller
     {
         $employee = Employee::with(['emplDegrees', 'emplTitle'])->findOrFail($id);
 
-        return view('profileEditing', [
+        return view('employees.profileEditing', [
             'id' => $employee->id,
             'fio' => $employee->FIO(),
             'emplDegree1' => $employee->emplDegrees[0] ?? new EmplDegree(['degree_id' => 9]),
@@ -227,7 +227,7 @@ class EmployeesController extends Controller
         $degrees = DB::table('degrees')->get();
         $titles = DB::table('titles')->get();
         return view(
-            'profileCreation',
+            'employees.profileCreation',
             [
                 'fio' => 'Новый сотрудник',
                 'degrees' => $degrees,

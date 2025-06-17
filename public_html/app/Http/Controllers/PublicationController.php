@@ -18,7 +18,7 @@ class PublicationController extends Controller
         $employees = Employee::all();
         $years = Publication::select('publication_year')->distinct()->pluck('publication_year');
 
-        return view('publications', compact('publs', 'employees', 'years'));
+        return view('publs.publications', compact('publs', 'employees', 'years'));
     }
 
     public function filter(Request $request)
@@ -89,7 +89,7 @@ class PublicationController extends Controller
         $employees = Employee::all();
         $years = Publication::select('publication_year')->distinct()->pluck('publication_year');
 
-        return view('publications', compact('publs', 'employees', 'years'));
+        return view('publs.publications', compact('publs', 'employees', 'years'));
     }
 
     function goToPublsAdd()
@@ -98,7 +98,7 @@ class PublicationController extends Controller
         $employees = Employee::all();
         $publTypes = PublType::all();
 
-        return view('publsAdd', compact('publLevels', 'employees', 'publTypes'));
+        return view('publs.publsAdd', compact('publLevels', 'employees', 'publTypes'));
     }
 
     function addPubl(Request $request)
@@ -143,7 +143,7 @@ class PublicationController extends Controller
             return $author->id === 0;
         })->values();
 
-        return view('publEdit', compact('publ', 'employees', 'publLevels', 'publTypes', 'authors'));
+        return view('publs.publEdit', compact('publ', 'employees', 'publLevels', 'publTypes', 'authors'));
     }
 
 

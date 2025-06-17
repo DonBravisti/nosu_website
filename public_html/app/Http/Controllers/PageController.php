@@ -35,7 +35,7 @@ class PageController extends Controller
                 ];
             });
 
-        return view('department', [
+        return view('departments.department', [
             'employees' => $employees
         ]);
 
@@ -75,7 +75,7 @@ class PageController extends Controller
                 ];
             });
 
-        return view('department_algebra_analysis', [
+        return view('departments.department_algebra_analysis', [
             'employees' => $employees,
         ]);
     }
@@ -97,7 +97,7 @@ class PageController extends Controller
         $emplTitle = $employee->emplTitle;
         $titleTitle = $emplTitle && $emplTitle->title ? $emplTitle->title->title : 'Звание не указано';
 
-        return view('persCard', [
+        return view('employees.persCard', [
             'fio' => sprintf('%s %s %s', $employee->surname, $employee->name, $employee->patronimyc),
             'degree' => $degreeTitle,
             'title' => $titleTitle
@@ -107,7 +107,7 @@ class PageController extends Controller
 
     function goToStructure()
     {
-        return view('structure');
+        return view('departments.structure');
     }
 
 

@@ -10,7 +10,7 @@ class AuthController extends Controller
 {
     public function showRegForm()
     {
-        return view('register');
+        return view('auth.register');
     }
 
 

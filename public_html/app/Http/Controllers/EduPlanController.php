@@ -21,7 +21,7 @@ class EduPlanController extends Controller
             $plan->fillFieldsNullValues();
         }
 
-        return view('EduPlan.eduPlans', [
+        return view('edu_plan.eduPlans', [
             'plans' => $plans,
         ]);
     }
@@ -34,7 +34,7 @@ class EduPlanController extends Controller
         $titlePlans = TitlePlan::all();
         $specialities = Speciality::all()->sortBy('title');
 
-        return view('EduPlan.eduPlanAdd', [
+        return view('edu_plan.eduPlanAdd', [
             'blocks' => $blocks,
             'subjects' => $subjects,
             'departments' => $deps,
@@ -110,7 +110,7 @@ class EduPlanController extends Controller
         $eduPlan->fillFieldsNullValues();
         $titlePlan = $eduPlan->titlePlan;
 
-        return view('EduPlan.eduPlanEdit', [
+        return view('edu_plan.eduPlanEdit', [
             'blocks' => $blocks,
             'subjects' => $subjects,
             'departments' => $deps,

@@ -13,14 +13,14 @@ class FpkController extends Controller
     {
         $fpk = EmplProfEducation::all();
 
-        return view('FPK.fpkFilter', compact('fpk'));
+        return view('fpk.fpkFilter', compact('fpk'));
     }
 
     function showFpkEmplsList()
     {
         $employees = Employee::all();
 
-        return view('FPK.FpkEmployees', compact('employees'));
+        return view('fpk.FpkEmployees', compact('employees'));
     }
 
     function showFpkEmployee($id)
@@ -28,14 +28,14 @@ class FpkController extends Controller
         $empl = Employee::findOrFail($id);
         $fpk = EmplProfEducation::all()->where('employee_id', $id);
 
-        return view('FPK.fpk', compact('empl', 'fpk'));
+        return view('fpk.fpk', compact('empl', 'fpk'));
     }
 
     function goToFpkAdd()
     {
         $empls = Employee::all();
         $docTypes = ProfDocType::all();
-        return view('FPK.fpkAdd', ['empls' => $empls, 'docTypes' => $docTypes]);
+        return view('fpk.fpkAdd', ['empls' => $empls, 'docTypes' => $docTypes]);
     }
 
     function addFpk(Request $request)
@@ -81,7 +81,7 @@ class FpkController extends Controller
 
         $sertificate = EmplProfEducation::findOrFail($id);
 
-        return view('FPK.FpkEdit', ['empls' => $empls, 'docTypes' => $docTypes, 'sertificate' => $sertificate]);
+        return view('fpk.FpkEdit', ['empls' => $empls, 'docTypes' => $docTypes, 'sertificate' => $sertificate]);
     }
 
     function updateFpk(Request $request, $id)
@@ -168,6 +168,6 @@ class FpkController extends Controller
         $fpk = $query->with(['employee', 'profDocType'])->get();
 
         // print_r($fpk);
-        return view('FPK.fpkFilter', compact('fpk'));
+        return view('fpk.fpkFilter', compact('fpk'));
     }
 }

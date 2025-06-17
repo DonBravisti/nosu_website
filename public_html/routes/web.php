@@ -76,7 +76,7 @@ Route::middleware('auth.basic')->group(function () {
     });
 
     Route::get('/profile', function () {
-        return view('profile');
+        return view('employees.profile');
     })->name('profile');
 });
 
