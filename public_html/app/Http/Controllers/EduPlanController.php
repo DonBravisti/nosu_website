@@ -14,17 +14,17 @@ use Illuminate\Validation\Rule;
 
 class EduPlanController extends Controller
 {
-    function showPlans()
-    {
-        $plans = EduPlan::paginate(20);
-        foreach ($plans as $plan) {
-            $plan->fillFieldsNullValues();
-        }
+    // function showPlans()
+    // {
+    //     $plans = EduPlan::paginate(20);
+    //     foreach ($plans as $plan) {
+    //         $plan->fillFieldsNullValues();
+    //     }
 
-        return view('edu_plan.eduPlans', [
-            'plans' => $plans,
-        ]);
-    }
+    //     return view('edu_plan.eduPlans', [
+    //         'plans' => $plans,
+    //     ]);
+    // }
 
     function showPlanAdd()
     {
@@ -174,5 +174,29 @@ class EduPlanController extends Controller
         EduPlan::destroy($id);
 
         return redirect(route('edu-plan.list'));
+    }
+
+    function showSpecialities()
+    {
+        $specialities = Speciality::all();
+        return view('edu_plan.specialities', compact('specialities'));
+    }
+
+    function showTitles($specialityId)
+    {
+        $speciality = Speciality::findOrFail($specialityId);
+        $titles = TitlePlan::where('spec_id', $specialityId)->get();
+
+        return view('edu_plan.titles', compact('speciality', 'titles'));
+    }
+
+    function showPlans($titleId)
+    {
+        $title = TitlePlan::with('speciality')->findOrFail($titleId);
+        $plans = EduPlan::with(['subject', 'department', 'block'])
+            ->where('title_plan_id', $titleId)
+            ->get();
+
+        return view('edu_plan.plans', compact('title', 'plans'));
     }
 }

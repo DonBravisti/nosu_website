@@ -1,0 +1,43 @@
+.specialities__table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.specialities__table th,
+.specialities__table td {
+    border: 1px solid #ccc;
+    padding: 8px 12px;
+    text-align: left;
+}
+
+.specialities__table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.specialities__table tr:nth-child(even) {
+    background-color: #e7e5e5;
+}
+
+.specialities__table a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.specialities__table a:hover {
+    text-decoration: underline;
+}
+
+.title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+section {
+    padding: 20px;
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+}

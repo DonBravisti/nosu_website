@@ -55,13 +55,23 @@ Route::middleware('auth.basic')->group(function () {
     });
 
     Route::prefix('/edu-plan')->name('edu-plan.')->group(function () {
-        Route::post('/add/send', [EduPlanController::class, 'addPlan'])->name('send');
-        Route::get('/add', [EduPlanController::class, 'showPlanAdd'])->name('add');
-        Route::get('/update-form/{id}', [EduPlanController::class, 'showPlanUpdate'])->name('update-form');
-        Route::put('/update/{id}', [EduPlanController::class, 'updatePlan'])->name('update');
-        Route::delete('/delete-edu-plan/{id}', [EduPlanController::class, 'deleteEduPlan'])->name('delete');
-        Route::get('/', [EduPlanController::class, 'showPlans'])->name('list');
+        Route::get('/', [EduPlanController::class, 'showSpecialities'])->name('specialities');
+
+        Route::get('/{speciality}', [EduPlanController::class, 'showTitles'])->name('titles');
+        Route::get('/{speciality}/title/create', [EduPlanController::class, 'showTitleCreate'])->name('title.create');
+        Route::post('/{speciality}/title', [EduPlanController::class, 'storeTitle'])->name('title.store');
+        Route::get('/title/{title}/edit', [EduPlanController::class, 'showTitleEdit'])->name('title.edit');
+        Route::put('/title/{title}', [EduPlanController::class, 'updateTitle'])->name('title.update');
+        Route::delete('/title/{title}', [EduPlanController::class, 'deleteTitle'])->name('title.delete');
+
+        Route::get('/title/{title}', [EduPlanController::class, 'showPlans'])->name('plans');
+        Route::get('/title/{title}/plan/create', [EduPlanController::class, 'showPlanCreate'])->name('plan.create');
+        Route::post('/title/{title}/plan', [EduPlanController::class, 'storePlan'])->name('plan.store');
+        Route::get('/plan/{plan}/edit', [EduPlanController::class, 'showPlanEdit'])->name('plan.edit');
+        Route::put('/plan/{plan}', [EduPlanController::class, 'updatePlan'])->name('plan.update');
+        Route::delete('/plan/{plan}', [EduPlanController::class, 'deletePlan'])->name('plan.delete');
     });
+
 
     Route::prefix('/empls')->name('empls.')->group(function () {
         Route::post('/sort-filter', [EmployeesController::class, 'sortFilter'])->name('sort-filter');

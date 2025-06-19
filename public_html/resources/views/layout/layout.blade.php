@@ -103,7 +103,7 @@
                                 @if (Auth::check() and Route::currentRouteName() != 'profile')
                                     <div class="dropdown-content">
                                         <a href="{{ route('empls.list') }}">Сотрудники</a>
-                                        <a href="{{ route('edu-plan.list') }}">Учебные планы</a>
+                                        <a href="{{ route('edu-plan.specialities') }}">Учебные планы</a>
                                         <a href="{{ route('fpk.list') }}">ФПК</a>
                                         <a href="{{ route('contracts.list') }}">Трудовые книжки</a>
                                         <a href="{{ route('publs.list') }}">Публикации</a>
